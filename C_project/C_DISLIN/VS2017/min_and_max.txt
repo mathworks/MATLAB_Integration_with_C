@@ -1,0 +1,56 @@
+ *  Function: min_and_max()
+ *  Goal    : Set the min and max values of axes for the graphical display
+ *
+ *  IN      : - data[NB_SAMPLES]: data to display
+ *            - min_val  : minimal possible value
+ *            - max_val  : maximal possible value
+ *  IN/OUT  : - *data_min: min value to display
+ *            - *data_max: max value to display
+ *  OUT     : -
+ *
+ *  Copyright 2018 The MathWorks, Inc.
+ * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ */
+static void min_and_max(double *data_min, double *data_max,
+                        double min_val, double max_val, double data[NB_SAMPLES])
+{
+  double temp_min, temp_max;
+  int  i, min_idx, max_idx;
+  
+  /* Looking for the boundaries */
+  for (i = 0; i < NB_SAMPLES-1; i++) {
+    temp_min = min_data(data[i],data[i+1]);
+    temp_max = max_data(data[i],data[i+1]);
+    if (temp_min < *data_min) {
+      *data_min = temp_min;
+      min_idx = i;
+    }
+    if (temp_max > *data_max) {
+      *data_max = temp_max;
+      max_idx = i;
+    }
+  }
+  
+  /* Round up of the boundaries */
+  *data_min = ceil(*data_min-1);
+  *data_max = ceil(*data_max+1);
+  if (fmod(*data_min,10) != 0){
+    /* Set the min boundary to have no division remainder for a divider of 10 */
+    *data_min = *data_min - Y_AXS_STEP+1;
+  }
+  
+  /* Check infinite values and set min/max limits if needed */
+  if (*data_min < -DBL_MAX) {
+    *data_min = min_val;
+    data[min_idx+1] = min_val; /* Saturate to avoid plotting out of scope */
+  }
+  if (*data_max > DBL_MAX) {
+    *data_max = max_val;
+    data[max_idx+1] = max_val; /* Saturate to avoid plotting out of scope */
+  }
+  /* For debug purposes only */
+  //printf("min = %lf, max = %lf\n", *data_min,*data_max);
+}
+
+/*
+ * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

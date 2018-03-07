@@ -1,0 +1,263 @@
+int main(void)
+{
+  /* Graphs parameters for dislin */
+  const int X_ORIG_W =  100;
+  const int Y_ORIG_W =  100;
+  const int X_SIZE_W = 1600;
+  const int Y_SIZE_W = 1000;
+  const int X_AXIS_L = 1400;
+  const int Y_AXIS_L = 1400;
+  const int X_AXIS_P =  600;
+  const int Y_AXIS_P = 2200;
+
+  /* Constants declaration */
+  static const char SEPARATOR[81] = {'-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
+
+  static const char TITLE[81]= {'-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', ' ', 'F', 'I', 'L', 'T', 'E', 'R', ' ', 'D', 'E', 'S', 'I',
+  'G', 'N', ' ', 'A', 'N', 'D', ' ', 'V', 'I', 'E', 'W', 'E', 'R', ' ', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
+  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
+
+  static const char BAND_FILTER[5] = { 'b', 'a', 'n', 'd', '\x00' };
+  static const char STOP_FILTER[5] = { 's', 't', 'o', 'p', '\x00' };
+  static const char N_CHAR[2]      = { 'n', '\x00' };
+
+  const double ORDER_LIMS_1[2] = {1,10};
+  const double ORDER_LIMS_2[2] = {2,10};
+  const double QUAL_LIMS[2]    = {0.1,10};
+  const double GAIN_LIMS[2]    = {0.001,1000};
+  
+  /* Vectors definition */
+  static double f[NB_SAMPLES];
+  static double H_arg[NB_SAMPLES];
+  static double H_mod[NB_SAMPLES];
+  
+  /* Variables declaration */
+  char f_t[5]        = { '0', '0', '0', '0', '\x00' };
+  char t_word[5]     = { '0', '0', '0', '0', '\x00' };
+  char keep_bodes[2] = { '0', '\x00' };
+  char new_bodes[2]  = { '0', '\x00' };
+  char amplitude_title[50] = "";
+  char phase_title[50]     = "";
+  size_t size_title = 0;
+  int    n_f;
+  double f_0, q_0, g;
+  double mod_min, mod_max, arg_min, arg_max;
+  double frequency_range[2];
+  int error_flag, fig_id, i0;
+  int negate_bool, neg_band_bool, neg_stop_bool;
+  int mod_y_axs_step, arg_y_axs_step;
+  int32_T exitg1;
+
+  /*  Initialization */
+  error_flag = 0;
+  n_f = 0;
+  f_0 = 0.0;
+  q_0 = 0.0;
+  g   = 1.0;
+
+  /*  Definition of the logarithmic frequency range till 1 Tera Hertz */
+  logspace(0.0, 9.0, f);
+
+  /*  Program title */
+  printf(SEPARATOR);
+  printf(TITLE);
+  printf(SEPARATOR);
+
+  /*  Forever loop */
+  fig_id = 0;
+  do {
+    exitg1 = 0;
+
+    /*  Ask for filter's parameters */
+    check_str_input(f_t);
+    neg_band_bool = strcmp(f_t, BAND_FILTER);
+    neg_stop_bool = strcmp(f_t, BAND_FILTER);	
+    if ((neg_band_bool == 0) || (neg_stop_bool == 0)) {
+      check_num_input(&n_f, ORDER_LIMS_2);
+    } else {
+      check_num_input(&n_f, ORDER_LIMS_1);
+        }
+    for (i0 = 0; i0 < 2; i0++) {
+      frequency_range[i0] = 1.0 + 9.99999999E+8 * (double)i0;
+    }
+    b_check_num_input(&f_0, frequency_range);
+    if (n_f > 1) {
+      c_check_num_input(&q_0, QUAL_LIMS);
+    }
+    d_check_num_input(&g, GAIN_LIMS);
+
+    /*  Bodes calculation */
+    filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg, &error_flag);
+
+    /*  Display of results (target dependent) */
+    if (error_flag == 0) {
+      /* Search of the min and max values in order to set a correct scale on axes */
+      mod_min = 0; mod_max = 0;
+      arg_min = 0; arg_max = 0;
+      min_and_max(&mod_min, &mod_max, -200, 200, H_mod);
+      min_and_max(&arg_min, &arg_max, -181, 181, H_arg);
+
+      if (fig_id == 0) {
+        /* Initialization of dislin */
+        metafl("XWIN");    /* Defines the META file format        */
+        setpag("DA3L");    /* Sets the size of the graphical area */
+        scrmod("REVERSE"); /* Sets the background color to white  */
+        units ("CM");      /* Sets the plot's units (100[pts/cm]) */
+        disini();          /* Launches the first dislin window    */
+        noclip();
+        fig_id = fig_id+1;
+      }
+      else if (fig_id > 0) {
+        /* Creation of a new graphical windows */
+        fig_id = fig_id+1;
+        opnwin(fig_id);
+      }
+      /* Selects the current window */ 
+      selwin(fig_id);
+      /* Sets the window's sizes and position */
+      window(X_ORIG_W,Y_ORIG_W,X_SIZE_W,Y_SIZE_W);
+
+      if (!strncmp(f_t,"stop",4)) {
+        strncpy_s(t_word,sizeof(t_word),"band",4);
+      }
+      else {
+        strncpy_s(t_word,sizeof(t_word),"pass",4);
+      }
+
+      /* Set the space between Y-axis labels for the module */
+      switch (n_f) {
+        case 1:
+          mod_y_axs_step = 10;
+          arg_y_axs_step = 5;
+          break;
+        case 2:
+          mod_y_axs_step = 10;
+          arg_y_axs_step = 10;
+          break;
+        case 3:
+        case 4:
+          mod_y_axs_step = 20;
+          arg_y_axs_step = 20;
+          break;
+        case 5:
+        case 6:
+        case 7:
+          mod_y_axs_step = 40;
+          arg_y_axs_step = 20;
+          break;
+        default:
+          mod_y_axs_step = 50;
+          arg_y_axs_step = 20;
+          break;
+      }
+      
+      /* Creation of the title of the amplitude's bode */
+      size_title = sizeof(amplitude_title);
+      _snprintf_s(amplitude_title,size_title,size_title,"%s %s%s%s %s %d",
+                  "Module of the",f_t,"-",t_word,"filter of order",n_f);
+      titlin(amplitude_title,1);
+      /* Settings of the amplitude's bode */
+      name  ("Frequency [Hz]","X");
+      name  ("|H| [dB]","Y");
+      axsscl("LOG","X");
+      labels("LOG","XY");
+      axslen(X_AXIS_L,Y_AXIS_L);
+      axspos(X_AXIS_P,Y_AXIS_P);
+      graf  (0,9,0,1, mod_min,mod_max,mod_min,mod_y_axs_step);
+      title ();
+      /* Drawing of the amplitude's bode */
+      thkcrv(10);
+      color ("red");
+      curve (f,H_mod,NB_SAMPLES);
+      color ("fore");
+      grid  (1,1);
+      endgrf();
+
+      /* Creation of the title of the phase's bode */
+      size_title = sizeof(phase_title);
+      _snprintf_s(phase_title,size_title,size_title,"%s %s%s%s %s %d",
+                  "Phase of the",f_t,"-",t_word,"filter of order",n_f);
+      titlin(phase_title,1);
+      /* Settings of the phase's bode */
+      name  ("Frequency [Hz]","X");
+      name  ("arg(H) [degree]","Y"); // °symbol in unicode:"\u00B0"
+      axsscl("LOG","X");
+      labels("LOG","XY");
+      axslen(X_AXIS_L,Y_AXIS_L);
+      axspos(2*X_AXIS_P+X_AXIS_L,Y_AXIS_P);
+      graf  (0,9,0,1, arg_min,arg_max,arg_min,arg_y_axs_step);
+      title ();
+      /* Drawing of the phase's bode */
+      thkcrv(10);
+      color ("red");
+      curve (f,H_arg,NB_SAMPLES);
+      color ("fore");
+      grid  (1,1);
+      endgrf();
+      }
+    else {
+      printf("Plots cannot be maid due to a misconfiguration of parameters.\n");
+      switch (error_flag) {
+        case ERROR_TYPE:
+          printf("This type of filter is not supported.\n");
+          break;
+        case ERROR_ORDER:
+          printf("This order value is not supported for such filters. It must be an even value.\n");
+          break;
+        default:
+          printf("Unknown error. Please re-submit filter's parameters.\n");
+          break;
+      }
+    }
+
+    /*  Ask the user if he wants to keep the previous graphs */
+    check_yes_or_no(keep_bodes);
+
+    negate_bool = _strcmpi(keep_bodes, N_CHAR);
+    if (negate_bool == 0)
+    {
+      if (fig_id > 1)
+      {
+        /* Close other windows */
+        clswin(fig_id);
+        fig_id = fig_id-1;
+      }
+      else {
+        /* Termination of dislin */
+        printf("Close the window to terminate the application...");
+        disfin();
+      }
+    }
+    /* Ask the user if he wants to see other filter's Bodes */
+    b_check_yes_or_no(new_bodes);
+
+    negate_bool = _strcmpi(new_bodes, N_CHAR);
+    if (negate_bool == 0)
+    {
+      /* Close all windows */
+      for (fig_id; fig_id>0; fig_id--) {
+        clswin(fig_id);
+      }
+      /* Termination of dislin */
+      printf("Close the window to terminate the application...");
+      disfin();
+    }
+    printf(SEPARATOR);
+  } while (negate_bool != 0);
+
+  return error_flag;
+}
+
+/*
+ * File trailer for main.c
+ *
+ * [EOF]
+ */
