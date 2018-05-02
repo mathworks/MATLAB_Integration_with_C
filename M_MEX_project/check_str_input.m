@@ -1,10 +1,10 @@
-function param = check_str_input(param,text_id)
+function param = check_str_input(text_id)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Function: check_str_input()
 % Goal    : Checks string input parameter given by the user
 %
 % IN      : - text_id : text to display related to the desired parameter
-% IN/OUT  : - param   : parameter to set via the user interface
+% IN/OUT  : -
 % OUT     : -
 %
 % Copyright 2018 The MathWorks, Inc.
@@ -24,13 +24,11 @@ function param = check_str_input(param,text_id)
     param_str = input(text_id,'s');
     % Handling of special strings
     if (strcmp(param_str,'low'))
-      param = [param_str,' '];
-    else
-      param = param_str;
+      param_str = [param_str,' ']; %#ok<AGROW>
     end
     % Compare the entry to the available types
     for i=1:1:NB_FILTERS
-      boolean = strcmp(param,FILTER(i,:));
+      boolean = strcmp(param_str,FILTER(i,:));
       if (boolean == true)
         break; % No need to go on with the FOR loop
       end
@@ -38,8 +36,9 @@ function param = check_str_input(param,text_id)
     if (boolean == true)
       break; % Leave the WHILE loop because one type matches the entry
     else
-	    % No right type selected
+      % No right type selected
       disp(ERROR_MESSAGE);
     end
   end
+  param = param_str;
 end

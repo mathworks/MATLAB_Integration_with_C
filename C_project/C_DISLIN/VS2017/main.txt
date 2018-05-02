@@ -11,19 +11,6 @@ int main(void)
   const int Y_AXIS_P = 2200;
 
   /* Constants declaration */
-  static const char SEPARATOR[81] = {'-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
-
-  static const char TITLE[81]= {'-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', ' ', 'F', 'I', 'L', 'T', 'E', 'R', ' ', 'D', 'E', 'S', 'I',
-  'G', 'N', ' ', 'A', 'N', 'D', ' ', 'V', 'I', 'E', 'W', 'E', 'R', ' ', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-  '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
 
   static const char BAND_FILTER[5] = { 'b', 'a', 'n', 'd', '\x00' };
   static const char STOP_FILTER[5] = { 's', 't', 'o', 'p', '\x00' };
@@ -55,6 +42,11 @@ int main(void)
   int negate_bool, neg_band_bool, neg_stop_bool;
   int mod_y_axs_step, arg_y_axs_step;
   int32_T exitg1;
+  /*  scanf_s input format */
+  char * INTEGER;
+  char * LONG_DOUBLE;
+  INTEGER = "%d";
+  LONG_DOUBLE = "%lf";
 
   /*  Initialization */
   error_flag = 0;
@@ -67,9 +59,15 @@ int main(void)
   logspace(0.0, 9.0, f);
 
   /*  Program title */
-  printf(SEPARATOR);
-  printf(TITLE);
-  printf(SEPARATOR);
+  printf("%s\n",
+         "-------------------------------------------------------------------------------");
+  fflush(stdout);
+  printf("%s\n",
+         "--------------------------- FILTER DESIGN AND VIEWER --------------------------");
+  fflush(stdout);
+  printf("%s\n",
+         "-------------------------------------------------------------------------------");
+  fflush(stdout);
 
   /*  Forever loop */
   fig_id = 0;
@@ -81,18 +79,18 @@ int main(void)
     neg_band_bool = strcmp(f_t, BAND_FILTER);
     neg_stop_bool = strcmp(f_t, BAND_FILTER);	
     if ((neg_band_bool == 0) || (neg_stop_bool == 0)) {
-      check_num_input(&n_f, ORDER_LIMS_2);
+      check_num_input(&n_f, ORDER_LIMS_2, INTEGER);
     } else {
-      check_num_input(&n_f, ORDER_LIMS_1);
+      check_num_input(&n_f, ORDER_LIMS_1, INTEGER);
         }
     for (i0 = 0; i0 < 2; i0++) {
       frequency_range[i0] = 1.0 + 9.99999999E+8 * (double)i0;
     }
-    b_check_num_input(&f_0, frequency_range);
+    b_check_num_input(&f_0, frequency_range, LONG_DOUBLE);
     if (n_f > 1) {
-      c_check_num_input(&q_0, QUAL_LIMS);
+      c_check_num_input(&q_0, QUAL_LIMS, LONG_DOUBLE);
     }
-    d_check_num_input(&g, GAIN_LIMS);
+    d_check_num_input(&g, GAIN_LIMS, LONG_DOUBLE);
 
     /*  Bodes calculation */
     filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg, &error_flag);
@@ -250,7 +248,11 @@ int main(void)
       printf("Close the window to terminate the application...");
       disfin();
     }
-    printf(SEPARATOR);
+    else {
+      printf("%s\n",
+             "-------------------------------------------------------------------------------");
+      fflush(stdout);
+    }
   } while (negate_bool != 0);
 
   return error_flag;

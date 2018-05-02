@@ -2,51 +2,38 @@
  * File: main.c
  *
  * MATLAB Coder version            : 3.4
- * C/C++ source code generated on  : 08-Feb-2018 11:07:30
+ * C/C++ source code generated on  : 30-Apr-2018 17:05:27
  */
 
 /* Include Files */
 #include "main.h"
-#include "stdio.h"
+#include <stdio.h>
+
+/* Type Definitions */
 
 /* Variable Definitions */
 static const char cv0[20] = { 'l', 'h', 'b', 's', 'o', 'i', 'a', 't', 'w', 'g',
   'n', 'o', '\x00', 'h', 'd', 'p', '\x00', '\x00', '\x00', '\x00' };
 
-static const char cv1[55] = { 'I', 'n', 'p', 'u', 't', ' ', 'n', 'o', 't', ' ',
-  'r', 'e', 'c', 'o', 'g', 'n', 'i', 's', 'e', 'd', ' ', 'a', 's', ' ', 'a', 'n',
-  ' ', 'i', 'n', 't', 'e', 'g', 'e', 'r', ',', ' ', 'p', 'l', 'e', 'a', 's', 'e',
-  ' ', 't', 'r', 'y', ' ', 'a', 'g', 'a', 'i', 'n', '.', '\x0a', '\x00' };
-
-static const char cv2[96] = { 'F', 'o', 'r', ' ', 't', 'h', 'i', 's', ' ', 'f',
-  'i', 'l', 't', 'e', 'r', ',', ' ', 't', 'h', 'e', ' ', 'p', 'a', 'r', 'a', 'm',
-  'e', 't', 'e', 'r', ' ', 's', 'h', 'o', 'u', 'l', 'd', ' ', 'b', 'e', ' ', 'b',
-  'e', 't', 'w', 'e', 'e', 'n', ' ', '%', '.', '3', 'f', ' ', 'a', 'n', 'd', ' ',
-  '%', '.', '3', 'f', '.', '\x0a', 'P', 'l', 'e', 'a', 's', 'e', ',', ' ', 'e',
-  'n', 't', 'e', 'r', ' ', 'a', ' ', 'c', 'o', 'r', 'r', 'e', 'c', 't', ' ', 'v',
-  'a', 'l', 'u', 'e', '.', '\x0a', '\x00' };
-
-static const char cv3[46] = { 'P', 'l', 'e', 'a', 's', 'e', ',', ' ', 'e', 'n',
-  't', 'e', 'r', ' ', '[', 'y', ',', 'Y', ']', ' ', 'f', 'o', 'r', ' ', 'Y', 'E',
-  'S', ' ', 'o', 'r', ' ', '[', 'n', ',', 'N', ']', ' ', 'f', 'o', 'r', ' ', 'N',
-  'O', '.', '\x0a', '\x00' };
-
 /* Function Declarations */
 static void angle(const creal_T x[100000], double y[100000]);
 static void b_abs(const creal_T x[100000], double y[100000]);
-static void b_check_num_input(double *param_p, const double limits[2]);
+static void b_check_num_input(double *param_p, const double limits[2], char
+  * c_param);
 static void b_check_yes_or_no(char param_p[2]);
 static void b_log10(double x[100000]);
 static int b_mod(int x);
 static void b_power(const creal_T a[100000], creal_T y[100000]);
-static void c_check_num_input(double *param_p, const double limits[2]);
-static void check_num_input(int *param_p, const double limits[2]);
+static void c_check_num_input(double *param_p, const double limits[2], char
+  * c_param);
+static void check_num_input(int *param_p, const double limits[2], char * c_param);
 static void check_str_input(char param_p[5]);
 static void check_yes_or_no(char param_p[2]);
-static void d_check_num_input(double *param_p, const double limits[2]);
+static void d_check_num_input(double *param_p, const double limits[2], char
+  * c_param);
 static void filter_bode(const double f[100000], double f_0, double q_0, double g,
   const char f_type[5], int f_order, double H_mod[100000], double H_arg[100000],
-  int *error_flag);
+  int *err_f);
 static void logspace(double d1, double d2, double y[100000]);
 static void power(double a, const double b[100000], double y[100000]);
 static double rt_hypotd(double u0, double u1);
@@ -94,25 +81,20 @@ static void b_abs(const creal_T x[100000], double y[100000])
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * Arguments    : double *param_p
  *                const double limits[2]
+ *                char * c_param
  * Return Type  : void
  */
-static void b_check_num_input(double *param_p, const double limits[2])
+static void b_check_num_input(double *param_p, const double limits[2], char
+  * c_param)
 {
-  char CLEAR_STDIN;
+  char * CLEAR_STDIN;
   int exitg1;
   int exitg2;
-  static const char text_id[19] = { 'C', 'u', 't', 'o', 'f', 'f', ' ', 'f', 'r',
-    'e', 'q', 'u', 'e', 'n', 'c', 'y', ':', ' ', '\x00' };
-
   int nb_params;
-  static const char c_param[3] = { '%', 'l', 'f' };
 
-  char WRONG_TYPE_IN[55];
-  char ERROR_MESSAGE[96];
-
-  /*  Constants */
-  /*  String not supported for codegen: to replace with "%*[^\n]%*1[\n]"; */
-  CLEAR_STDIN = 0;
+  /*  Constant */
+  /*  Force the string regular expression in the generated C code for scanf_s */
+  CLEAR_STDIN = "%*[^\n]%*1[\n]";
 
   /*  Initialization */
   /*  Check user's input */
@@ -122,8 +104,9 @@ static void b_check_num_input(double *param_p, const double limits[2])
       exitg2 = 0;
 
       /*  Ask the user to enter a number  */
-      printf(text_id);
-      nb_params = scanf(c_param, param_p);
+      printf("%s", "Cutoff frequency: ");
+      fflush(stdout);
+      nb_params = scanf_s(c_param, param_p, 1);
 
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
@@ -136,14 +119,13 @@ static void b_check_num_input(double *param_p, const double limits[2])
 
       /*  Post process the keyboard input buffer data */
       if (nb_params == 1) {
-        for (nb_params = 0; nb_params < 55; nb_params++) {
-          WRONG_TYPE_IN[nb_params] = cv1[nb_params];
-        }
+        printf("The value provided is not of the right data type.\n");
+        fflush(stdout);
+        printf("Please, enter a correct value.\n");
+        fflush(stdout);
 
-        printf(WRONG_TYPE_IN);
-        scanf(CLEAR_STDIN);
-
-        /*  Clear of stdin buffer */
+        /*  Clear the input buffer */
+        scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
@@ -153,8 +135,11 @@ static void b_check_num_input(double *param_p, const double limits[2])
     if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
       exitg1 = 1;
     } else {
-      memcpy(&ERROR_MESSAGE[0], &cv2[0], 96U * sizeof(char));
-      printf(ERROR_MESSAGE, limits[0], limits[1]);
+      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
+             limits[0], limits[1]);
+      fflush(stdout);
+      printf("Please, enter a correct value.\n");
+      fflush(stdout);
     }
   } while (exitg1 == 0);
 
@@ -178,14 +163,9 @@ static void b_check_num_input(double *param_p, const double limits[2])
 static void b_check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  static const char text_id[51] = { 'D', 'o', ' ', 'y', 'o', 'u', ' ', 'w', 'a',
-    'n', 't', ' ', 't', 'o', ' ', 's', 'e', 'e', ' ', 'B', 'o', 'd', 'e', 's',
-    ' ', 'o', 'f', ' ', 'a', 'n', 'o', 't', 'h', 'e', 'r', ' ', 'f', 'i', 'l',
-    't', 'e', 'r', ' ', '[', 'y', ',', 'n', ']', '?', ' ', '\x00' };
-
   int negate_bool_idx_1;
   char N_CHAR[2];
-  static const char cv9[2] = { '%', 's' };
+  static const char cv6[2] = { '%', 's' };
 
   int negate_bool_idx_0;
   char b_param_p[2];
@@ -193,21 +173,21 @@ static void b_check_yes_or_no(char param_p[2])
 
   static const char Y_CHAR[2] = { 'y', '\x00' };
 
-  char ERROR_MESSAGE[46];
-
   /*  Constants */
   /*  Initialization */
+  /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
 
     /*  Ask the user to enter a selection */
-    printf(text_id);
+    printf("%s", "Do you want to see Bodes of another filter [y,n]? ");
+    fflush(stdout);
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      N_CHAR[negate_bool_idx_1] = cv9[negate_bool_idx_1];
+      N_CHAR[negate_bool_idx_1] = cv6[negate_bool_idx_1];
     }
 
-    scanf(N_CHAR, param_p);
+    scanf_s(N_CHAR, param_p, 2);
 
     /*  Compare the entry to the available types */
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
@@ -215,21 +195,22 @@ static void b_check_yes_or_no(char param_p[2])
       N_CHAR[negate_bool_idx_1] = b_N_CHAR[negate_bool_idx_1];
     }
 
-    negate_bool_idx_0 = strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_0 = _strcmpi(b_param_p, N_CHAR);
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
       b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
       N_CHAR[negate_bool_idx_1] = Y_CHAR[negate_bool_idx_1];
     }
 
-    negate_bool_idx_1 = strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_1 = _strcmpi(b_param_p, N_CHAR);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
-      for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 46; negate_bool_idx_1++) {
-        ERROR_MESSAGE[negate_bool_idx_1] = cv3[negate_bool_idx_1];
-      }
+      printf("%s\n", "Please, enter [y,Y] for YES or [n,N] for NO.\n");
+      fflush(stdout);
 
-      printf(ERROR_MESSAGE);
+      /*  Force the string regular expression in the generated C code for scanf_s */
+      /*  Clear the input buffer */
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
 
@@ -286,25 +267,20 @@ static void b_power(const creal_T a[100000], creal_T y[100000])
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * Arguments    : double *param_p
  *                const double limits[2]
+ *                char * c_param
  * Return Type  : void
  */
-static void c_check_num_input(double *param_p, const double limits[2])
+static void c_check_num_input(double *param_p, const double limits[2], char
+  * c_param)
 {
-  char CLEAR_STDIN;
+  char * CLEAR_STDIN;
   int exitg1;
   int exitg2;
-  static const char text_id[17] = { 'Q', 'u', 'a', 'l', 'i', 't', 'y', ' ', 'f',
-    'a', 'c', 't', 'o', 'r', ':', ' ', '\x00' };
-
   int nb_params;
-  static const char c_param[3] = { '%', 'l', 'f' };
 
-  char WRONG_TYPE_IN[55];
-  char ERROR_MESSAGE[96];
-
-  /*  Constants */
-  /*  String not supported for codegen: to replace with "%*[^\n]%*1[\n]"; */
-  CLEAR_STDIN = 0;
+  /*  Constant */
+  /*  Force the string regular expression in the generated C code for scanf_s */
+  CLEAR_STDIN = "%*[^\n]%*1[\n]";
 
   /*  Initialization */
   /*  Check user's input */
@@ -314,8 +290,9 @@ static void c_check_num_input(double *param_p, const double limits[2])
       exitg2 = 0;
 
       /*  Ask the user to enter a number  */
-      printf(text_id);
-      nb_params = scanf(c_param, param_p);
+      printf("%s", "Quality factor: ");
+      fflush(stdout);
+      nb_params = scanf_s(c_param, param_p, 1);
 
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
@@ -328,14 +305,13 @@ static void c_check_num_input(double *param_p, const double limits[2])
 
       /*  Post process the keyboard input buffer data */
       if (nb_params == 1) {
-        for (nb_params = 0; nb_params < 55; nb_params++) {
-          WRONG_TYPE_IN[nb_params] = cv1[nb_params];
-        }
+        printf("The value provided is not of the right data type.\n");
+        fflush(stdout);
+        printf("Please, enter a correct value.\n");
+        fflush(stdout);
 
-        printf(WRONG_TYPE_IN);
-        scanf(CLEAR_STDIN);
-
-        /*  Clear of stdin buffer */
+        /*  Clear the input buffer */
+        scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
@@ -345,8 +321,11 @@ static void c_check_num_input(double *param_p, const double limits[2])
     if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
       exitg1 = 1;
     } else {
-      memcpy(&ERROR_MESSAGE[0], &cv2[0], 96U * sizeof(char));
-      printf(ERROR_MESSAGE, limits[0], limits[1]);
+      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
+             limits[0], limits[1]);
+      fflush(stdout);
+      printf("Please, enter a correct value.\n");
+      fflush(stdout);
     }
   } while (exitg1 == 0);
 
@@ -368,25 +347,19 @@ static void c_check_num_input(double *param_p, const double limits[2])
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * Arguments    : int *param_p
  *                const double limits[2]
+ *                char * c_param
  * Return Type  : void
  */
-static void check_num_input(int *param_p, const double limits[2])
+static void check_num_input(int *param_p, const double limits[2], char * c_param)
 {
-  char CLEAR_STDIN;
+  char * CLEAR_STDIN;
   int exitg1;
   int exitg2;
-  static const char text_id[22] = { 'O', 'r', 'd', 'e', 'r', ' ', 'o', 'f', ' ',
-    't', 'h', 'e', ' ', 'f', 'i', 'l', 't', 'e', 'r', ':', ' ', '\x00' };
-
   int nb_params;
-  static const char c_param[2] = { '%', 'd' };
 
-  char WRONG_TYPE_IN[55];
-  char ERROR_MESSAGE[96];
-
-  /*  Constants */
-  /*  String not supported for codegen: to replace with "%*[^\n]%*1[\n]"; */
-  CLEAR_STDIN = 0;
+  /*  Constant */
+  /*  Force the string regular expression in the generated C code for scanf_s */
+  CLEAR_STDIN = "%*[^\n]%*1[\n]";
 
   /*  Initialization */
   /*  Check user's input */
@@ -396,8 +369,9 @@ static void check_num_input(int *param_p, const double limits[2])
       exitg2 = 0;
 
       /*  Ask the user to enter a number  */
-      printf(text_id);
-      nb_params = scanf(c_param, param_p);
+      printf("%s", "Order of the filter: ");
+      fflush(stdout);
+      nb_params = scanf_s(c_param, param_p, 1);
 
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
@@ -410,14 +384,13 @@ static void check_num_input(int *param_p, const double limits[2])
 
       /*  Post process the keyboard input buffer data */
       if (nb_params == 1) {
-        for (nb_params = 0; nb_params < 55; nb_params++) {
-          WRONG_TYPE_IN[nb_params] = cv1[nb_params];
-        }
+        printf("The value provided is not of the right data type.\n");
+        fflush(stdout);
+        printf("Please, enter a correct value.\n");
+        fflush(stdout);
 
-        printf(WRONG_TYPE_IN);
-        scanf(CLEAR_STDIN);
-
-        /*  Clear of stdin buffer */
+        /*  Clear the input buffer */
+        scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
@@ -427,8 +400,11 @@ static void check_num_input(int *param_p, const double limits[2])
     if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
       exitg1 = 1;
     } else {
-      memcpy(&ERROR_MESSAGE[0], &cv2[0], 96U * sizeof(char));
-      printf(ERROR_MESSAGE, limits[0], limits[1]);
+      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
+             limits[0], limits[1]);
+      fflush(stdout);
+      printf("Please, enter a correct value.\n");
+      fflush(stdout);
     }
   } while (exitg1 == 0);
 
@@ -453,40 +429,32 @@ static void check_str_input(char param_p[5])
 {
   int negate_bool;
   int exitg1;
-  static const char text_id[41] = { 'T', 'y', 'p', 'e', ' ', 'o', 'f', ' ', 'f',
-    'i', 'l', 't', 'e', 'r', ' ', '[', 'l', 'o', 'w', ']', '[', 'h', 'i', 'g',
-    'h', ']', '[', 'b', 'a', 'n', 'd', ']', '[', 's', 't', 'o', 'p', ']', ':',
-    ' ', '\x00' };
-
   int i0;
-  char cv6[2];
-  static const char cv7[2] = { '%', 's' };
+  char cv3[3];
+  static const char cv4[3] = { '%', '4', 's' };
 
   int i;
   boolean_T exitg2;
   char b_param_p[5];
   char FILTER[5];
-  char ERROR_MESSAGE[51];
-  static const char b_ERROR_MESSAGE[51] = { 'U', 'n', 'k', 'n', 'o', 'w', 'n',
-    ' ', 'f', 'i', 'l', 't', 'e', 'r', ' ', 't', 'y', 'p', 'e', '.', ' ', 'P',
-    'l', 'e', 'a', 's', 'e', ',', ' ', 'e', 'n', 't', 'e', 'r', ' ', 'a', ' ',
-    'c', 'o', 'r', 'r', 'e', 'c', 't', ' ', 'o', 'n', 'e', '.', '\x0a', '\x00' };
 
   /*  Constants */
   /*  Initialization */
   negate_bool = 1;
 
+  /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
 
     /*  Ask the user to enter a filter type */
-    printf(text_id);
-    for (i0 = 0; i0 < 2; i0++) {
-      cv6[i0] = cv7[i0];
+    printf("%s", "Type of filter [low][high][band][stop]: ");
+    fflush(stdout);
+    for (i0 = 0; i0 < 3; i0++) {
+      cv3[i0] = cv4[i0];
     }
 
-    scanf(cv6, param_p);
+    scanf_s(cv3, param_p, 8);
 
     /*  Compare the entry to the available types */
     i = 1;
@@ -509,11 +477,12 @@ static void check_str_input(char param_p[5])
       exitg1 = 1;
     } else {
       /*  No right type selected */
-      for (i0 = 0; i0 < 51; i0++) {
-        ERROR_MESSAGE[i0] = b_ERROR_MESSAGE[i0];
-      }
+      printf("%s\n", "Unknown filter type. Please, enter a correct one.");
+      fflush(stdout);
 
-      printf(ERROR_MESSAGE);
+      /*  Force the string regular expression in the generated C code for scanf_s */
+      /*  Clear the input buffer */
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
 }
@@ -535,14 +504,9 @@ static void check_str_input(char param_p[5])
 static void check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  static const char text_id[47] = { 'D', 'o', ' ', 'y', 'o', 'u', ' ', 'w', 'a',
-    'n', 't', ' ', 't', 'o', ' ', 'k', 'e', 'e', 'p', ' ', 't', 'h', 'e', ' ',
-    'p', 'r', 'e', 'v', 'i', 'o', 'u', 's', ' ', 'B', 'o', 'd', 'e', 's', ' ',
-    '[', 'y', ',', 'n', ']', '?', ' ', '\x00' };
-
   int negate_bool_idx_1;
   char N_CHAR[2];
-  static const char cv8[2] = { '%', 's' };
+  static const char cv5[2] = { '%', 's' };
 
   int negate_bool_idx_0;
   char b_param_p[2];
@@ -550,21 +514,21 @@ static void check_yes_or_no(char param_p[2])
 
   static const char Y_CHAR[2] = { 'y', '\x00' };
 
-  char ERROR_MESSAGE[46];
-
   /*  Constants */
   /*  Initialization */
+  /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
 
     /*  Ask the user to enter a selection */
-    printf(text_id);
+    printf("%s", "Do you want to keep the previous Bodes [y,n]? ");
+    fflush(stdout);
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      N_CHAR[negate_bool_idx_1] = cv8[negate_bool_idx_1];
+      N_CHAR[negate_bool_idx_1] = cv5[negate_bool_idx_1];
     }
 
-    scanf(N_CHAR, param_p);
+    scanf_s(N_CHAR, param_p, 2);
 
     /*  Compare the entry to the available types */
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
@@ -572,21 +536,22 @@ static void check_yes_or_no(char param_p[2])
       N_CHAR[negate_bool_idx_1] = b_N_CHAR[negate_bool_idx_1];
     }
 
-    negate_bool_idx_0 = strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_0 = _strcmpi(b_param_p, N_CHAR);
     for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
       b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
       N_CHAR[negate_bool_idx_1] = Y_CHAR[negate_bool_idx_1];
     }
 
-    negate_bool_idx_1 = strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_1 = _strcmpi(b_param_p, N_CHAR);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
-      for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 46; negate_bool_idx_1++) {
-        ERROR_MESSAGE[negate_bool_idx_1] = cv3[negate_bool_idx_1];
-      }
+      printf("%s\n", "Please, enter [y,Y] for YES or [n,N] for NO.\n");
+      fflush(stdout);
 
-      printf(ERROR_MESSAGE);
+      /*  Force the string regular expression in the generated C code for scanf_s */
+      /*  Clear the input buffer */
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
 
@@ -608,26 +573,20 @@ static void check_yes_or_no(char param_p[2])
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  * Arguments    : double *param_p
  *                const double limits[2]
+ *                char * c_param
  * Return Type  : void
  */
-static void d_check_num_input(double *param_p, const double limits[2])
+static void d_check_num_input(double *param_p, const double limits[2], char
+  * c_param)
 {
-  char CLEAR_STDIN;
+  char * CLEAR_STDIN;
   int exitg1;
   int exitg2;
-  static const char text_id[28] = { 'L', 'i', 'n', 'e', 'a', 'r', ' ', 'g', 'a',
-    'i', 'n', ' ', 'o', 'f', ' ', 't', 'h', 'e', ' ', 'f', 'i', 'l', 't', 'e',
-    'r', ':', ' ', '\x00' };
-
   int nb_params;
-  static const char c_param[3] = { '%', 'l', 'f' };
 
-  char WRONG_TYPE_IN[55];
-  char ERROR_MESSAGE[96];
-
-  /*  Constants */
-  /*  String not supported for codegen: to replace with "%*[^\n]%*1[\n]"; */
-  CLEAR_STDIN = 0;
+  /*  Constant */
+  /*  Force the string regular expression in the generated C code for scanf_s */
+  CLEAR_STDIN = "%*[^\n]%*1[\n]";
 
   /*  Initialization */
   /*  Check user's input */
@@ -637,8 +596,9 @@ static void d_check_num_input(double *param_p, const double limits[2])
       exitg2 = 0;
 
       /*  Ask the user to enter a number  */
-      printf(text_id);
-      nb_params = scanf(c_param, param_p);
+      printf("%s", "Linear gain of the filter: ");
+      fflush(stdout);
+      nb_params = scanf_s(c_param, param_p, 1);
 
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
@@ -651,14 +611,13 @@ static void d_check_num_input(double *param_p, const double limits[2])
 
       /*  Post process the keyboard input buffer data */
       if (nb_params == 1) {
-        for (nb_params = 0; nb_params < 55; nb_params++) {
-          WRONG_TYPE_IN[nb_params] = cv1[nb_params];
-        }
+        printf("The value provided is not of the right data type.\n");
+        fflush(stdout);
+        printf("Please, enter a correct value.\n");
+        fflush(stdout);
 
-        printf(WRONG_TYPE_IN);
-        scanf(CLEAR_STDIN);
-
-        /*  Clear of stdin buffer */
+        /*  Clear the input buffer */
+        scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
@@ -668,8 +627,11 @@ static void d_check_num_input(double *param_p, const double limits[2])
     if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
       exitg1 = 1;
     } else {
-      memcpy(&ERROR_MESSAGE[0], &cv2[0], 96U * sizeof(char));
-      printf(ERROR_MESSAGE, limits[0], limits[1]);
+      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
+             limits[0], limits[1]);
+      fflush(stdout);
+      printf("Please, enter a correct value.\n");
+      fflush(stdout);
     }
   } while (exitg1 == 0);
 
@@ -678,7 +640,7 @@ static void d_check_num_input(double *param_p, const double limits[2])
 
 /*
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- *  Function: filter()
+ *  Function: filter_bode()
  *  Goal    : Calculates the frequency response of a given filter's type
  *
  *  IN      : - f      : vector of frequency values
@@ -702,12 +664,12 @@ static void d_check_num_input(double *param_p, const double limits[2])
  *                int f_order
  *                double H_mod[100000]
  *                double H_arg[100000]
- *                int *error_flag
+ *                int *err_f
  * Return Type  : void
  */
 static void filter_bode(const double f[100000], double f_0, double q_0, double g,
   const char f_type[5], int f_order, double H_mod[100000], double H_arg[100000],
-  int *error_flag)
+  int *err_f)
 {
   int filter_T_32;
   int negate_bool;
@@ -731,7 +693,7 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
   /*  Constants */
   /*  Integer representation of filter's type */
   /*  Initializations */
-  *error_flag = 0;
+  *err_f = 0;
   filter_T_32 = 0;
 
   /*  Pulsation's vectors */
@@ -761,7 +723,7 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
   /*  Test the order of the filter against the filter type */
   if ((filter_T_32 > 2) && (b_mod(f_order) != 0)) {
     /*  For band-pass and stop-band filters odd orders are not feasible */
-    *error_flag = 2;
+    *err_f = 2;
   } else {
     /*  Bode diagram calculation */
     do {
@@ -853,7 +815,7 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
 
            default:
             /*  Type of filter not supported */
-            *error_flag = 1;
+            *err_f = 1;
             exitg1 = 1;
             break;
           }
@@ -966,7 +928,7 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
 
            default:
             /*  Type of filter not supported */
-            *error_flag = 1;
+            *err_f = 1;
             exitg1 = 1;
             break;
           }
@@ -1068,33 +1030,21 @@ int main(void)
   boolean_T b2;
   boolean_T b3;
   boolean_T b4;
+  char * INTEGER;
+  char * LONG_DOUBLE;
   double f_0;
   double q_0;
   double g;
   int n_f;
   int neg_stop_bool;
   char f_t[5];
-  static const char cv4[5] = { '0', '0', '0', '0', '\x00' };
+  static const char cv1[5] = { '0', '0', '0', '0', '\x00' };
 
   char keep_bodes[2];
-  static const char cv5[2] = { '0', '\x00' };
+  static const char cv2[2] = { '0', '\x00' };
 
   static double f[100000];
   char new_bodes[2];
-  static const char SEPARATOR[80] = { '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
-
-  static const char TITLE[80] = { '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', ' ', 'F', 'I', 'L', 'T', 'E', 'R', ' ', 'D', 'E', 'S', 'I',
-    'G', 'N', ' ', 'A', 'N', 'D', ' ', 'V', 'I', 'E', 'W', 'E', 'R', ' ', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-',
-    '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '\x00' };
-
   int exitg1;
   int neg_band_bool;
   char BAND_FILTER[5];
@@ -1119,29 +1069,37 @@ int main(void)
   b4 = false;
 
   /*  Functions that are not translated into C code */
-  /*  Include of stdio.h because of user-called standard I/O functions */
   /*  Constants */
+  INTEGER = "%d";
+  LONG_DOUBLE = "%lf";
+
   /*  Initialization */
   f_0 = 0.0;
   q_0 = 0.0;
   g = 1.0;
   n_f = 0;
   for (neg_stop_bool = 0; neg_stop_bool < 5; neg_stop_bool++) {
-    f_t[neg_stop_bool] = cv4[neg_stop_bool];
+    f_t[neg_stop_bool] = cv1[neg_stop_bool];
   }
 
   for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-    keep_bodes[neg_stop_bool] = cv5[neg_stop_bool];
-    new_bodes[neg_stop_bool] = cv5[neg_stop_bool];
+    keep_bodes[neg_stop_bool] = cv2[neg_stop_bool];
+    new_bodes[neg_stop_bool] = cv2[neg_stop_bool];
   }
 
   /*  Definition of the logarithmic frequency range */
   logspace(0.0, 9.0, f);
 
   /*  Program title */
-  printf(SEPARATOR);
-  printf(TITLE);
-  printf(SEPARATOR);
+  printf("%s\n",
+         "-------------------------------------------------------------------------------");
+  fflush(stdout);
+  printf("%s\n",
+         "--------------------------- FILTER DESIGN AND VIEWER --------------------------");
+  fflush(stdout);
+  printf("%s\n",
+         "-------------------------------------------------------------------------------");
+  fflush(stdout);
 
   /*  Forever loop */
   do {
@@ -1168,7 +1126,7 @@ int main(void)
         b0 = true;
       }
 
-      check_num_input(&n_f, dv1);
+      check_num_input(&n_f, dv1, INTEGER);
     } else {
       if (!b1) {
         for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
@@ -1178,7 +1136,7 @@ int main(void)
         b1 = true;
       }
 
-      check_num_input(&n_f, dv0);
+      check_num_input(&n_f, dv0, INTEGER);
     }
 
     if (!b2) {
@@ -1189,7 +1147,7 @@ int main(void)
       b2 = true;
     }
 
-    b_check_num_input(&f_0, dv2);
+    b_check_num_input(&f_0, dv2, LONG_DOUBLE);
     if (n_f > 1) {
       if (!b3) {
         for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
@@ -1199,7 +1157,7 @@ int main(void)
         b3 = true;
       }
 
-      c_check_num_input(&q_0, dv3);
+      c_check_num_input(&q_0, dv3, LONG_DOUBLE);
     }
 
     if (!b4) {
@@ -1210,7 +1168,7 @@ int main(void)
       b4 = true;
     }
 
-    d_check_num_input(&g, dv4);
+    d_check_num_input(&g, dv4, LONG_DOUBLE);
 
     /*  Bodes calculation */
     filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg, &error_flag);
@@ -1222,7 +1180,7 @@ int main(void)
       N_CHAR[neg_stop_bool] = b_N_CHAR[neg_stop_bool];
     }
 
-    strcmpi(keep_bodes, N_CHAR);
+    _strcmpi(keep_bodes, N_CHAR);
 
     /*  Ask the user if he wants to see other filter's Bodes */
     b_check_yes_or_no(new_bodes);
@@ -1230,11 +1188,13 @@ int main(void)
       N_CHAR[neg_stop_bool] = b_N_CHAR[neg_stop_bool];
     }
 
-    neg_stop_bool = strcmpi(new_bodes, N_CHAR);
+    neg_stop_bool = _strcmpi(new_bodes, N_CHAR);
     if (neg_stop_bool == 0) {
       exitg1 = 1;
     } else {
-      printf(SEPARATOR);
+      printf("%s\n",
+             "-------------------------------------------------------------------------------");
+      fflush(stdout);
     }
   } while (exitg1 == 0);
 

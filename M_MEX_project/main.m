@@ -35,7 +35,7 @@ function error_flag = main()
 
   % Initialization
   error_flag = int32(0);
-  f_t = char(zeros(1,4));
+  f_t = char(zeros(1,4)); %#ok<NASGU>
   n_f = 0;
   f_0 = 0;
   q_0 = 0;
@@ -52,7 +52,7 @@ function error_flag = main()
   % Forever loop
   while(1)
     % Ask for filter's parameters
-    f_t = check_str_input(f_t,FILTER_TYPE);
+    f_t = check_str_input(FILTER_TYPE);
     if (strcmp(f_t,BAND_FILTER) || strcmp(f_t,STOP_FILTER))
       n_f = check_num_input(n_f,[2 10],FILTER_ORDER);
     else

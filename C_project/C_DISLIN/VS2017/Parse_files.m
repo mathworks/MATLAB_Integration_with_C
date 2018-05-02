@@ -2,12 +2,12 @@
 % Parse_files
 % Automatically modify the generated C and header files.
 %
-% Author  : Sébastien Dupertuis
+% Copyright 2018 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Parsing of the main.h file
 clear variables; close all; clc;
-
+disp('Starting the parsing of the header file...');
 % Constants declarations
 % Text files containing HMM definitions
 FILE_READ  = '.\main_original.h';
@@ -19,7 +19,6 @@ KEY_TAGS   = {'__cplusplus' 'main(void)'...
 LINE_FEED  = newline;
 DIRECTIVES = {'/* Constants definition */'
               '#define NB_SAMPLES 100000'
-              '#define NB_FILTERS  8'
               '#define FREQ_STEP  10'
               '#define Y_AXS_STEP 20'
               '#define ERROR_TYPE  1'
@@ -42,7 +41,7 @@ while(1)
   line_data = fgets(file_read_ID);
   % Look for any tag in the current line
   tags_present = cellfun(@(s) contains(line_data,s),KEY_TAGS);
-  if (any(tags_present))
+  if any(tags_present)
     % Get the index of the identified tag
     tag_idx = find(tags_present);
     % Retrieve needed data based on tags identification
@@ -82,20 +81,21 @@ end
 % Close text files
 fclose(file_read_ID);
 fclose(file_write_ID);
+disp('Parsing of the header file done.');
 
 %% Parsing of the main.c file
 clear variables; close all; clc;
-
+disp('Starting the parsing of the C file...');
 % Constants declarations
 % Text files containing HMM definitions
 FILE_READ  = '.\main_original.c';
 FILE_WRITE = '.\main.c';
 % Key words to recognize in the generated files
-KEY_TAGS   = {'angle' '100000'  '99999.0' '99998.0' '99999' '99998' '[8]'...
-              'scanf' 'strcmpi' 'char CLEAR_STDIN;' 'CLEAR_STDIN = 0;'};
+KEY_TAGS   = {'angle' '100000U' '100000'  '99999.0' '99998.0' '99999' '99998'};
 % Text to add at the beginning of the file
 LINE_FEED  = newline;
 INCLUDES   = {'#include <float.h>'
+              '#include <math.h>'
               '#include "dislin.h" /* Added of the graphical library */'};
 
 % Text to add at the end of the file
@@ -132,42 +132,35 @@ while(1)
   line_data = fgets(file_read_ID);
   % Look for any tag in the current line
   tags_present = cellfun(@(s) contains(line_data,s),KEY_TAGS);
-  if (any(tags_present))
+  if any(tags_present)
     % Correct the name of the angle function that already exists in math.h
     line_data = regexprep(line_data,KEY_TAGS(1),'angle_tf');
     % Add of the pre-defined directives for constant values
     line_data = regexprep(line_data,KEY_TAGS(2),'NB_SAMPLES');
-    line_data = regexprep(line_data,KEY_TAGS(3),'(NB_SAMPLES-1.0)');
-    line_data = regexprep(line_data,KEY_TAGS(4),'(NB_SAMPLES-2.0)');
-    line_data = regexprep(line_data,KEY_TAGS(5),'NB_SAMPLES-1');
-    line_data = regexprep(line_data,KEY_TAGS(6),'NB_SAMPLES-2');
-    line_data = regexprep(line_data,KEY_TAGS(7),'[NB_FILTERS]');
-    % Correct the name of stdio C functions to use in Visual Studio
-    line_data = regexprep(line_data,KEY_TAGS(8),'scanf_s');
-    line_data = regexprep(line_data,KEY_TAGS(9),'_strcmpi');
-    % Handle of string data type that is not supported for code generation
-    line_data = regexprep(line_data,KEY_TAGS(10),'');
-    line_data = regexprep(line_data,KEY_TAGS(end),...
-                          'char CLEAR_STDIN[14] = "%*[^\\n]%*1[\\n]";');
-  elseif (regexp(line_data,'"main.h"'))
+    line_data = regexprep(line_data,KEY_TAGS(3),'NB_SAMPLES');
+    line_data = regexprep(line_data,KEY_TAGS(4),'(NB_SAMPLES-1.0)');
+    line_data = regexprep(line_data,KEY_TAGS(5),'(NB_SAMPLES-2.0)');
+    line_data = regexprep(line_data,KEY_TAGS(6),'NB_SAMPLES-1');
+    line_data = regexprep(line_data,KEY_TAGS(end),'NB_SAMPLES-2');
+  elseif regexp(line_data,'"main.h"')
     % Write includes needed for the main C file
     for i=1:length(INCLUDES)
       fprintf(file_write_ID,'%s',[INCLUDES{i,1} LINE_FEED]);
     end
-  elseif (regexp(line_data,'Function: main\(\)'))
+  elseif regexp(line_data,'Function: main\(\)')
     % Added of the min_and_max function
     for i=1:length(min_and_max)
       line_to_write = min_and_max{i,1};
       fprintf(file_write_ID,'%s',line_to_write(1:end-1));
     end
-  elseif (regexp(line_data,'int main\(void\)'))
+  elseif regexp(line_data,'int main\(void\)')
     % Added of the main function with the graphical interface
     for i=1:length(main)
       line_to_write = main{i,1};
       fprintf(file_write_ID,'%s',line_to_write(1:end-1));
     end
     do_not_copy = 1;
-  elseif (regexp(line_data,'* Arguments    : void'))
+  elseif regexp(line_data,'* Arguments    : void')
     if (counter > 0)
       for i=1:17
         line_data = fgets(file_read_ID);
@@ -182,7 +175,7 @@ while(1)
   end
   
   % Leave the loop if the end of file has been reached
-  if (feof(file_read_ID))
+  if feof(file_read_ID)
     break;
   end
 end
@@ -190,4 +183,4 @@ end
 % Close text files
 fclose(file_read_ID);
 fclose(file_write_ID);
-disp('Parsing of the main.h and main.c files done.');
+disp('Parsing of the C file done.');

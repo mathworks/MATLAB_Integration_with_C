@@ -26,7 +26,7 @@ disp('Initialization done.');
 cfg = coder.config('mex');
 cfg.FilePartitionMethod = 'SingleFile';
 % MEX file generation
-codegen filter_bode -config cfg -args {zeros(1,1e005),0,0,0,char(zeros(1,4)),int32(0)}
+codegen filter_bode -launchreport -config cfg -args {zeros(1,1e005),0,0,0,char(zeros(1,4)),int32(0)}
 disp('MEX generated successfully.');
 
 % Bodes calculation

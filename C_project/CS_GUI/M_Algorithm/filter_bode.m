@@ -1,4 +1,4 @@
-function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
+function [H_mod,H_arg,err_f] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Function: filter_bode()
 % Goal    : Calculates the frequency response of a given filter's type
@@ -17,15 +17,16 @@ function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 % Copyright 2018 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
+  coder.cinclude('string.h');
   % Constants
-  TYPE        = [['low' 0 0];['high' 0];['band' 0];['stop' 0]];
+  TYPE        = [['low',0,0];['high',0];['band',0];['stop',0]];
   NB_FILTERS  = int32(4);
   T_32        = int32(1:4); % Integer representation of filter's type
   ERROR_TYPE  = int32(1);
   ERROR_ORDER = int32(2);
 
   % Initializations
-  error_flag  = int32(0);
+  err_f       = int32(0);
   filter_T_32 = int32(0);
   negate_bool = int32(0); %#ok<NASGU>
   n           = int32(0);
@@ -49,7 +50,7 @@ function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
   if (filter_T_32 > T_32(2))
     % For band-pass and stop-band filters odd orders are not feasible
     if mod(f_order,2)
-      error_flag = ERROR_ORDER;
+      err_f = ERROR_ORDER;
       return
     end
   end
@@ -80,7 +81,7 @@ function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
           H = 1i*(w/w_0).*H;
         otherwise
           % Type of filter not supported
-          error_flag = ERROR_TYPE;
+          err_f = ERROR_TYPE;
           return
       end
     else % 2nd order filter
@@ -101,7 +102,7 @@ function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
           H = (1+(1i*(w/w_0)).^2).*H;
         otherwise
           % Type of filter not supported
-          error_flag = ERROR_TYPE;
+          err_f = ERROR_TYPE;
           return
       end
     end
@@ -109,7 +110,7 @@ function [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
   H = g*H; % Apply the filter gain only once
 
   % Retrieves module and argument of the transfer function H
-  if (error_flag == 0)
+  if (err_f == 0)
     H_mod = 20*log10(abs(H)); % [dB]
     H_arg = angle(H)*180/pi;  % [°]
     return

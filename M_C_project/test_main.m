@@ -5,10 +5,11 @@
 clear variables; close all; clc;
 
 % Test the MEX file if set to '1'
-TEST_MEX = 1;
-if (TEST_MEX ~= 1)
+TEST_MEX = 0;
+if (TEST_MEX == 0)
   % Call of the standard MATLAB code
   error('The coder.ceval function is not supported in MATLAB. Generate the MEX file.');
 else
-  error('The MEX file has been generated successfully, but it cannot be tested due to IOs console access.');
+  % Call of the MEX function
+  error('The write access to the console via scanf() or scanf_s() is not supported in MATLAB.');
 end

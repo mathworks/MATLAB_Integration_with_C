@@ -18,20 +18,25 @@ function param_p = check_yes_or_no(param_p,text_id)
 
   % Initialization
   negate_bool = int32(ones(1,2));
+  char_length = int32(2); % sizeof(char)
 
   % Loop to get and validate user's input
   while(1)
     % Ask the user to enter a selection
-    coder.ceval('printf',coder.rref(text_id));
-    coder.ceval('scanf','%s', coder.wref(param_p));
+    fprintf('%s',text_id);
+    coder.ceval('scanf_s','%s',coder.wref(param_p),char_length);
     % Compare the entry to the available types
-    negate_bool(1) = coder.ceval('strcmpi',param_p,N_CHAR);
-    negate_bool(2) = coder.ceval('strcmpi',param_p,Y_CHAR);
+    negate_bool(1) = coder.ceval('_strcmpi',param_p,N_CHAR);
+    negate_bool(2) = coder.ceval('_strcmpi',param_p,Y_CHAR);
     if (negate_bool(1) == 0 || negate_bool(2) == 0)
       % Handle graphical windows in C
       break;
     else
-      coder.ceval('printf',ERROR_MESSAGE);
+      fprintf('%s\n',ERROR_MESSAGE);
+      % Force the string regular expression in the generated C code for scanf_s
+      CLEAR_STDIN = coder.opaque('char *','"%*[^\n]%*1[\n]"');
+      % Clear the input buffer
+      coder.ceval('scanf_s', CLEAR_STDIN);
     end
   end
 end

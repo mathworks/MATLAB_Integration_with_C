@@ -2,7 +2,7 @@
  * File: main_types.h
  *
  * MATLAB Coder version            : 3.4
- * C/C++ source code generated on  : 08-Feb-2018 11:07:30
+ * C/C++ source code generated on  : 30-Apr-2018 17:05:27
  */
 
 #ifndef MAIN_TYPES_H

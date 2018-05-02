@@ -1,6 +1,6 @@
 function [H_mod,H_arg,err_f] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Function: filter()
+% Function: filter_bode()
 % Goal    : Calculates the frequency response of a given filter's type
 %
 % IN      : - f      : vector of frequency values
@@ -18,17 +18,17 @@ function [H_mod,H_arg,err_f] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Constants
-  TYPE = ['low ';'high';'band';'stop'];
-  NB_FILTERS = int32(4);
-  T_32 = int32(1:NB_FILTERS); % Integer representation of filter's type
-  ERROR_TYPE   = int32(1);
-  ERROR_ORDER  = int32(2);
+  TYPE        = ['low ';'high';'band';'stop'];
+  NB_FILTERS  = int32(4);
+  T_32        = int32(1:NB_FILTERS); % Integer representation of filter's type
+  ERROR_TYPE  = int32(1);
+  ERROR_ORDER = int32(2);
 
   % Initializations
   err_f       = int32(0);
   filter_T_32 = int32(0);
   n           = int32(0);
-  nb_samples  = length(f);
+  nb_samples  = int32(length(f));
   H     = complex(ones(1,nb_samples),0);
   H_mod = zeros(1,nb_samples);
   H_arg = zeros(1,nb_samples);

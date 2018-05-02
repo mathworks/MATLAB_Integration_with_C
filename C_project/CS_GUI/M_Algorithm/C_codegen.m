@@ -32,15 +32,14 @@ disp('Build folder cleaned successfully.');
 cfg = coder.config('dll');
 cfg.FilePartitionMethod = 'SingleFile';
 % Generate C code only
-codegen filter_bode -config cfg -c -d '.\Artifacts' -args {zeros(1,1e005),0,0,0,char(zeros(1,4)),int32(0)}
+codegen filter_bode -config cfg -c -d '.\Artifacts' -args {zeros(1,1e005),0,0,0,char(zeros(1,5)),int32(0)}
 disp('C code generated successfully.');
 % Package the artifacts
 load([BUILD_FOLDER '\buildinfo.mat']);
 packNGo(buildInfo,'fileName',ZIP_FILE_PATH);
 disp('ZIP file created successfully.');
 % Generate DLL
-setenv('VSCMD_START_DIR','%CD%');
-codegen filter_bode_DLL -config cfg -d '.\Artifacts' -o filter_bode_ML -args {zeros(1,1e005),0,0,0,char(zeros(1,4)),int32(0)}
+codegen filter_bode_DLL -config cfg -d '.\Artifacts' -o filter_bode_ML -args {zeros(1,1e005),0,0,0,char(zeros(1,5)),int32(0)}
 disp('DLL generated successfully.');
 
 % Move the artifacts to Visual Studio SLN project location

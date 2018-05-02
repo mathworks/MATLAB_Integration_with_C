@@ -12,8 +12,6 @@ function error_flag = main()
   %#codegen
   % Functions that are not translated into C code
   coder.extrinsic('plot_filter');
-  % Include of stdio.h because of user-called standard I/O functions
-  coder.cinclude('stdio.h');
 
   % Constants
   SEPARATOR    = ['-------------------------------------------------------------------------------',0];
@@ -41,8 +39,8 @@ function error_flag = main()
   ORDER_LIMS_2 = [2 10];
   QUAL_LIMS    = [0.1 10];
   GAIN_LIMS    = [0.001 1000];
-  INTEGER      = '%d';
-  LONG_DOUBLE  = '%lf';
+  INTEGER      = coder.opaque('char *','"%d"');
+  LONG_DOUBLE  = coder.opaque('char *','"%lf"');
 
   % Initialization
   error_flag = int32(0);
@@ -63,9 +61,9 @@ function error_flag = main()
   frequency_range = 10.^[POWER_F_MIN,POWER_F_MAX];
   
   % Program title
-  coder.ceval('printf',coder.rref(SEPARATOR));
-  coder.ceval('printf',coder.rref(TITLE));
-  coder.ceval('printf',coder.rref(SEPARATOR));
+  fprintf('%s\n',SEPARATOR);
+  fprintf('%s\n',TITLE);
+  fprintf('%s\n',SEPARATOR);
 
   % Forever loop
   while(1)
@@ -104,18 +102,18 @@ function error_flag = main()
 
     % Ask the user if he wants to keep the previous graphs
     keep_bodes = check_yes_or_no(keep_bodes,PREV_BODES);
-    negate_bool = coder.ceval('strcmpi',coder.rref(keep_bodes),N_CHAR);
+    negate_bool = coder.ceval('_strcmpi',coder.rref(keep_bodes),N_CHAR);
     if (negate_bool == 0)
       fig_id = fig_id-1;
       % C implementation in order to close the previous windows
     end
     % Ask the user if he wants to see other filter's Bodes
     new_bodes = check_yes_or_no(new_bodes,OTHER_BODES);
-    negate_bool = coder.ceval('strcmpi',coder.rref(new_bodes),N_CHAR);
+    negate_bool = coder.ceval('_strcmpi',coder.rref(new_bodes),N_CHAR);
     if (negate_bool == 0)
       break;
       % C implementation in order to quit the console
     end
-    coder.ceval('printf',coder.rref(SEPARATOR));
+    fprintf('%s\n',SEPARATOR);
   end
 end

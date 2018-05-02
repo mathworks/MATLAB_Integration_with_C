@@ -2,7 +2,7 @@
  * File: main.h
  *
  * MATLAB Coder version            : 3.4
- * C/C++ source code generated on  : 08-Feb-2018 11:07:30
+ * C/C++ source code generated on  : 30-Apr-2018 17:05:27
  */
 
 #ifndef MAIN_H
@@ -12,9 +12,11 @@
 #include <math.h>
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "main_types.h"
+
+/* Type Definitions */
+#include <stdio.h>
 
 /* Function Declarations */
 extern int main(void);

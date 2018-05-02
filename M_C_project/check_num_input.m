@@ -14,15 +14,9 @@ function param_p = check_num_input(param_p,limits,text_id,c_param)
   %#codegen 
   %#ok<*NASGU>
 
-  % Constants
-  NEW_LINE = char(10); %#ok<CHARTEN>
-  WRONG_TYPE_IN = coder.const(['Input not recognised as an integer, ',...
-                               'please try again.',NEW_LINE,0]);
-  ERROR_MESSAGE = coder.const(['For this filter, the parameter should ',...
-                               'be between %.3f and %.3f.',NEW_LINE,...
-                               'Please, enter a correct value.',NEW_LINE,0]);
-  % String not supported for codegen: to replace with "%*[^\n]%*1[\n]";
-  CLEAR_STDIN = coder.opaque('char','0');
+  % Constant
+  % Force the string regular expression in the generated C code for scanf_s
+  CLEAR_STDIN = coder.opaque('char *','"%*[^\n]%*1[\n]"');
 
   % Initialization
   nb_params   = int32(0);
@@ -31,8 +25,8 @@ function param_p = check_num_input(param_p,limits,text_id,c_param)
   % Check user's input
   while(1)
     % Ask the user to enter a number 
-    coder.ceval('printf',coder.rref(text_id));
-    nb_params = coder.ceval('scanf',coder.rref(c_param),coder.wref(param_p));
+    fprintf('%s',text_id);
+    nb_params = coder.ceval('scanf_s',c_param,coder.wref(param_p),int32(1));
     % Check if a number or some chars have been entered
     if (nb_params == 1)
       % One entry => this is a number
@@ -43,16 +37,20 @@ function param_p = check_num_input(param_p,limits,text_id,c_param)
     end
     % Post process the keyboard input buffer data
     if (negate_bool == 1)
-      coder.ceval('printf',WRONG_TYPE_IN);
-      coder.ceval('scanf' ,CLEAR_STDIN); % Clear of stdin buffer
+      fprintf('The value provided is not of the right data type.\n');
+      fprintf('Please, enter a correct value.\n');
+      % Clear the input buffer
+      coder.ceval('scanf_s',CLEAR_STDIN);
     else
       % Compare the entry to the possible data range
       if (param_p >= limits(1) && param_p <= limits(2))
         % The parameter stands into the correct range
         break;
       else
-        coder.ceval('printf',ERROR_MESSAGE,limits(1),limits(2));
+        fprintf('For this filter, the parameter should be between %.3f and %.3f.\n',...
+                limits(1),limits(2));
+        fprintf('Please, enter a correct value.\n');
       end
-	  end
+    end
   end
 end
