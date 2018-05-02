@@ -1,19 +1,19 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 3.4
- * C/C++ source code generated on  : 30-Apr-2018 17:05:27
+ * MATLAB Coder version            : 4.0
+ * C/C++ source code generated on  : 30-Apr-2018 13:53:32
  */
 
 /* Include Files */
+#include <math.h>
+#include <string.h>
 #include "main.h"
 #include <stdio.h>
 
-/* Type Definitions */
-
 /* Variable Definitions */
-static const char cv0[20] = { 'l', 'h', 'b', 's', 'o', 'i', 'a', 't', 'w', 'g',
-  'n', 'o', '\x00', 'h', 'd', 'p', '\x00', '\x00', '\x00', '\x00' };
+static const char cv0[20] = { 'l', 'o', 'w', '\x00', '\x00', 'h', 'i', 'g', 'h',
+  '\x00', 'b', 'a', 'n', 'd', '\x00', 's', 't', 'o', 'p', '\x00' };
 
 /* Function Declarations */
 static void angle(const creal_T x[100000], double y[100000]);
@@ -47,10 +47,14 @@ static double rt_hypotd(double u0, double u1);
  */
 static void angle(const creal_T x[100000], double y[100000])
 {
+  static double z1[100000];
   int k;
+  memcpy(&z1[0], &y[0], 100000U * sizeof(double));
   for (k = 0; k < 100000; k++) {
-    y[k] = atan2(x[k].im, x[k].re);
+    z1[k] = atan2(x[k].im, x[k].re);
   }
+
+  memcpy(&y[0], &z1[0], 100000U * sizeof(double));
 }
 
 /*
@@ -60,10 +64,14 @@ static void angle(const creal_T x[100000], double y[100000])
  */
 static void b_abs(const creal_T x[100000], double y[100000])
 {
+  static double z1[100000];
   int k;
+  memcpy(&z1[0], &y[0], 100000U * sizeof(double));
   for (k = 0; k < 100000; k++) {
-    y[k] = rt_hypotd(x[k].re, x[k].im);
+    z1[k] = rt_hypotd(x[k].re, x[k].im);
   }
+
+  memcpy(&y[0], &z1[0], 100000U * sizeof(double));
 }
 
 /*
@@ -91,6 +99,7 @@ static void b_check_num_input(double *param_p, const double limits[2], char
   int exitg1;
   int exitg2;
   int nb_params;
+  int negate_bool;
 
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
@@ -111,14 +120,14 @@ static void b_check_num_input(double *param_p, const double limits[2], char
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
-        nb_params = 0;
+        negate_bool = 0;
       } else {
         /*  Multiple entries => this is an array of chars */
-        nb_params = 1;
+        negate_bool = 1;
       }
 
       /*  Post process the keyboard input buffer data */
-      if (nb_params == 1) {
+      if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
@@ -163,15 +172,24 @@ static void b_check_num_input(double *param_p, const double limits[2], char
 static void b_check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  int negate_bool_idx_1;
-  char N_CHAR[2];
-  static const char cv6[2] = { '%', 's' };
+  int i31;
+  char cv25[2];
+  char cv26[2];
+  static const char cv27[2] = { '%', 's' };
 
+  int i32;
   int negate_bool_idx_0;
-  char b_param_p[2];
-  static const char b_N_CHAR[2] = { 'n', '\x00' };
+  char cv28[2];
+  char cv29[2];
+  int i33;
+  static const char cv30[2] = { 'n', '\x00' };
 
-  static const char Y_CHAR[2] = { 'y', '\x00' };
+  int negate_bool_idx_1;
+  char cv31[2];
+  char cv32[2];
+  static const char cv33[2] = { 'y', '\x00' };
+
+  char * CLEAR_STDIN;
 
   /*  Constants */
   /*  Initialization */
@@ -183,25 +201,26 @@ static void b_check_yes_or_no(char param_p[2])
     /*  Ask the user to enter a selection */
     printf("%s", "Do you want to see Bodes of another filter [y,n]? ");
     fflush(stdout);
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      N_CHAR[negate_bool_idx_1] = cv6[negate_bool_idx_1];
+    for (i31 = 0; i31 < 2; i31++) {
+      cv25[i31] = cv27[i31];
     }
 
-    scanf_s(N_CHAR, param_p, 2);
+    scanf_s(cv25, cv26, 2);
 
     /*  Compare the entry to the available types */
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
-      N_CHAR[negate_bool_idx_1] = b_N_CHAR[negate_bool_idx_1];
+    for (i32 = 0; i32 < 2; i32++) {
+      param_p[i32] = cv26[i32];
+      cv28[i32] = cv26[i32];
+      cv29[i32] = cv30[i32];
     }
 
-    negate_bool_idx_0 = _strcmpi(b_param_p, N_CHAR);
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
-      N_CHAR[negate_bool_idx_1] = Y_CHAR[negate_bool_idx_1];
+    negate_bool_idx_0 = _strcmpi(cv28, cv29);
+    for (i33 = 0; i33 < 2; i33++) {
+      cv31[i33] = cv26[i33];
+      cv32[i33] = cv33[i33];
     }
 
-    negate_bool_idx_1 = _strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_1 = _strcmpi(cv31, cv32);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
@@ -209,8 +228,10 @@ static void b_check_yes_or_no(char param_p[2])
       fflush(stdout);
 
       /*  Force the string regular expression in the generated C code for scanf_s */
+      CLEAR_STDIN = "%*[^\n]%*1[\n]";
+
       /*  Clear the input buffer */
-      scanf_s("%*[^\n]%*1[\n]");
+      scanf_s(CLEAR_STDIN);
     }
   } while (exitg1 == 0);
 
@@ -245,11 +266,57 @@ static int b_mod(int x)
  */
 static void b_power(const creal_T a[100000], creal_T y[100000])
 {
+  static creal_T z1[100000];
   int k;
+  double y_re;
+  double y_im;
+  double x_re;
+  double x_im;
+  double r;
+  memcpy(&z1[0], &y[0], 100000U * sizeof(creal_T));
   for (k = 0; k < 100000; k++) {
-    y[k].re = a[k].re * a[k].re - a[k].im * a[k].im;
-    y[k].im = a[k].re * a[k].im + a[k].im * a[k].re;
+    if ((a[k].im == 0.0) && (a[k].re >= 0.0)) {
+      y_re = pow(a[k].re, 2.0);
+      y_im = 0.0;
+    } else if (a[k].re == 0.0) {
+      y_re = -pow(a[k].im, 2.0);
+      y_im = 0.0;
+    } else {
+      if (a[k].im == 0.0) {
+        if (a[k].re < 0.0) {
+          x_re = log(fabs(a[k].re));
+          x_im = 3.1415926535897931;
+        } else {
+          x_re = log(fabs(a[k].re));
+          x_im = 0.0;
+        }
+      } else if ((fabs(a[k].re) > 8.9884656743115785E+307) || (fabs(a[k].im) >
+                  8.9884656743115785E+307)) {
+        x_re = log(rt_hypotd(a[k].re / 2.0, a[k].im / 2.0)) +
+          0.69314718055994529;
+        x_im = atan2(a[k].im, a[k].re);
+      } else {
+        x_re = log(rt_hypotd(a[k].re, a[k].im));
+        x_im = atan2(a[k].im, a[k].re);
+      }
+
+      y_re = 2.0 * x_re;
+      y_im = 2.0 * x_im;
+      if (y_im == 0.0) {
+        y_re = exp(y_re);
+        y_im = 0.0;
+      } else {
+        r = exp(y_re / 2.0);
+        y_re = r * (r * cos(y_im));
+        y_im = r * (r * sin(y_im));
+      }
+    }
+
+    z1[k].re = y_re;
+    z1[k].im = y_im;
   }
+
+  memcpy(&y[0], &z1[0], 100000U * sizeof(creal_T));
 }
 
 /*
@@ -277,6 +344,7 @@ static void c_check_num_input(double *param_p, const double limits[2], char
   int exitg1;
   int exitg2;
   int nb_params;
+  int negate_bool;
 
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
@@ -297,14 +365,14 @@ static void c_check_num_input(double *param_p, const double limits[2], char
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
-        nb_params = 0;
+        negate_bool = 0;
       } else {
         /*  Multiple entries => this is an array of chars */
-        nb_params = 1;
+        negate_bool = 1;
       }
 
       /*  Post process the keyboard input buffer data */
-      if (nb_params == 1) {
+      if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
@@ -356,6 +424,7 @@ static void check_num_input(int *param_p, const double limits[2], char * c_param
   int exitg1;
   int exitg2;
   int nb_params;
+  int negate_bool;
 
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
@@ -376,14 +445,14 @@ static void check_num_input(int *param_p, const double limits[2], char * c_param
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
-        nb_params = 0;
+        negate_bool = 0;
       } else {
         /*  Multiple entries => this is an array of chars */
-        nb_params = 1;
+        negate_bool = 1;
       }
 
       /*  Post process the keyboard input buffer data */
-      if (nb_params == 1) {
+      if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
@@ -429,14 +498,18 @@ static void check_str_input(char param_p[5])
 {
   int negate_bool;
   int exitg1;
-  int i0;
-  char cv3[3];
-  static const char cv4[3] = { '%', '4', 's' };
+  int i25;
+  char cv12[3];
+  char cv13[5];
+  static const char cv14[3] = { '%', '4', 's' };
 
+  int i26;
   int i;
   boolean_T exitg2;
-  char b_param_p[5];
+  int i27;
+  char cv15[5];
   char FILTER[5];
+  char * CLEAR_STDIN;
 
   /*  Constants */
   /*  Initialization */
@@ -450,22 +523,25 @@ static void check_str_input(char param_p[5])
     /*  Ask the user to enter a filter type */
     printf("%s", "Type of filter [low][high][band][stop]: ");
     fflush(stdout);
-    for (i0 = 0; i0 < 3; i0++) {
-      cv3[i0] = cv4[i0];
+    for (i25 = 0; i25 < 3; i25++) {
+      cv12[i25] = cv14[i25];
     }
 
-    scanf_s(cv3, param_p, 8);
+    scanf_s(cv12, cv13, 8);
+    for (i26 = 0; i26 < 5; i26++) {
+      param_p[i26] = cv13[i26];
+    }
 
     /*  Compare the entry to the available types */
     i = 1;
     exitg2 = false;
     while ((!exitg2) && (i < 5)) {
-      for (i0 = 0; i0 < 5; i0++) {
-        b_param_p[i0] = param_p[i0];
-        FILTER[i0] = cv0[(i + (i0 << 2)) - 1];
+      for (i27 = 0; i27 < 5; i27++) {
+        cv15[i27] = cv13[i27];
+        FILTER[i27] = cv0[i27 + 5 * (i - 1)];
       }
 
-      negate_bool = strcmp(b_param_p, FILTER);
+      negate_bool = strcmp(cv15, FILTER);
       if (negate_bool == 0) {
         exitg2 = true;
       } else {
@@ -481,8 +557,10 @@ static void check_str_input(char param_p[5])
       fflush(stdout);
 
       /*  Force the string regular expression in the generated C code for scanf_s */
+      CLEAR_STDIN = "%*[^\n]%*1[\n]";
+
       /*  Clear the input buffer */
-      scanf_s("%*[^\n]%*1[\n]");
+      scanf_s(CLEAR_STDIN);
     }
   } while (exitg1 == 0);
 }
@@ -504,15 +582,24 @@ static void check_str_input(char param_p[5])
 static void check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  int negate_bool_idx_1;
-  char N_CHAR[2];
-  static const char cv5[2] = { '%', 's' };
+  int i28;
+  char cv16[2];
+  char cv17[2];
+  static const char cv18[2] = { '%', 's' };
 
+  int i29;
   int negate_bool_idx_0;
-  char b_param_p[2];
-  static const char b_N_CHAR[2] = { 'n', '\x00' };
+  char cv19[2];
+  char cv20[2];
+  int i30;
+  static const char cv21[2] = { 'n', '\x00' };
 
-  static const char Y_CHAR[2] = { 'y', '\x00' };
+  int negate_bool_idx_1;
+  char cv22[2];
+  char cv23[2];
+  static const char cv24[2] = { 'y', '\x00' };
+
+  char * CLEAR_STDIN;
 
   /*  Constants */
   /*  Initialization */
@@ -524,25 +611,26 @@ static void check_yes_or_no(char param_p[2])
     /*  Ask the user to enter a selection */
     printf("%s", "Do you want to keep the previous Bodes [y,n]? ");
     fflush(stdout);
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      N_CHAR[negate_bool_idx_1] = cv5[negate_bool_idx_1];
+    for (i28 = 0; i28 < 2; i28++) {
+      cv16[i28] = cv18[i28];
     }
 
-    scanf_s(N_CHAR, param_p, 2);
+    scanf_s(cv16, cv17, 2);
 
     /*  Compare the entry to the available types */
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
-      N_CHAR[negate_bool_idx_1] = b_N_CHAR[negate_bool_idx_1];
+    for (i29 = 0; i29 < 2; i29++) {
+      param_p[i29] = cv17[i29];
+      cv19[i29] = cv17[i29];
+      cv20[i29] = cv21[i29];
     }
 
-    negate_bool_idx_0 = _strcmpi(b_param_p, N_CHAR);
-    for (negate_bool_idx_1 = 0; negate_bool_idx_1 < 2; negate_bool_idx_1++) {
-      b_param_p[negate_bool_idx_1] = param_p[negate_bool_idx_1];
-      N_CHAR[negate_bool_idx_1] = Y_CHAR[negate_bool_idx_1];
+    negate_bool_idx_0 = _strcmpi(cv19, cv20);
+    for (i30 = 0; i30 < 2; i30++) {
+      cv22[i30] = cv17[i30];
+      cv23[i30] = cv24[i30];
     }
 
-    negate_bool_idx_1 = _strcmpi(b_param_p, N_CHAR);
+    negate_bool_idx_1 = _strcmpi(cv22, cv23);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
@@ -550,8 +638,10 @@ static void check_yes_or_no(char param_p[2])
       fflush(stdout);
 
       /*  Force the string regular expression in the generated C code for scanf_s */
+      CLEAR_STDIN = "%*[^\n]%*1[\n]";
+
       /*  Clear the input buffer */
-      scanf_s("%*[^\n]%*1[\n]");
+      scanf_s(CLEAR_STDIN);
     }
   } while (exitg1 == 0);
 
@@ -583,6 +673,7 @@ static void d_check_num_input(double *param_p, const double limits[2], char
   int exitg1;
   int exitg2;
   int nb_params;
+  int negate_bool;
 
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
@@ -603,14 +694,14 @@ static void d_check_num_input(double *param_p, const double limits[2], char
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
-        nb_params = 0;
+        negate_bool = 0;
       } else {
         /*  Multiple entries => this is an array of chars */
-        nb_params = 1;
+        negate_bool = 1;
       }
 
       /*  Post process the keyboard input buffer data */
-      if (nb_params == 1) {
+      if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
@@ -672,23 +763,64 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
   int *err_f)
 {
   int filter_T_32;
-  int negate_bool;
+  int i11;
   double w_0;
   static creal_T H[100000];
   int i;
+  int i12;
   static double w[100000];
+  int negate_bool;
   char b_f_type[5];
   char TYPE[5];
   int exitg1;
   boolean_T guard1 = false;
+  int n_cell_order;
+  int i13;
+  static double dv5[100000];
+  int i14;
   double y_im;
+  int i15;
+  int i16;
   double bi;
+  int i17;
   static creal_T dcv0[100000];
   static creal_T dcv1[100000];
-  double im;
+  int i18;
+  int i19;
+  double bim;
   double re;
+  double im;
   double br;
+  double b_im;
+  double d;
+  double b_bi;
+  double H_re;
+  double s;
+  double b_H_re;
+  int i20;
+  double b_br;
+  int i21;
+  double sgnbi;
+  double b_re;
+  static creal_T dcv2[100000];
+  int i22;
+  static creal_T dcv3[100000];
   double brm;
+  double c_im;
+  int i23;
+  int i24;
+  double b_bim;
+  double b_y_im;
+  double c_H_re;
+  double d_H_re;
+  double e_H_re;
+  double c_re;
+  double b_s;
+  double d_im;
+  double b_d;
+  double f_H_re;
+  double sgnbr;
+  double b_sgnbi;
 
   /*  Constants */
   /*  Integer representation of filter's type */
@@ -697,21 +829,21 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
   filter_T_32 = 0;
 
   /*  Pulsation's vectors */
-  for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-    H[negate_bool].re = 1.0;
-    H[negate_bool].im = 0.0;
-    H_mod[negate_bool] = 0.0;
-    H_arg[negate_bool] = 0.0;
-    w[negate_bool] = 6.2831853071795862 * f[negate_bool];
+  for (i11 = 0; i11 < 100000; i11++) {
+    H[i11].re = 1.0;
+    H[i11].im = 0.0;
+    H_mod[i11] = 0.0;
+    H_arg[i11] = 0.0;
+    w[i11] = 6.2831853071795862 * f[i11];
   }
 
   w_0 = 6.2831853071795862 * f_0;
 
   /*  Set switches to work with integer */
   for (i = 0; i < 4; i++) {
-    for (negate_bool = 0; negate_bool < 5; negate_bool++) {
-      b_f_type[negate_bool] = f_type[negate_bool];
-      TYPE[negate_bool] = cv0[i + (negate_bool << 2)];
+    for (i12 = 0; i12 < 5; i12++) {
+      b_f_type[i12] = f_type[i12];
+      TYPE[i12] = cv0[i12 + 5 * i];
     }
 
     negate_bool = strcmp(b_f_type, TYPE);
@@ -730,28 +862,30 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
       exitg1 = 0;
       guard1 = false;
       if (f_order > 1) {
-        negate_bool = 2;
+        n_cell_order = 2;
         guard1 = true;
       } else if (f_order == 1) {
-        negate_bool = 1;
+        n_cell_order = 1;
         guard1 = true;
       } else {
         /*  All filter's cells have been calculated */
-        for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-          H[negate_bool].re *= g;
-          H[negate_bool].im *= g;
+        for (i13 = 0; i13 < 100000; i13++) {
+          H[i13].re *= g;
+          H[i13].im *= g;
         }
 
         /*  Apply the filter gain only once */
         /*  Retrieves module and argument of the transfer function H */
-        b_abs(H, H_mod);
-        b_log10(H_mod);
+        b_abs(H, dv5);
+        b_log10(dv5);
+        for (i14 = 0; i14 < 100000; i14++) {
+          H_mod[i14] = 20.0 * dv5[i14];
+        }
 
         /*  [dB] */
-        angle(H, H_arg);
-        for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-          H_mod[negate_bool] *= 20.0;
-          H_arg[negate_bool] = H_arg[negate_bool] * 180.0 / 3.1415926535897931;
+        angle(H, dv5);
+        for (i17 = 0; i17 < 100000; i17++) {
+          H_arg[i17] = dv5[i17] * 180.0 / 3.1415926535897931;
         }
 
         /*  [°] */
@@ -759,43 +893,43 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
       }
 
       if (guard1) {
-        f_order -= negate_bool;
+        f_order -= n_cell_order;
 
         /*  Calculate each filter's cell separately */
-        if (negate_bool == 1) {
+        if (n_cell_order == 1) {
           /*  1st order filter */
           /*  Initialization of the transfer function with the common divider */
-          for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-            bi = w[negate_bool] / w_0;
+          for (i15 = 0; i15 < 100000; i15++) {
+            bi = w[i15] / w_0;
             if (bi == 0.0) {
               re = 1.0;
               im = 0.0;
             } else {
-              im = fabs(bi);
-              if (1.0 > im) {
-                im = 1.0 + bi * bi;
-                re = 1.0 / im;
-                im = (0.0 - bi) / im;
-              } else if (im == 1.0) {
-                re = 0.5;
+              bim = fabs(bi);
+              if (1.0 > bim) {
+                d = 1.0 + bi * bi;
+                re = 1.0 / d;
+                im = (0.0 - bi) / d;
+              } else if (bim == 1.0) {
                 if (bi > 0.0) {
-                  im = 0.5;
+                  sgnbi = 0.5;
                 } else {
-                  im = -0.5;
+                  sgnbi = -0.5;
                 }
 
-                im = 0.0 - im;
+                re = 0.5;
+                im = 0.0 - sgnbi;
               } else {
-                brm = 1.0 / bi;
-                im = bi + brm;
-                re = brm / im;
-                im = -1.0 / im;
+                s = 1.0 / bi;
+                d = bi + s;
+                re = s / d;
+                im = -1.0 / d;
               }
             }
 
-            br = H[negate_bool].re;
-            H[negate_bool].re = H[negate_bool].re * re - H[negate_bool].im * im;
-            H[negate_bool].im = br * im + H[negate_bool].im * re;
+            b_H_re = H[i15].re;
+            H[i15].re = H[i15].re * re - H[i15].im * im;
+            H[i15].im = b_H_re * im + H[i15].im * re;
           }
 
           switch (filter_T_32) {
@@ -805,11 +939,11 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
 
            case 2:
             /*  High-pass filter */
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              im = w[negate_bool] / w_0;
-              br = H[negate_bool].re;
-              H[negate_bool].re = 0.0 - im * H[negate_bool].im;
-              H[negate_bool].im = im * br;
+            for (i19 = 0; i19 < 100000; i19++) {
+              b_im = w[i19] / w_0;
+              H_re = H[i19].re;
+              H[i19].re = 0.0 - b_im * H[i19].im;
+              H[i19].im = b_im * H_re;
             }
             break;
 
@@ -823,55 +957,55 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
           /*  2nd order filter */
           /*  Initialisation of the transfer function with the common divider */
           y_im = 1.0 / q_0;
-          for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-            dcv0[negate_bool].re = 0.0;
-            dcv0[negate_bool].im = w[negate_bool] / w_0;
+          for (i16 = 0; i16 < 100000; i16++) {
+            dcv0[i16].re = 0.0;
+            dcv0[i16].im = w[i16] / w_0;
           }
 
           b_power(dcv0, dcv1);
-          for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-            br = 1.0 + dcv1[negate_bool].re;
-            bi = y_im * (w[negate_bool] / w_0) + dcv1[negate_bool].im;
-            if (bi == 0.0) {
-              re = 1.0 / br;
-              im = 0.0;
+          for (i18 = 0; i18 < 100000; i18++) {
+            br = 1.0 + dcv1[i18].re;
+            b_bi = y_im * (w[i18] / w_0) + dcv1[i18].im;
+            if (b_bi == 0.0) {
+              b_re = 1.0 / br;
+              c_im = 0.0;
             } else if (br == 0.0) {
-              re = 0.0;
-              im = -(1.0 / bi);
+              b_re = 0.0;
+              c_im = -(1.0 / b_bi);
             } else {
               brm = fabs(br);
-              im = fabs(bi);
-              if (brm > im) {
-                brm = bi / br;
-                im = br + brm * bi;
-                re = 1.0 / im;
-                im = (0.0 - brm) / im;
-              } else if (im == brm) {
+              b_bim = fabs(b_bi);
+              if (brm > b_bim) {
+                b_s = b_bi / br;
+                b_d = br + b_s * b_bi;
+                b_re = 1.0 / b_d;
+                c_im = (0.0 - b_s) / b_d;
+              } else if (b_bim == brm) {
                 if (br > 0.0) {
-                  re = 0.5;
+                  sgnbr = 0.5;
                 } else {
-                  re = -0.5;
+                  sgnbr = -0.5;
                 }
 
-                if (bi > 0.0) {
-                  im = 0.5;
+                if (b_bi > 0.0) {
+                  b_sgnbi = 0.5;
                 } else {
-                  im = -0.5;
+                  b_sgnbi = -0.5;
                 }
 
-                re /= brm;
-                im = (0.0 - im) / brm;
+                b_re = sgnbr / brm;
+                c_im = (0.0 - b_sgnbi) / brm;
               } else {
-                brm = br / bi;
-                im = bi + brm * br;
-                re = brm / im;
-                im = -1.0 / im;
+                b_s = br / b_bi;
+                b_d = b_bi + b_s * br;
+                b_re = b_s / b_d;
+                c_im = -1.0 / b_d;
               }
             }
 
-            br = H[negate_bool].re;
-            H[negate_bool].re = H[negate_bool].re * re - H[negate_bool].im * im;
-            H[negate_bool].im = br * im + H[negate_bool].im * re;
+            c_H_re = H[i18].re;
+            H[i18].re = H[i18].re * b_re - H[i18].im * c_im;
+            H[i18].im = c_H_re * c_im + H[i18].im * b_re;
           }
 
           switch (filter_T_32) {
@@ -881,48 +1015,45 @@ static void filter_bode(const double f[100000], double f_0, double q_0, double g
 
            case 2:
             /*  High-pass filter */
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              dcv0[negate_bool].re = 0.0;
-              dcv0[negate_bool].im = w[negate_bool] / w_0;
+            for (i20 = 0; i20 < 100000; i20++) {
+              dcv2[i20].re = 0.0;
+              dcv2[i20].im = w[i20] / w_0;
             }
 
-            b_power(dcv0, dcv1);
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              br = H[negate_bool].re;
-              H[negate_bool].re = dcv1[negate_bool].re * H[negate_bool].re -
-                dcv1[negate_bool].im * H[negate_bool].im;
-              H[negate_bool].im = dcv1[negate_bool].re * H[negate_bool].im +
-                dcv1[negate_bool].im * br;
+            b_power(dcv2, dcv1);
+            for (i23 = 0; i23 < 100000; i23++) {
+              d_H_re = H[i23].re;
+              H[i23].re = dcv1[i23].re * H[i23].re - dcv1[i23].im * H[i23].im;
+              H[i23].im = dcv1[i23].re * H[i23].im + dcv1[i23].im * d_H_re;
             }
             break;
 
            case 3:
             /*  Band-pass filter */
-            br = 2.0 * q_0 * w_0;
-            y_im = 1.0 / br;
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              im = w[negate_bool] * y_im;
-              br = H[negate_bool].re;
-              H[negate_bool].re = 0.0 - im * H[negate_bool].im;
-              H[negate_bool].im = im * br;
+            b_br = 2.0 * q_0 * w_0;
+            y_im = 1.0 / b_br;
+            for (i22 = 0; i22 < 100000; i22++) {
+              b_y_im = w[i22] * y_im;
+              e_H_re = H[i22].re;
+              H[i22].re = 0.0 - b_y_im * H[i22].im;
+              H[i22].im = b_y_im * e_H_re;
             }
             break;
 
            case 4:
             /*  Band-stop filter */
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              dcv0[negate_bool].re = 0.0;
-              dcv0[negate_bool].im = w[negate_bool] / w_0;
+            for (i21 = 0; i21 < 100000; i21++) {
+              dcv3[i21].re = 0.0;
+              dcv3[i21].im = w[i21] / w_0;
             }
 
-            b_power(dcv0, dcv1);
-            for (negate_bool = 0; negate_bool < 100000; negate_bool++) {
-              re = 1.0 + dcv1[negate_bool].re;
-              im = dcv1[negate_bool].im;
-              br = H[negate_bool].re;
-              H[negate_bool].re = re * H[negate_bool].re - im * H[negate_bool].
-                im;
-              H[negate_bool].im = re * H[negate_bool].im + im * br;
+            b_power(dcv3, dcv1);
+            for (i24 = 0; i24 < 100000; i24++) {
+              c_re = 1.0 + dcv1[i24].re;
+              d_im = dcv1[i24].im;
+              f_H_re = H[i24].re;
+              H[i24].re = c_re * H[i24].re - d_im * H[i24].im;
+              H[i24].im = c_re * H[i24].im + d_im * f_H_re;
             }
             break;
 
@@ -950,14 +1081,16 @@ static void logspace(double d1, double d2, double y[100000])
   double delta1;
   int k;
   double delta2;
+  int b_k;
   b_y[99999] = d2;
   b_y[0] = d1;
   if (((d1 < 0.0) != (d2 < 0.0)) && ((fabs(d1) > 8.9884656743115785E+307) ||
        (fabs(d2) > 8.9884656743115785E+307))) {
     delta1 = d1 / 99999.0;
     delta2 = d2 / 99999.0;
-    for (k = 0; k < 99998; k++) {
-      b_y[k + 1] = (d1 + delta2 * (1.0 + (double)k)) - delta1 * (1.0 + (double)k);
+    for (b_k = 0; b_k < 99998; b_k++) {
+      b_y[b_k + 1] = (d1 + delta2 * (1.0 + (double)b_k)) - delta1 * (1.0 +
+        (double)b_k);
     }
   } else {
     delta1 = (d2 - d1) / 99999.0;
@@ -977,10 +1110,14 @@ static void logspace(double d1, double d2, double y[100000])
  */
 static void power(double a, const double b[100000], double y[100000])
 {
+  static double z1[100000];
   int k;
+  memcpy(&z1[0], &y[0], 100000U * sizeof(double));
   for (k = 0; k < 100000; k++) {
-    y[k] = pow(a, b[k]);
+    z1[k] = pow(a, b[k]);
   }
+
+  memcpy(&y[0], &z1[0], 100000U * sizeof(double));
 }
 
 /*
@@ -1036,7 +1173,8 @@ int main(void)
   double q_0;
   double g;
   int n_f;
-  int neg_stop_bool;
+  int i0;
+  int i1;
   char f_t[5];
   static const char cv1[5] = { '0', '0', '0', '0', '\x00' };
 
@@ -1046,22 +1184,37 @@ int main(void)
   static double f[100000];
   char new_bodes[2];
   int exitg1;
+  int i2;
   int neg_band_bool;
-  char BAND_FILTER[5];
-  static const char b_BAND_FILTER[5] = { 'b', 'a', 'n', 'd', '\x00' };
+  char cv3[5];
+  char cv4[5];
+  int i3;
+  static const char cv5[5] = { 'b', 'a', 'n', 'd', '\x00' };
 
-  static const char STOP_FILTER[5] = { 's', 't', 'o', 'p', '\x00' };
+  int neg_stop_bool;
+  char cv6[5];
+  static const char cv7[5] = { 's', 't', 'o', 'p', '\x00' };
 
+  int i4;
+  int i5;
   double dv0[2];
   double dv1[2];
+  int i6;
   double dv2[2];
+  int i7;
+  int i8;
   double dv3[2];
   double dv4[2];
   static double H_mod[100000];
   static double H_arg[100000];
-  char N_CHAR[2];
-  static const char b_N_CHAR[2] = { 'n', '\x00' };
+  int i9;
+  char cv8[2];
+  char cv9[2];
+  static const char cv10[2] = { 'n', '\x00' };
 
+  int i10;
+  int negate_bool;
+  char cv11[2];
   b0 = false;
   b1 = false;
   b2 = false;
@@ -1078,13 +1231,13 @@ int main(void)
   q_0 = 0.0;
   g = 1.0;
   n_f = 0;
-  for (neg_stop_bool = 0; neg_stop_bool < 5; neg_stop_bool++) {
-    f_t[neg_stop_bool] = cv1[neg_stop_bool];
+  for (i0 = 0; i0 < 5; i0++) {
+    f_t[i0] = cv1[i0];
   }
 
-  for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-    keep_bodes[neg_stop_bool] = cv2[neg_stop_bool];
-    new_bodes[neg_stop_bool] = cv2[neg_stop_bool];
+  for (i1 = 0; i1 < 2; i1++) {
+    keep_bodes[i1] = cv2[i1];
+    new_bodes[i1] = cv2[i1];
   }
 
   /*  Definition of the logarithmic frequency range */
@@ -1107,20 +1260,22 @@ int main(void)
 
     /*  Ask for filter's parameters */
     check_str_input(f_t);
-    for (neg_stop_bool = 0; neg_stop_bool < 5; neg_stop_bool++) {
-      BAND_FILTER[neg_stop_bool] = b_BAND_FILTER[neg_stop_bool];
+    for (i2 = 0; i2 < 5; i2++) {
+      cv3[i2] = f_t[i2];
+      cv4[i2] = cv5[i2];
     }
 
-    neg_band_bool = strcmp(f_t, BAND_FILTER);
-    for (neg_stop_bool = 0; neg_stop_bool < 5; neg_stop_bool++) {
-      BAND_FILTER[neg_stop_bool] = STOP_FILTER[neg_stop_bool];
+    neg_band_bool = strcmp(cv3, cv4);
+    for (i3 = 0; i3 < 5; i3++) {
+      cv3[i3] = f_t[i3];
+      cv6[i3] = cv7[i3];
     }
 
-    neg_stop_bool = strcmp(f_t, BAND_FILTER);
+    neg_stop_bool = strcmp(cv3, cv6);
     if ((neg_band_bool == 0) || (neg_stop_bool == 0)) {
       if (!b0) {
-        for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-          dv1[neg_stop_bool] = 2.0 + 8.0 * (double)neg_stop_bool;
+        for (i5 = 0; i5 < 2; i5++) {
+          dv1[i5] = 2.0 + 8.0 * (double)i5;
         }
 
         b0 = true;
@@ -1129,8 +1284,8 @@ int main(void)
       check_num_input(&n_f, dv1, INTEGER);
     } else {
       if (!b1) {
-        for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-          dv0[neg_stop_bool] = 1.0 + 9.0 * (double)neg_stop_bool;
+        for (i4 = 0; i4 < 2; i4++) {
+          dv0[i4] = 1.0 + 9.0 * (double)i4;
         }
 
         b1 = true;
@@ -1140,8 +1295,8 @@ int main(void)
     }
 
     if (!b2) {
-      for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-        dv2[neg_stop_bool] = 1.0 + 9.99999999E+8 * (double)neg_stop_bool;
+      for (i6 = 0; i6 < 2; i6++) {
+        dv2[i6] = 1.0 + 9.99999999E+8 * (double)i6;
       }
 
       b2 = true;
@@ -1150,8 +1305,8 @@ int main(void)
     b_check_num_input(&f_0, dv2, LONG_DOUBLE);
     if (n_f > 1) {
       if (!b3) {
-        for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-          dv3[neg_stop_bool] = 0.1 + 9.9 * (double)neg_stop_bool;
+        for (i7 = 0; i7 < 2; i7++) {
+          dv3[i7] = 0.1 + 9.9 * (double)i7;
         }
 
         b3 = true;
@@ -1161,8 +1316,8 @@ int main(void)
     }
 
     if (!b4) {
-      for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-        dv4[neg_stop_bool] = 0.001 + 999.999 * (double)neg_stop_bool;
+      for (i8 = 0; i8 < 2; i8++) {
+        dv4[i8] = 0.001 + 999.999 * (double)i8;
       }
 
       b4 = true;
@@ -1176,20 +1331,22 @@ int main(void)
     /*  Display of results (target dependent) */
     /*  Ask the user if he wants to keep the previous graphs */
     check_yes_or_no(keep_bodes);
-    for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-      N_CHAR[neg_stop_bool] = b_N_CHAR[neg_stop_bool];
+    for (i9 = 0; i9 < 2; i9++) {
+      cv8[i9] = keep_bodes[i9];
+      cv9[i9] = cv10[i9];
     }
 
-    _strcmpi(keep_bodes, N_CHAR);
+    _strcmpi(cv8, cv9);
 
     /*  Ask the user if he wants to see other filter's Bodes */
     b_check_yes_or_no(new_bodes);
-    for (neg_stop_bool = 0; neg_stop_bool < 2; neg_stop_bool++) {
-      N_CHAR[neg_stop_bool] = b_N_CHAR[neg_stop_bool];
+    for (i10 = 0; i10 < 2; i10++) {
+      cv8[i10] = new_bodes[i10];
+      cv11[i10] = cv10[i10];
     }
 
-    neg_stop_bool = _strcmpi(new_bodes, N_CHAR);
-    if (neg_stop_bool == 0) {
+    negate_bool = _strcmpi(cv8, cv11);
+    if (negate_bool == 0) {
       exitg1 = 1;
     } else {
       printf("%s\n",
@@ -1207,15 +1364,6 @@ int main(void)
  */
 void main_initialize(void)
 {
-}
-
-/*
- * Arguments    : void
- * Return Type  : void
- */
-void main_terminate(void)
-{
-  /* (no terminate code required) */
 }
 
 /*

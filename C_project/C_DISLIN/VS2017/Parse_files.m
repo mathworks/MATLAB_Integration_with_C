@@ -95,7 +95,6 @@ KEY_TAGS   = {'angle' '100000U' '100000'  '99999.0' '99998.0' '99999' '99998'};
 % Text to add at the beginning of the file
 LINE_FEED  = newline;
 INCLUDES   = {'#include <float.h>'
-              '#include <math.h>'
               '#include "dislin.h" /* Added of the graphical library */'};
 
 % Text to add at the end of the file
@@ -142,7 +141,7 @@ while(1)
     line_data = regexprep(line_data,KEY_TAGS(5),'(NB_SAMPLES-2.0)');
     line_data = regexprep(line_data,KEY_TAGS(6),'NB_SAMPLES-1');
     line_data = regexprep(line_data,KEY_TAGS(end),'NB_SAMPLES-2');
-  elseif regexp(line_data,'"main.h"')
+  elseif regexp(line_data,'<math.h>')
     % Write includes needed for the main C file
     for i=1:length(INCLUDES)
       fprintf(file_write_ID,'%s',[INCLUDES{i,1} LINE_FEED]);

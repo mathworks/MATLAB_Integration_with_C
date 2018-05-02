@@ -95,7 +95,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.TabGroup.Controls.Add(this.Tab_inputs);
       this.TabGroup.Controls.Add(this.Tab_outputs);
-      this.TabGroup.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.TabGroup.Location = new System.Drawing.Point(0, 36);
       this.TabGroup.Name = "TabGroup";
       this.TabGroup.SelectedIndex = 0;
@@ -106,11 +105,11 @@
       // 
       this.Tab_inputs.BackColor = System.Drawing.Color.WhiteSmoke;
       this.Tab_inputs.Controls.Add(this.tableLayoutInputs);
-      this.Tab_inputs.Location = new System.Drawing.Point(4, 24);
+      this.Tab_inputs.Location = new System.Drawing.Point(4, 22);
       this.Tab_inputs.Margin = new System.Windows.Forms.Padding(0);
       this.Tab_inputs.Name = "Tab_inputs";
       this.Tab_inputs.Padding = new System.Windows.Forms.Padding(3);
-      this.Tab_inputs.Size = new System.Drawing.Size(632, 418);
+      this.Tab_inputs.Size = new System.Drawing.Size(632, 420);
       this.Tab_inputs.TabIndex = 0;
       this.Tab_inputs.Text = "Inputs";
       // 
@@ -129,7 +128,7 @@
       this.tableLayoutInputs.Name = "tableLayoutInputs";
       this.tableLayoutInputs.RowCount = 1;
       this.tableLayoutInputs.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutInputs.Size = new System.Drawing.Size(626, 412);
+      this.tableLayoutInputs.Size = new System.Drawing.Size(626, 414);
       this.tableLayoutInputs.TabIndex = 17;
       // 
       // tableLayoutLeft
@@ -146,7 +145,7 @@
       this.tableLayoutLeft.RowCount = 2;
       this.tableLayoutLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.tableLayoutLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutLeft.Size = new System.Drawing.Size(187, 412);
+      this.tableLayoutLeft.Size = new System.Drawing.Size(187, 414);
       this.tableLayoutLeft.TabIndex = 1;
       // 
       // tableLayoutFiltersData
@@ -159,7 +158,7 @@
       this.tableLayoutFiltersData.Controls.Add(this.tableLayoutStatus, 1, 2);
       this.tableLayoutFiltersData.Controls.Add(this.CreateBodesButton, 1, 1);
       this.tableLayoutFiltersData.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutFiltersData.Location = new System.Drawing.Point(0, 206);
+      this.tableLayoutFiltersData.Location = new System.Drawing.Point(0, 207);
       this.tableLayoutFiltersData.Margin = new System.Windows.Forms.Padding(0);
       this.tableLayoutFiltersData.Name = "tableLayoutFiltersData";
       this.tableLayoutFiltersData.RowCount = 5;
@@ -168,7 +167,7 @@
       this.tableLayoutFiltersData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
       this.tableLayoutFiltersData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
       this.tableLayoutFiltersData.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57F));
-      this.tableLayoutFiltersData.Size = new System.Drawing.Size(187, 206);
+      this.tableLayoutFiltersData.Size = new System.Drawing.Size(187, 207);
       this.tableLayoutFiltersData.TabIndex = 0;
       // 
       // ViewBodesButton
@@ -178,11 +177,11 @@
       this.ViewBodesButton.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.ViewBodesButton.Enabled = false;
       this.ViewBodesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ViewBodesButton.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ViewBodesButton.Location = new System.Drawing.Point(56, 64);
-      this.ViewBodesButton.Margin = new System.Windows.Forms.Padding(0);
+      this.ViewBodesButton.Font = new System.Drawing.Font("Arial", 9F);
+      this.ViewBodesButton.Location = new System.Drawing.Point(57, 65);
+      this.ViewBodesButton.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
       this.ViewBodesButton.Name = "ViewBodesButton";
-      this.ViewBodesButton.Size = new System.Drawing.Size(84, 22);
+      this.ViewBodesButton.Size = new System.Drawing.Size(82, 22);
       this.ViewBodesButton.TabIndex = 7;
       this.ViewBodesButton.Text = "View Bodes";
       this.ViewBodesButton.UseVisualStyleBackColor = false;
@@ -202,18 +201,18 @@
       this.tableLayoutStatus.Name = "tableLayoutStatus";
       this.tableLayoutStatus.RowCount = 1;
       this.tableLayoutStatus.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutStatus.Size = new System.Drawing.Size(84, 30);
+      this.tableLayoutStatus.Size = new System.Drawing.Size(84, 31);
       this.tableLayoutStatus.TabIndex = 10;
       // 
       // FilterStatus
       // 
       this.FilterStatus.AutoSize = true;
       this.FilterStatus.Dock = System.Windows.Forms.DockStyle.Right;
-      this.FilterStatus.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FilterStatus.Location = new System.Drawing.Point(4, 0);
+      this.FilterStatus.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.FilterStatus.Location = new System.Drawing.Point(0, 0);
       this.FilterStatus.Margin = new System.Windows.Forms.Padding(0);
       this.FilterStatus.Name = "FilterStatus";
-      this.FilterStatus.Size = new System.Drawing.Size(42, 30);
+      this.FilterStatus.Size = new System.Drawing.Size(46, 31);
       this.FilterStatus.TabIndex = 8;
       this.FilterStatus.Text = "Status";
       this.FilterStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -228,7 +227,7 @@
       this.StatusLamp.Location = new System.Drawing.Point(50, 0);
       this.StatusLamp.Margin = new System.Windows.Forms.Padding(0);
       this.StatusLamp.Name = "StatusLamp";
-      this.StatusLamp.Size = new System.Drawing.Size(34, 30);
+      this.StatusLamp.Size = new System.Drawing.Size(34, 31);
       this.StatusLamp.TabIndex = 9;
       // 
       // CreateBodesButton
@@ -237,12 +236,11 @@
       this.CreateBodesButton.Cursor = System.Windows.Forms.Cursors.Hand;
       this.CreateBodesButton.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.CreateBodesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.CreateBodesButton.Font = new System.Drawing.Font("Arial", 8.25F);
-      this.CreateBodesButton.Location = new System.Drawing.Point(56, 12);
-      this.CreateBodesButton.Margin = new System.Windows.Forms.Padding(0);
+      this.CreateBodesButton.Font = new System.Drawing.Font("Arial", 9F);
+      this.CreateBodesButton.Location = new System.Drawing.Point(57, 12);
+      this.CreateBodesButton.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
       this.CreateBodesButton.Name = "CreateBodesButton";
-      this.CreateBodesButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.CreateBodesButton.Size = new System.Drawing.Size(84, 22);
+      this.CreateBodesButton.Size = new System.Drawing.Size(82, 22);
       this.CreateBodesButton.TabIndex = 6;
       this.CreateBodesButton.Text = "Create Bodes";
       this.CreateBodesButton.UseVisualStyleBackColor = false;
@@ -267,7 +265,7 @@
       this.tableLayoutLeftTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.5F));
       this.tableLayoutLeftTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13F));
       this.tableLayoutLeftTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-      this.tableLayoutLeftTop.Size = new System.Drawing.Size(187, 206);
+      this.tableLayoutLeftTop.Size = new System.Drawing.Size(187, 207);
       this.tableLayoutLeftTop.TabIndex = 1;
       // 
       // ComputeFiltersDataLabel
@@ -275,7 +273,7 @@
       this.ComputeFiltersDataLabel.AutoSize = true;
       this.ComputeFiltersDataLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
       this.ComputeFiltersDataLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.ComputeFiltersDataLabel.Location = new System.Drawing.Point(0, 187);
+      this.ComputeFiltersDataLabel.Location = new System.Drawing.Point(0, 188);
       this.ComputeFiltersDataLabel.Margin = new System.Windows.Forms.Padding(0);
       this.ComputeFiltersDataLabel.Name = "ComputeFiltersDataLabel";
       this.ComputeFiltersDataLabel.Size = new System.Drawing.Size(187, 19);
@@ -290,7 +288,7 @@
       this.tableLayoutKnob.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
       this.tableLayoutKnob.Controls.Add(this.OrderKnob, 1, 0);
       this.tableLayoutKnob.Controls.Add(this.tableLayoutOrder, 0, 0);
-      this.tableLayoutKnob.Location = new System.Drawing.Point(0, 69);
+      this.tableLayoutKnob.Location = new System.Drawing.Point(0, 71);
       this.tableLayoutKnob.Margin = new System.Windows.Forms.Padding(0);
       this.tableLayoutKnob.Name = "tableLayoutKnob";
       this.tableLayoutKnob.RowCount = 1;
@@ -348,11 +346,11 @@
       // 
       this.FilterOrder.AutoSize = true;
       this.FilterOrder.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.FilterOrder.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FilterOrder.Location = new System.Drawing.Point(0, 51);
+      this.FilterOrder.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.FilterOrder.Location = new System.Drawing.Point(0, 50);
       this.FilterOrder.Margin = new System.Windows.Forms.Padding(0);
       this.FilterOrder.Name = "FilterOrder";
-      this.FilterOrder.Size = new System.Drawing.Size(46, 15);
+      this.FilterOrder.Size = new System.Drawing.Size(46, 16);
       this.FilterOrder.TabIndex = 4;
       this.FilterOrder.Text = "Order:";
       // 
@@ -364,21 +362,21 @@
       this.tableLayoutType.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
       this.tableLayoutType.Controls.Add(this.TypeDropDown, 1, 0);
       this.tableLayoutType.Controls.Add(this.FilterType, 0, 0);
-      this.tableLayoutType.Location = new System.Drawing.Point(0, 29);
+      this.tableLayoutType.Location = new System.Drawing.Point(0, 30);
       this.tableLayoutType.Margin = new System.Windows.Forms.Padding(0);
       this.tableLayoutType.Name = "tableLayoutType";
       this.tableLayoutType.RowCount = 1;
       this.tableLayoutType.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-      this.tableLayoutType.Size = new System.Drawing.Size(187, 29);
+      this.tableLayoutType.Size = new System.Drawing.Size(187, 30);
       this.tableLayoutType.TabIndex = 7;
       // 
       // TypeDropDown
       // 
       this.TypeDropDown.AllowDrop = true;
       this.TypeDropDown.DisplayMember = "1";
-      this.TypeDropDown.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.TypeDropDown.Dock = System.Windows.Forms.DockStyle.Fill;
       this.TypeDropDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.TypeDropDown.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.TypeDropDown.Font = new System.Drawing.Font("Arial", 10F);
       this.TypeDropDown.FormattingEnabled = true;
       this.TypeDropDown.Items.AddRange(new object[] {
             "Lowpass",
@@ -388,7 +386,7 @@
       this.TypeDropDown.Location = new System.Drawing.Point(49, 3);
       this.TypeDropDown.MaxDropDownItems = 4;
       this.TypeDropDown.Name = "TypeDropDown";
-      this.TypeDropDown.Size = new System.Drawing.Size(96, 23);
+      this.TypeDropDown.Size = new System.Drawing.Size(96, 24);
       this.TypeDropDown.TabIndex = 1;
       this.TypeDropDown.Text = "Lowpass";
       this.TypeDropDown.SelectedIndexChanged += new System.EventHandler(this.FilterTypeText);
@@ -397,21 +395,21 @@
       // 
       this.FilterType.AutoSize = true;
       this.FilterType.Dock = System.Windows.Forms.DockStyle.Bottom;
-      this.FilterType.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.FilterType.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FilterType.Location = new System.Drawing.Point(3, 14);
       this.FilterType.Name = "FilterType";
-      this.FilterType.Size = new System.Drawing.Size(40, 15);
+      this.FilterType.Size = new System.Drawing.Size(40, 16);
       this.FilterType.TabIndex = 2;
       this.FilterType.Text = "Type:";
       // 
       // FiltersparametersLabel
       // 
       this.FiltersparametersLabel.AutoSize = true;
-      this.FiltersparametersLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+      this.FiltersparametersLabel.Dock = System.Windows.Forms.DockStyle.Left;
       this.FiltersparametersLabel.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.FiltersparametersLabel.Location = new System.Drawing.Point(3, 10);
+      this.FiltersparametersLabel.Location = new System.Drawing.Point(3, 0);
       this.FiltersparametersLabel.Name = "FiltersparametersLabel";
-      this.FiltersparametersLabel.Size = new System.Drawing.Size(181, 19);
+      this.FiltersparametersLabel.Size = new System.Drawing.Size(150, 30);
       this.FiltersparametersLabel.TabIndex = 0;
       this.FiltersparametersLabel.Text = "Filter\'s parameters";
       // 
@@ -428,7 +426,7 @@
       this.tableLayoutInputsRight.RowCount = 2;
       this.tableLayoutInputsRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.tableLayoutInputsRight.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutInputsRight.Size = new System.Drawing.Size(314, 412);
+      this.tableLayoutInputsRight.Size = new System.Drawing.Size(314, 414);
       this.tableLayoutInputsRight.TabIndex = 0;
       // 
       // tableLayoutRightTop
@@ -451,7 +449,7 @@
       this.tableLayoutRightTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18F));
       this.tableLayoutRightTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5F));
       this.tableLayoutRightTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5F));
-      this.tableLayoutRightTop.Size = new System.Drawing.Size(314, 206);
+      this.tableLayoutRightTop.Size = new System.Drawing.Size(314, 207);
       this.tableLayoutRightTop.TabIndex = 0;
       // 
       // CutoffFrequencyValue
@@ -501,32 +499,32 @@
       // 
       // tableLayoutRightBottom
       // 
-      this.tableLayoutRightBottom.ColumnCount = 2;
-      this.tableLayoutRightBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 96F));
-      this.tableLayoutRightBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4F));
-      this.tableLayoutRightBottom.Controls.Add(this.LogMessageValue, 0, 1);
+      this.tableLayoutRightBottom.ColumnCount = 1;
+      this.tableLayoutRightBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+      this.tableLayoutRightBottom.Controls.Add(this.LogMessageValue, 0, 0);
       this.tableLayoutRightBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutRightBottom.Location = new System.Drawing.Point(0, 206);
+      this.tableLayoutRightBottom.Location = new System.Drawing.Point(0, 207);
       this.tableLayoutRightBottom.Margin = new System.Windows.Forms.Padding(0);
       this.tableLayoutRightBottom.Name = "tableLayoutRightBottom";
-      this.tableLayoutRightBottom.RowCount = 3;
-      this.tableLayoutRightBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+      this.tableLayoutRightBottom.RowCount = 2;
       this.tableLayoutRightBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
-      this.tableLayoutRightBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-      this.tableLayoutRightBottom.Size = new System.Drawing.Size(314, 206);
+      this.tableLayoutRightBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+      this.tableLayoutRightBottom.Size = new System.Drawing.Size(314, 207);
       this.tableLayoutRightBottom.TabIndex = 1;
       // 
       // LogMessageValue
       // 
-      this.LogMessageValue.Dock = System.Windows.Forms.DockStyle.Fill;
+      this.LogMessageValue.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
       this.LogMessageValue.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.LogMessageValue.ForeColor = System.Drawing.Color.Lime;
-      this.LogMessageValue.Location = new System.Drawing.Point(0, 10);
+      this.LogMessageValue.Location = new System.Drawing.Point(0, 0);
       this.LogMessageValue.Margin = new System.Windows.Forms.Padding(0);
       this.LogMessageValue.Multiline = true;
       this.LogMessageValue.Name = "LogMessageValue";
       this.LogMessageValue.RightToLeft = System.Windows.Forms.RightToLeft.No;
-      this.LogMessageValue.Size = new System.Drawing.Size(301, 144);
+      this.LogMessageValue.Size = new System.Drawing.Size(314, 144);
       this.LogMessageValue.TabIndex = 16;
       // 
       // tableLayoutMiddle
@@ -542,7 +540,7 @@
       this.tableLayoutMiddle.RowCount = 2;
       this.tableLayoutMiddle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.tableLayoutMiddle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutMiddle.Size = new System.Drawing.Size(125, 412);
+      this.tableLayoutMiddle.Size = new System.Drawing.Size(125, 414);
       this.tableLayoutMiddle.TabIndex = 2;
       // 
       // tableLayoutMiddleTop
@@ -564,7 +562,7 @@
       this.tableLayoutMiddleTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18F));
       this.tableLayoutMiddleTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5F));
       this.tableLayoutMiddleTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5F));
-      this.tableLayoutMiddleTop.Size = new System.Drawing.Size(125, 206);
+      this.tableLayoutMiddleTop.Size = new System.Drawing.Size(125, 207);
       this.tableLayoutMiddleTop.TabIndex = 0;
       // 
       // CutoffFrequencyLabel
@@ -609,13 +607,13 @@
       this.tableLayoutMiddleBottom.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
       this.tableLayoutMiddleBottom.Controls.Add(this.LogMessageLabel, 0, 0);
       this.tableLayoutMiddleBottom.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.tableLayoutMiddleBottom.Location = new System.Drawing.Point(0, 206);
+      this.tableLayoutMiddleBottom.Location = new System.Drawing.Point(0, 207);
       this.tableLayoutMiddleBottom.Margin = new System.Windows.Forms.Padding(0);
       this.tableLayoutMiddleBottom.Name = "tableLayoutMiddleBottom";
       this.tableLayoutMiddleBottom.RowCount = 2;
       this.tableLayoutMiddleBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.5F));
       this.tableLayoutMiddleBottom.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.5F));
-      this.tableLayoutMiddleBottom.Size = new System.Drawing.Size(125, 206);
+      this.tableLayoutMiddleBottom.Size = new System.Drawing.Size(125, 207);
       this.tableLayoutMiddleBottom.TabIndex = 1;
       // 
       // LogMessageLabel
@@ -634,10 +632,10 @@
       // 
       this.Tab_outputs.BackColor = System.Drawing.Color.WhiteSmoke;
       this.Tab_outputs.Controls.Add(this.tableLayoutOutputs);
-      this.Tab_outputs.Location = new System.Drawing.Point(4, 24);
+      this.Tab_outputs.Location = new System.Drawing.Point(4, 22);
       this.Tab_outputs.Name = "Tab_outputs";
       this.Tab_outputs.Padding = new System.Windows.Forms.Padding(3);
-      this.Tab_outputs.Size = new System.Drawing.Size(632, 418);
+      this.Tab_outputs.Size = new System.Drawing.Size(632, 420);
       this.Tab_outputs.TabIndex = 1;
       this.Tab_outputs.Text = "Outputs";
       // 
@@ -653,7 +651,7 @@
       this.tableLayoutOutputs.RowCount = 2;
       this.tableLayoutOutputs.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
       this.tableLayoutOutputs.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-      this.tableLayoutOutputs.Size = new System.Drawing.Size(626, 412);
+      this.tableLayoutOutputs.Size = new System.Drawing.Size(626, 414);
       this.tableLayoutOutputs.TabIndex = 2;
       // 
       // cartesianChartMod
@@ -662,17 +660,17 @@
       this.cartesianChartMod.Location = new System.Drawing.Point(0, 0);
       this.cartesianChartMod.Margin = new System.Windows.Forms.Padding(0);
       this.cartesianChartMod.Name = "cartesianChartMod";
-      this.cartesianChartMod.Size = new System.Drawing.Size(626, 206);
+      this.cartesianChartMod.Size = new System.Drawing.Size(626, 207);
       this.cartesianChartMod.TabIndex = 0;
       this.cartesianChartMod.Text = "cartesianChart1";
       // 
       // cartesianChartArg
       // 
       this.cartesianChartArg.Dock = System.Windows.Forms.DockStyle.Fill;
-      this.cartesianChartArg.Location = new System.Drawing.Point(0, 206);
+      this.cartesianChartArg.Location = new System.Drawing.Point(0, 207);
       this.cartesianChartArg.Margin = new System.Windows.Forms.Padding(0);
       this.cartesianChartArg.Name = "cartesianChartArg";
-      this.cartesianChartArg.Size = new System.Drawing.Size(626, 206);
+      this.cartesianChartArg.Size = new System.Drawing.Size(626, 207);
       this.cartesianChartArg.TabIndex = 1;
       this.cartesianChartArg.Text = "cartesianChart2";
       // 
@@ -680,10 +678,10 @@
       // 
       this.TitelLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
       this.TitelLabel.AutoSize = true;
-      this.TitelLabel.Font = new System.Drawing.Font("Arial", 15F, System.Drawing.FontStyle.Bold);
-      this.TitelLabel.Location = new System.Drawing.Point(175, 8);
+      this.TitelLabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold);
+      this.TitelLabel.Location = new System.Drawing.Point(143, 4);
       this.TitelLabel.Name = "TitelLabel";
-      this.TitelLabel.Size = new System.Drawing.Size(288, 24);
+      this.TitelLabel.Size = new System.Drawing.Size(354, 29);
       this.TitelLabel.TabIndex = 1;
       this.TitelLabel.Text = "FILTER DESIGN AND VIEWER";
       this.TitelLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -692,14 +690,15 @@
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.SystemColors.ScrollBar;
+      this.BackColor = System.Drawing.SystemColors.ControlLightLight;
       this.ClientSize = new System.Drawing.Size(639, 481);
       this.Controls.Add(this.TitelLabel);
       this.Controls.Add(this.TabGroup);
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "UIFigure";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "UI Figure";
+      this.Text = "GUI";
+      this.TopMost = true;
       this.TabGroup.ResumeLayout(false);
       this.Tab_inputs.ResumeLayout(false);
       this.tableLayoutInputs.ResumeLayout(false);

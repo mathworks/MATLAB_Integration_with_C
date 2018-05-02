@@ -1,0 +1,93 @@
+<deployment-project plugin="plugin.webdeploy" plugin-version="1.0">
+  <configuration build-checksum="344452326" file="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignWebApp.prj" location="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment" name="FilterDesignWebApp" preferred-package-location="C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\Deployment\FilterDesignWebApp\for_redistribution" target="target.webdeploy" target-name="Web App Compiler">
+    <param.appname>FilterDesign</param.appname>
+    <param.version>1.1</param.version>
+    <param.displayname>FilterDesign</param.displayname>
+    <param.authnamewatermark>Sebastien Dupertuis</param.authnamewatermark>
+    <param.summary>Design analog filters interactively</param.summary>
+    <param.screenshot>${PROJECT_ROOT}\splash_screen.png</param.screenshot>
+    <param.intermediate>${PROJECT_ROOT}\FilterDesignWebApp\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\FilterDesignWebApp\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\FilterDesignWebApp\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\FilterDesignWebApp</param.logdir>
+    <param.target.type>subtarget.web.app</param.target.type>
+    <param.user.defined.mcr.options />
+    <unset>
+      <param.displayname />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.target.type />
+      <param.user.defined.mcr.options />
+    </unset>
+    <fileset.web.main>
+      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Filter_Design.mlapp</file>
+    </fileset.web.main>
+    <fileset.resources />
+    <fileset.depfun>
+      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\filter_bode.m</file>
+    </fileset.depfun>
+    <fileset.package />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\FilterDesignWebApp\for_testing" name="FilterDesign.ctf" optional="false">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignWebApp\for_testing\FilterDesign.ctf</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\MATLAB\R2018a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="polyspacebugfinder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>

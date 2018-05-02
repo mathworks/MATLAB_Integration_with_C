@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="2000579914" file="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1401405883" file="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2018a\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>FilterDesign</param.appname>
     <param.icon>${PROJECT_ROOT}\FilterDesignCompiler_resources\icon.ico</param.icon>
     <param.icons>
@@ -49,6 +49,7 @@
       <param.installpath.string />
       <param.installpath.combo />
       <param.logo />
+      <param.install.notes />
       <param.target.install.notes />
       <param.logdir />
       <param.enable.clean.build />
@@ -70,21 +71,21 @@
       <param.help.text />
     </unset>
     <fileset.main>
-      <file>C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Filter_Design.mlapp</file>
+      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Filter_Design.mlapp</file>
     </fileset.main>
     <fileset.resources />
     <fileset.package />
     <fileset.depfun>
-      <file>C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\filter_bode.m</file>
+      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\filter_bode.m</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\for_testing" name="readme.txt" optional="true">C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\for_testing" name="splash.png" optional="false">C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\for_testing" name="FilterDesign.exe" optional="false">C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\Deployment\for_testing\FilterDesign.exe</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="splash.png" optional="false">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\splash.png</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="readme.txt" optional="true">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="FilterDesign.exe" optional="false">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\FilterDesign.exe</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\MATLAB\R2017b</root>
+      <root>C:\MATLAB\R2018a</root>
       <toolboxes>
         <toolbox name="fixedpoint" />
         <toolbox name="matlabcoder" />

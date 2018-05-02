@@ -1,7 +1,7 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2016a">
-  <configuration build-checksum="228024171" file="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\main.prj" location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project" name="main" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="3879466009" file="C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\main.prj" location="C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project" name="main" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex />
+      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
@@ -16,8 +16,9 @@
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.RowMajor />
-      <param.HighlightPotentialRowMajorIssues />
+      <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
+      <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
+      <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
       <param.StackUsageMax>200000</param.StackUsageMax>
       <param.FilePartitionMethod>option.FilePartitionMethod.SingleFile</param.FilePartitionMethod>
       <param.GenerateComments>true</param.GenerateComments>
@@ -31,6 +32,8 @@
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
       <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
+      <param.EnableMexProfiling>false</param.EnableMexProfiling>
+      <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
       <param.CustomHeaderCode />
       <param.CustomInitializer />
@@ -56,7 +59,7 @@
       <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
       <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <param.EnableJIT>false</param.EnableJIT>
-      <param.EnableJITSilentBailOut />
+      <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
       <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
       <unset>
         <param.BuiltInstrumentedMex />
@@ -75,6 +78,7 @@
         <param.DynamicMemoryAllocationThreshold />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
+        <param.PreserveArrayDimensions />
         <param.StackUsageMax />
         <param.GenerateComments />
         <param.MATLABSourceComments />
@@ -85,6 +89,8 @@
         <param.ReportPotentialDifferences />
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
+        <param.EnableMexProfiling />
+        <var.BuiltWithMexProfiling />
         <param.CustomInclude />
         <param.CustomSource />
         <param.CustomLibrary />
@@ -121,8 +127,9 @@
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.RowMajor />
-      <param.HighlightPotentialRowMajorIssues />
+      <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
+      <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
+      <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
       <param.StackUsageMax>200000</param.StackUsageMax>
       <param.MultiInstanceCode />
       <param.FilePartitionMethod />
@@ -137,13 +144,13 @@
       <param.EnableSignedRightShifts />
       <param.ParenthesesLevel />
       <param.MaxIdLength />
-      <param.CustomSymbolStrGlobalVar />
-      <param.CustomSymbolStrType />
-      <param.CustomSymbolStrField />
-      <param.CustomSymbolStrFcn />
-      <param.CustomSymbolStrTmpVar />
-      <param.CustomSymbolStrMacro />
-      <param.CustomSymbolStrEMXArray />
+      <param.CustomSymbolStrGlobalVar>$M$N</param.CustomSymbolStrGlobalVar>
+      <param.CustomSymbolStrType>$M$N</param.CustomSymbolStrType>
+      <param.CustomSymbolStrField>$M$N</param.CustomSymbolStrField>
+      <param.CustomSymbolStrFcn>$M$N</param.CustomSymbolStrFcn>
+      <param.CustomSymbolStrTmpVar>$M$N</param.CustomSymbolStrTmpVar>
+      <param.CustomSymbolStrMacro>$M$N</param.CustomSymbolStrMacro>
+      <param.CustomSymbolStrEMXArray>emxArray_$M$N</param.CustomSymbolStrEMXArray>
       <param.CustomSymbolStrEMXArrayFcn />
       <param.ReservedNameArray />
       <param.RuntimeChecks>false</param.RuntimeChecks>
@@ -231,13 +238,13 @@
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>true</param.EnableRuntimeRecursion>
       <param.IncludeTerminateFcn />
-      <param.GenerateExampleMain />
+      <param.GenerateExampleMain>option.GenerateExampleMain.GenerateCodeOnly</param.GenerateExampleMain>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
       <param.TargetLang>option.TargetLang.C</param.TargetLang>
       <param.CCompilerOptimization />
       <param.CCompilerCustomOptimizations />
       <param.GenerateMakefile />
-      <param.BuildToolEnable />
+      <param.BuildToolEnable>false</param.BuildToolEnable>
       <param.MakeCommand />
       <param.TemplateMakefile />
       <param.BuildToolConfiguration />
@@ -253,7 +260,16 @@
       <param.CustomLAPACKCallback />
       <param.CustomFFTCallback />
       <param.GenerateDefaultInSwitch />
+      <param.EnableTraceability />
       <param.UseECoderFeatures />
+      <param.psCustomPrjState>false</param.psCustomPrjState>
+      <param.psCustomProjectFile />
+      <param.psCheckConfValue>option.psCheckConfValue.onWarnCheckConfDlg</param.psCheckConfValue>
+      <param.psUniqueOutPutState>true</param.psUniqueOutPutState>
+      <param.psOpenResultsState>true</param.psOpenResultsState>
+      <param.psProductModeValue>option.psProductModeValue.codeProver</param.psProductModeValue>
+      <param.psQuickConfValue>option.psQuickConfValue.proj</param.psQuickConfValue>
+      <param.psOutputFolder>results_$codegenName$</param.psOutputFolder>
       <unset>
         <param.WorkingFolder />
         <param.SpecifiedWorkingFolder />
@@ -268,6 +284,7 @@
         <param.DynamicMemoryAllocationThreshold />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
+        <param.PreserveArrayDimensions />
         <param.StackUsageMax />
         <param.MultiInstanceCode />
         <param.FilePartitionMethod />
@@ -356,7 +373,16 @@
         <param.CustomLAPACKCallback />
         <param.CustomFFTCallback />
         <param.GenerateDefaultInSwitch />
+        <param.EnableTraceability />
         <param.UseECoderFeatures />
+        <param.psCustomPrjState />
+        <param.psCustomProjectFile />
+        <param.psCheckConfValue />
+        <param.psUniqueOutPutState />
+        <param.psOpenResultsState />
+        <param.psProductModeValue />
+        <param.psQuickConfValue />
+        <param.psOutputFolder />
       </unset>
     </profile>
     <profile key="profile.hdl">
@@ -707,22 +733,22 @@
     <param.TestSnippets>
       <item>test_main</item>
     </param.TestSnippets>
-    <param.DefaultImportExportVariable />
-    <param.ExternalFcnMajority />
+    <param.DefaultImportExportVariable>config</param.DefaultImportExportVariable>
+    <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
     <param.outputfile>${PROJECT_ROOT}\main_mex.mexw64</param.outputfile>
-    <param.version />
+    <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>true</param.HasGpuCoder>
     <param.mex.mainhtml>C:\Users\sdupertu\Projects\branch\Filter_Viewer\2nd_version\M_MEX_project\codegen\mex\main\html\index.html</param.mex.mainhtml>
     <param.grt.mainhtml>C:\Users\Sebastien\Projects\Filter_Demo\2nd_version\M_MEX_project\codegen\dll\main\html\index.html</param.grt.mainhtml>
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
     <param.AutoInferDefaultFile />
-    <param.AutoInferUseVariableSize />
-    <param.AutoInferUseUnboundedSize />
-    <param.AutoInferVariableSizeThreshold />
-    <param.AutoInferUnboundedSizeThreshold />
-    <param.EnableFixedPointStep />
+    <param.AutoInferUseVariableSize>false</param.AutoInferUseVariableSize>
+    <param.AutoInferUseUnboundedSize>false</param.AutoInferUseUnboundedSize>
+    <param.AutoInferVariableSizeThreshold>1024</param.AutoInferVariableSizeThreshold>
+    <param.AutoInferUnboundedSizeThreshold>2048</param.AutoInferUnboundedSizeThreshold>
+    <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
     <param.EnableScreener>true</param.EnableScreener>
     <param.AnnotationChecksum>0</param.AnnotationChecksum>
     <var.LegacyTarget>target.matlab.coder</var.LegacyTarget>
@@ -733,13 +759,13 @@
     <param.unifiedParamStorage />
     <var.gc.lastOutputRoot>codegen\mex\main</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>2564450571</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>678082111</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\main</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>518650508</var.cfi.preBuildChecksum>
+    <var.cfi.preBuildChecksum>3750427258</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>test_main</var.lastCfiTestSnippet>
-    <var.outdatedOnRestore />
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_num_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_str_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\filter_bode.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\main.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;496385330&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_num_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_str_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\filter_bode.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\main.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.outdatedOnRestore>false</var.outdatedOnRestore>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_num_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_str_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\filter_bode.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\main.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;159805984&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_num_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_str_input.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\filter_bode.m&lt;/file&gt;&lt;file&gt;C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\main.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.configImportActive>false</param.configImportActive>
     <var.isGpuCoder>false</var.isGpuCoder>
@@ -753,7 +779,7 @@
     <param.UsePreconditions>false</param.UsePreconditions>
     <param.FeatureFlags />
     <param.FixedPointMode>option.FixedPointMode.None</param.FixedPointMode>
-    <param.AutoScaleLoopIndexVariables />
+    <param.AutoScaleLoopIndexVariables>false</param.AutoScaleLoopIndexVariables>
     <param.ComputedFixedPointData>
       <ComputedEntities />
     </param.ComputedFixedPointData>
@@ -779,7 +805,9 @@
     <param.FixedPointValidationChecksum />
     <param.FixedPointSourceCodeChecksum />
     <param.FixedPointFunctionReplacements>
-      <FunctionReplacements />
+      <FunctionReplacements>
+        <Replacement />
+      </FunctionReplacements>
     </param.FixedPointFunctionReplacements>
     <param.OptimizeWholeNumbers>true</param.OptimizeWholeNumbers>
     <param.ContainerTypes>false</param.ContainerTypes>
@@ -789,8 +817,8 @@
     <param.EnableCodeEfficiencyChecks>false</param.EnableCodeEfficiencyChecks>
     <param.DefaultFixedPointSignedness>option.DefaultFixedPointSignedness.Automatic</param.DefaultFixedPointSignedness>
     <param.FixedPointTypeProposalMode>option.FixedPointTypeProposalMode.ProposeFractionLengths</param.FixedPointTypeProposalMode>
-    <param.EnableFixedPointStep />
-    <var.lastFixedPointAction />
+    <param.EnableFixedPointStep>false</param.EnableFixedPointStep>
+    <var.lastFixedPointAction>option.fixedPointAction.none</var.lastFixedPointAction>
     <var.lastSimContext />
     <var.lastVerifyContext />
     <param.fpDataRoot />
@@ -798,19 +826,19 @@
     <var.snapshotChecksum />
     <param.fpLastConvertChecksum />
     <var.functionBlockSid />
-    <param.fptSignedness />
+    <param.fptSignedness>false</param.fptSignedness>
     <var.FixedPointAnalysisMode>option.FixedPointAnalysisMode.Sim</var.FixedPointAnalysisMode>
     <param.FixedPointUseDesignRanges>false</param.FixedPointUseDesignRanges>
     <param.gpu.Enabled>false</param.gpu.Enabled>
     <param.gpu.KernelNamePrefix />
     <param.gpu.MallocMode>discrete</param.gpu.MallocMode>
-    <param.gpu.MallocThreshold />
-    <param.gpu.StackLimitPerThread />
+    <param.gpu.MallocThreshold>200</param.gpu.MallocThreshold>
+    <param.gpu.StackLimitPerThread>1024</param.gpu.StackLimitPerThread>
     <param.gpu.EnableCUBLAS>true</param.gpu.EnableCUBLAS>
     <param.gpu.EnableCUSOLVER>true</param.gpu.EnableCUSOLVER>
     <param.gpu.EnableCUFFT>true</param.gpu.EnableCUFFT>
     <param.gpu.Benchmarking>false</param.gpu.Benchmarking>
-    <param.gpu.SafeBuild />
+    <param.gpu.SafeBuild>false</param.gpu.SafeBuild>
     <param.gpu.ComputeCapability>3.5</param.gpu.ComputeCapability>
     <param.gpu.CustomComputeCapability />
     <param.gpu.CompilerFlags />
@@ -913,11 +941,11 @@
       <file>${PROJECT_ROOT}\main.m</file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project" name="main_mex.mexw64" optional="false">C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2017b\M_MEX_project\main_mex.mexw64</file>
+      <file location="C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project" name="main_mex.mexw64" optional="false">C:\Users\sdupertu\Data\Projects\Demos\trunk\Communications_Electronics_and_Semiconductor\Filter_Design_C_Codegen\M_MEX_project\main_mex.mexw64</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\MATLAB\R2017b</root>
+      <root>C:\MATLAB\R2018a</root>
       <toolboxes>
         <toolbox name="fixedpoint" />
         <toolbox name="matlabcoder" />
