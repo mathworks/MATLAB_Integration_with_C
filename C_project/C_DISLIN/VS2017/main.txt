@@ -12,8 +12,8 @@ int main(void)
 
   /* Constants declaration */
 
-  static const char BAND_FILTER[5] = { 'b', 'a', 'n', 'd', '\x00' };
-  static const char STOP_FILTER[5] = { 's', 't', 'o', 'p', '\x00' };
+  static const char BAND_FILTER[5] = "band";
+  static const char STOP_FILTER[5] = "stop";
   static const char N_CHAR[2]      = { 'n', '\x00' };
 
   const double ORDER_LIMS_1[2] = {1,10};
@@ -25,10 +25,11 @@ int main(void)
   static double f[NB_SAMPLES];
   static double H_arg[NB_SAMPLES];
   static double H_mod[NB_SAMPLES];
-  
+  static double y[NB_SAMPLES];
+
   /* Variables declaration */
-  char f_t[5]        = { '0', '0', '0', '0', '\x00' };
-  char t_word[5]     = { '0', '0', '0', '0', '\x00' };
+  char f_t[5]        = "0000";
+  char t_word[5]     = "0000";
   char keep_bodes[2] = { '0', '\x00' };
   char new_bodes[2]  = { '0', '\x00' };
   char amplitude_title[50] = "";
@@ -55,8 +56,16 @@ int main(void)
   q_0 = 0.0;
   g   = 1.0;
 
-  /*  Definition of the logarithmic frequency range till 1 Tera Hertz */
-  logspace(0.0, 9.0, f);
+  /*  Definition of the logarithmic frequency range */
+  y[99999] = 9.0;
+  y[0] = 0.0;
+  for (int k = 0; k < 99998; k++) {
+    y[k + 1] = ((double)k + 1.0) * 9.0000900009000085E-5;
+  }
+
+  for (int b_k = 0; b_k < 100000; b_k++) {
+    f[b_k] = pow(10.0, y[b_k]);
+  }
 
   /*  Program title */
   printf("%s\n",

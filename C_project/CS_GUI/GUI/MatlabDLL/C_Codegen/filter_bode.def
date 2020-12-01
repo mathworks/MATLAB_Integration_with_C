@@ -1,0 +1,4 @@
+EXPORTS
+filter_bode
+filter_bode_initialize
+filter_bode_terminate

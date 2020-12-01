@@ -6,7 +6,7 @@ clear variables; close all; clc;
 
 % Test the MEX file if set to '1'
 TEST_MEX = 0;
-if (TEST_MEX == 0)
+if (TEST_MEX == 1)
   % Call of the standard MATLAB code
   error_flag = main();
 else

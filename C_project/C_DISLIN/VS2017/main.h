@@ -1,21 +1,19 @@
 /*
  * File: main.h
  *
- * MATLAB Coder version            : 4.0
- * C/C++ source code generated on  : 30-Apr-2018 13:53:32
+ * MATLAB Coder version            : 5.1
+ * C/C++ source code generated on  : 01-Dec-2020 16:51:46
  */
 
 #ifndef MAIN_H
 #define MAIN_H
 
 /* Include Files */
+#include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "rtwtypes.h"
-#include "main_types.h"
-
-/* Function Declarations */
-extern int main(void);
+  /* Function Declarations */
+  extern int main(void);
 
 /* Constants definition */
 #define NB_SAMPLES 100000
@@ -27,7 +25,6 @@ extern int main(void);
 #define min_data(a,b) (a<=b?a:b)
 #define max_data(a,b) (a>=b?a:b)
 #endif
-
 /*
  * File trailer for main.h
  *

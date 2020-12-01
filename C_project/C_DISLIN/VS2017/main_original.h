@@ -1,23 +1,31 @@
 /*
  * File: main.h
  *
- * MATLAB Coder version            : 4.0
- * C/C++ source code generated on  : 30-Apr-2018 13:53:32
+ * MATLAB Coder version            : 5.1
+ * C/C++ source code generated on  : 01-Dec-2020 16:51:46
  */
 
 #ifndef MAIN_H
 #define MAIN_H
 
 /* Include Files */
+#include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "rtwtypes.h"
-#include "main_types.h"
+#ifdef __cplusplus
 
-/* Function Declarations */
-extern int main(void);
-extern void main_initialize(void);
+extern "C" {
 
+#endif
+
+  /* Function Declarations */
+  extern int main(void);
+  extern void main_initialize(void);
+
+#ifdef __cplusplus
+
+}
+#endif
 #endif
 
 /*

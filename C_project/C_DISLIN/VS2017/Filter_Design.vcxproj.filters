@@ -24,6 +24,9 @@
     <ClInclude Include="rtwtypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tmwtypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c">

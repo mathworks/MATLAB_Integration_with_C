@@ -13,7 +13,7 @@ disp('Starting the parsing of the header file...');
 FILE_READ  = '.\main_original.h';
 FILE_WRITE = '.\main.h';
 % Key words to recognize in the generated files
-KEY_TAGS   = {'__cplusplus' 'main(void)'...
+KEY_TAGS   = {'#ifdef __cplusplus' 'main(void)'...
                'main_initialize' 'main_terminate' 'File trailer'};
 % Text to add at the end of the file
 LINE_FEED  = newline;
@@ -26,6 +26,7 @@ DIRECTIVES = {'/* Constants definition */'
               '/* Macros definition */'
               '#define min_data(a,b) (a<=b?a:b)'
               '#define max_data(a,b) (a>=b?a:b)'
+              '#endif'
              };
 
 % Backup of the original generated file
@@ -94,7 +95,8 @@ FILE_WRITE = '.\main.c';
 KEY_TAGS   = {'angle' '100000U' '100000'  '99999.0' '99998.0' '99999' '99998'};
 % Text to add at the beginning of the file
 LINE_FEED  = newline;
-INCLUDES   = {'#include <float.h>'
+INCLUDES   = {'#include <string.h>'
+              '#include <float.h>'
               '#include "dislin.h" /* Added of the graphical library */'};
 
 % Text to add at the end of the file
