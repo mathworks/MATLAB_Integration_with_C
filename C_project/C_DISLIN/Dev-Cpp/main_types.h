@@ -1,8 +1,8 @@
 /*
  * File: main_types.h
  *
- * MATLAB Coder version            : 4.0
- * C/C++ source code generated on  : 30-Apr-2018 13:53:32
+ * MATLAB Coder version            : 5.1
+ * C/C++ source code generated on  : 04-Dec-2020 08:52:13
  */
 
 #ifndef MAIN_TYPES_H

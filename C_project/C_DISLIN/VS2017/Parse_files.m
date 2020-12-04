@@ -92,7 +92,7 @@ disp('Starting the parsing of the C file...');
 FILE_READ  = '.\main_original.c';
 FILE_WRITE = '.\main.c';
 % Key words to recognize in the generated files
-KEY_TAGS   = {'angle' '100000U' '100000'  '99999.0' '99998.0' '99999' '99998'};
+KEY_TAGS   = {'angle' '100000U' '100000' '99999.0' '99998.0' '99999' '99998'};
 % Text to add at the beginning of the file
 LINE_FEED  = newline;
 INCLUDES   = {'#include <string.h>'

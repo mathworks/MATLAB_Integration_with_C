@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1401405883" file="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="1776852146" file="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>FilterDesign</param.appname>
     <param.icon>${PROJECT_ROOT}\FilterDesignCompiler_resources\icon.ico</param.icon>
     <param.icons>
@@ -79,7 +79,9 @@
     </fileset.main>
     <fileset.resources />
     <fileset.package />
-    <fileset.depfun />
+    <fileset.depfun>
+      <file>D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\filter_bode.m</file>
+    </fileset.depfun>
     <build-deliverables>
       <file location="${PROJECT_ROOT}\for_testing" name="readme.txt" optional="true">D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\readme.txt</file>
       <file location="${PROJECT_ROOT}\for_testing" name="FilterDesign.exe" optional="false">D:\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\FilterDesign.exe</file>
