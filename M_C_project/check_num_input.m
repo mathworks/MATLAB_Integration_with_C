@@ -9,7 +9,7 @@ function param_p = check_num_input(param_p,limits,text_id,c_param)
 % IN/OUT  : - param_p: parameter to set via the user interface
 % OUT     : - 
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen 
   %#ok<*NASGU>

@@ -7,7 +7,7 @@ function error_flag = main()
 % IN/OUT  : -
 % OUT     : -
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Functions that are not translated into C code

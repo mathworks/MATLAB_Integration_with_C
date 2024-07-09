@@ -7,7 +7,7 @@ function param = check_yes_or_no(text_id)
 % IN/OUT  : -
 % OUT     : - param  : parameter to set via the user interface
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Functions that are not translated into C code

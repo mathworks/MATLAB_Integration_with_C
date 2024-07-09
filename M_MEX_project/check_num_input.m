@@ -8,7 +8,7 @@ function param = check_num_input(param,limits,text_id)
 % IN/OUT  : - param  : parameter to set via the user interface
 % OUT     : -
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Functions that are not translated into C code

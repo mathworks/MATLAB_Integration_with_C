@@ -14,7 +14,7 @@ function [H_mod,H_arg,err_f] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 %           - H_arg : argument of the transfer function in [°]
 %           - err_f : returns execution error related to input parameters
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Constants

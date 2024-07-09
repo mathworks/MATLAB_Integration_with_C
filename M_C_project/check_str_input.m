@@ -7,7 +7,7 @@ function param_p = check_str_input(param_p,text_id)
 % IN/OUT  : - param_p: parameter to set via the user interface
 % OUT     : - 
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Constants

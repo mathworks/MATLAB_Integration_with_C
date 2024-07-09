@@ -7,7 +7,7 @@ function param = check_str_input(text_id)
 % IN/OUT  : -
 % OUT     : -
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   % Functions that are not translated into C code

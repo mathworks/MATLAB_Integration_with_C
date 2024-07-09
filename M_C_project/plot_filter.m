@@ -12,7 +12,7 @@ function plot_filter(f,H_mod,H_arg,f_type,f_order,fig_id)
 % IN/OUT  : -
 % OUT     : -
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Functions that are not translated into C code
   coder.extrinsic('num2str');

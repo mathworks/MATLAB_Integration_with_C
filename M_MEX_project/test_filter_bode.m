@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Goal    : Test of the filter_bode() and filter_bode_mex() functions
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear variables; close all; clc;
 
@@ -11,7 +11,7 @@ q_0   = [0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5];
 g     = [1,10,10,100,1,1,10,100];
 type  = char('low','high','low','high','band','stop','test','band');
 order = int32([1,1,2,2,2,2,1,3]);
-% Initializations
+% Initialization
 nb_filter = length(order);
 nb_frequs = length(f);
 H_mod = zeros(nb_filter,nb_frequs);
