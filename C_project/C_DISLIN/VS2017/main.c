@@ -1,81 +1,47 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 4.0
- * C/C++ source code generated on  : 30-Apr-2018 13:53:32
+ * MATLAB Coder version            : 24.1
+ * C/C++ source code generated on  : 09-Jul-2024 17:03:17
  */
 
 /* Include Files */
-#include <float.h>
-#include "dislin.h" /* Added of the graphical library */
-#include <math.h>
-#include <string.h>
 #include "main.h"
+#include "dislin.h" /* Added of the graphical library */
+#include <string.h>
+#include <float.h>
+#include <math.h>
 #include <stdio.h>
 
 /* Variable Definitions */
-static const char cv0[20] = { 'l', 'o', 'w', '\x00', '\x00', 'h', 'i', 'g', 'h',
-  '\x00', 'b', 'a', 'n', 'd', '\x00', 's', 't', 'o', 'p', '\x00' };
+static const char cv[20] = {'l',    'o', 'w',    '\x00', '\x00', 'h',   'i',
+                            'g',    'h', '\x00', 'b',    'a',    'n',   'd',
+                            '\x00', 's', 't',    'o',    'p',    '\x00'};
 
 /* Function Declarations */
-static void angle_tf(const creal_T x[NB_SAMPLES], double y[NB_SAMPLES]);
-static void b_abs(const creal_T x[NB_SAMPLES], double y[NB_SAMPLES]);
-static void b_check_num_input(double *param_p, const double limits[2], char
-  * c_param);
+static double b_check_num_input(char *c_param);
+
 static void b_check_yes_or_no(char param_p[2]);
-static void b_log10(double x[NB_SAMPLES]);
-static int b_mod(int x);
-static void b_power(const creal_T a[NB_SAMPLES], creal_T y[NB_SAMPLES]);
-static void c_check_num_input(double *param_p, const double limits[2], char
-  * c_param);
-static void check_num_input(int *param_p, const double limits[2], char * c_param);
+
+static double c_check_num_input(char *c_param);
+
+static int check_num_input(const double limits[2], char *c_param);
+
 static void check_str_input(char param_p[5]);
+
 static void check_yes_or_no(char param_p[2]);
-static void d_check_num_input(double *param_p, const double limits[2], char
-  * c_param);
-static void filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, double g,
-  const char f_type[5], int f_order, double H_mod[NB_SAMPLES], double H_arg[NB_SAMPLES],
-  int *err_f);
-static void logspace(double d1, double d2, double y[NB_SAMPLES]);
-static void power(double a, const double b[NB_SAMPLES], double y[NB_SAMPLES]);
+
+static double d_check_num_input(char *c_param);
+
+static int filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, double g,
+                       const char f_type[5], int f_order, double H_mod[NB_SAMPLES],
+                       double H_arg[NB_SAMPLES]);
+
+static void power(const creal_T a[NB_SAMPLES], creal_T y[NB_SAMPLES]);
+
 static double rt_hypotd(double u0, double u1);
 
 /* Function Definitions */
-
-/*
- * Arguments    : const creal_T x[NB_SAMPLES]
- *                double y[NB_SAMPLES]
- * Return Type  : void
- */
-static void angle_tf(const creal_T x[NB_SAMPLES], double y[NB_SAMPLES])
-{
-  static double z1[NB_SAMPLES];
-  int k;
-  memcpy(&z1[0], &y[0], NB_SAMPLES * sizeof(double));
-  for (k = 0; k < NB_SAMPLES; k++) {
-    z1[k] = atan2(x[k].im, x[k].re);
-  }
-
-  memcpy(&y[0], &z1[0], NB_SAMPLES * sizeof(double));
-}
-
-/*
- * Arguments    : const creal_T x[NB_SAMPLES]
- *                double y[NB_SAMPLES]
- * Return Type  : void
- */
-static void b_abs(const creal_T x[NB_SAMPLES], double y[NB_SAMPLES])
-{
-  static double z1[NB_SAMPLES];
-  int k;
-  memcpy(&z1[0], &y[0], NB_SAMPLES * sizeof(double));
-  for (k = 0; k < NB_SAMPLES; k++) {
-    z1[k] = rt_hypotd(x[k].re, x[k].im);
-  }
-
-  memcpy(&y[0], &z1[0], NB_SAMPLES * sizeof(double));
-}
-
 /*
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  *  Function: check_num_input()
@@ -87,38 +53,33 @@ static void b_abs(const creal_T x[NB_SAMPLES], double y[NB_SAMPLES])
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- * Arguments    : double *param_p
- *                const double limits[2]
- *                char * c_param
- * Return Type  : void
+ *
+ * Arguments    : char * c_param
+ * Return Type  : double
  */
-static void b_check_num_input(double *param_p, const double limits[2], char
-  * c_param)
+static double b_check_num_input(char *c_param)
 {
-  char * CLEAR_STDIN;
+  char *CLEAR_STDIN;
+  double param_p;
   int exitg1;
   int exitg2;
   int nb_params;
   int negate_bool;
-
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
   CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
   /*  Initialization */
   /*  Check user's input */
   do {
     exitg1 = 0;
     do {
       exitg2 = 0;
-
       /*  Ask the user to enter a number  */
       printf("%s", "Cutoff frequency: ");
       fflush(stdout);
-      nb_params = scanf_s(c_param, param_p, 1);
-
+      nb_params = scanf_s(c_param, &param_p, 1);
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
@@ -127,34 +88,32 @@ static void b_check_num_input(double *param_p, const double limits[2], char
         /*  Multiple entries => this is an array of chars */
         negate_bool = 1;
       }
-
       /*  Post process the keyboard input buffer data */
       if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
         fflush(stdout);
-
         /*  Clear the input buffer */
         scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
     } while (exitg2 == 0);
-
     /*  Compare the entry to the possible data range */
-    if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
+    if ((param_p >= 1.0) && (param_p <= 1.0E+9)) {
       exitg1 = 1;
     } else {
-      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
-             limits[0], limits[1]);
+      printf(
+          "For this filter, the parameter should be between %.3f and %.3f.\n",
+          1.0, 1.0E+9);
       fflush(stdout);
       printf("Please, enter a correct value.\n");
       fflush(stdout);
     }
   } while (exitg1 == 0);
-
   /*  The parameter stands into the correct range */
+  return param_p;
 }
 
 /*
@@ -166,162 +125,57 @@ static void b_check_num_input(double *param_p, const double limits[2], char
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *
  * Arguments    : char param_p[2]
  * Return Type  : void
  */
 static void b_check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  int i31;
-  char cv25[2];
-  char cv26[2];
-  static const char cv27[2] = { '%', 's' };
-
-  int i32;
   int negate_bool_idx_0;
-  char cv28[2];
-  char cv29[2];
-  int i33;
-  static const char cv30[2] = { 'n', '\x00' };
-
   int negate_bool_idx_1;
-  char cv31[2];
-  char cv32[2];
-  static const char cv33[2] = { 'y', '\x00' };
-
-  char * CLEAR_STDIN;
-
+  char b_cv[2];
+  char cv1[2];
   /*  Constants */
   /*  Initialization */
   /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
-
     /*  Ask the user to enter a selection */
     printf("%s", "Do you want to see Bodes of another filter [y,n]? ");
     fflush(stdout);
-    for (i31 = 0; i31 < 2; i31++) {
-      cv25[i31] = cv27[i31];
-    }
-
-    scanf_s(cv25, cv26, 2);
-
+    b_cv[0] = '%';
+    b_cv[1] = 's';
+    scanf_s(&b_cv[0], &param_p[0], 2);
     /*  Compare the entry to the available types */
-    for (i32 = 0; i32 < 2; i32++) {
-      param_p[i32] = cv26[i32];
-      cv28[i32] = cv26[i32];
-      cv29[i32] = cv30[i32];
-    }
-
-    negate_bool_idx_0 = _strcmpi(cv28, cv29);
-    for (i33 = 0; i33 < 2; i33++) {
-      cv31[i33] = cv26[i33];
-      cv32[i33] = cv33[i33];
-    }
-
-    negate_bool_idx_1 = _strcmpi(cv31, cv32);
+    b_cv[0] = param_p[0];
+    cv1[0] = 'n';
+    b_cv[1] = param_p[1];
+    cv1[1] = '\x00';
+    negate_bool_idx_0 = _strcmpi(&b_cv[0], &cv1[0]);
+    b_cv[0] = param_p[0];
+    cv1[0] = 'y';
+    b_cv[1] = param_p[1];
+    cv1[1] = '\x00';
+    negate_bool_idx_1 = _strcmpi(&b_cv[0], &cv1[0]);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
       printf("%s\n", "Please, enter [y,Y] for YES or [n,N] for NO.\n");
       fflush(stdout);
-
-      /*  Force the string regular expression in the generated C code for scanf_s */
-      CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
+      /*  Force the string regular expression in the generated C code for
+       * scanf_s */
       /*  Clear the input buffer */
-      scanf_s(CLEAR_STDIN);
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
-
   /*  Handle graphical windows in C */
 }
 
 /*
- * Arguments    : double x[NB_SAMPLES]
- * Return Type  : void
- */
-static void b_log10(double x[NB_SAMPLES])
-{
-  int k;
-  for (k = 0; k < NB_SAMPLES; k++) {
-    x[k] = log10(x[k]);
-  }
-}
-
-/*
- * Arguments    : int x
- * Return Type  : int
- */
-static int b_mod(int x)
-{
-  return x - ((x >> 1) << 1);
-}
-
-/*
- * Arguments    : const creal_T a[NB_SAMPLES]
- *                creal_T y[NB_SAMPLES]
- * Return Type  : void
- */
-static void b_power(const creal_T a[NB_SAMPLES], creal_T y[NB_SAMPLES])
-{
-  static creal_T z1[NB_SAMPLES];
-  int k;
-  double y_re;
-  double y_im;
-  double x_re;
-  double x_im;
-  double r;
-  memcpy(&z1[0], &y[0], NB_SAMPLES * sizeof(creal_T));
-  for (k = 0; k < NB_SAMPLES; k++) {
-    if ((a[k].im == 0.0) && (a[k].re >= 0.0)) {
-      y_re = pow(a[k].re, 2.0);
-      y_im = 0.0;
-    } else if (a[k].re == 0.0) {
-      y_re = -pow(a[k].im, 2.0);
-      y_im = 0.0;
-    } else {
-      if (a[k].im == 0.0) {
-        if (a[k].re < 0.0) {
-          x_re = log(fabs(a[k].re));
-          x_im = 3.1415926535897931;
-        } else {
-          x_re = log(fabs(a[k].re));
-          x_im = 0.0;
-        }
-      } else if ((fabs(a[k].re) > 8.9884656743115785E+307) || (fabs(a[k].im) >
-                  8.9884656743115785E+307)) {
-        x_re = log(rt_hypotd(a[k].re / 2.0, a[k].im / 2.0)) +
-          0.69314718055994529;
-        x_im = atan2(a[k].im, a[k].re);
-      } else {
-        x_re = log(rt_hypotd(a[k].re, a[k].im));
-        x_im = atan2(a[k].im, a[k].re);
-      }
-
-      y_re = 2.0 * x_re;
-      y_im = 2.0 * x_im;
-      if (y_im == 0.0) {
-        y_re = exp(y_re);
-        y_im = 0.0;
-      } else {
-        r = exp(y_re / 2.0);
-        y_re = r * (r * cos(y_im));
-        y_im = r * (r * sin(y_im));
-      }
-    }
-
-    z1[k].re = y_re;
-    z1[k].im = y_im;
-  }
-
-  memcpy(&y[0], &z1[0], NB_SAMPLES * sizeof(creal_T));
-}
-
-/*
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  *  Function: check_num_input()
  *  Goal    : Checks a numerical input parameter given by the user
@@ -332,38 +186,33 @@ static void b_power(const creal_T a[NB_SAMPLES], creal_T y[NB_SAMPLES])
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- * Arguments    : double *param_p
- *                const double limits[2]
- *                char * c_param
- * Return Type  : void
+ *
+ * Arguments    : char * c_param
+ * Return Type  : double
  */
-static void c_check_num_input(double *param_p, const double limits[2], char
-  * c_param)
+static double c_check_num_input(char *c_param)
 {
-  char * CLEAR_STDIN;
+  char *CLEAR_STDIN;
+  double param_p;
   int exitg1;
   int exitg2;
   int nb_params;
   int negate_bool;
-
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
   CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
   /*  Initialization */
   /*  Check user's input */
   do {
     exitg1 = 0;
     do {
       exitg2 = 0;
-
       /*  Ask the user to enter a number  */
       printf("%s", "Quality factor: ");
       fflush(stdout);
-      nb_params = scanf_s(c_param, param_p, 1);
-
+      nb_params = scanf_s(c_param, &param_p, 1);
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
@@ -372,34 +221,32 @@ static void c_check_num_input(double *param_p, const double limits[2], char
         /*  Multiple entries => this is an array of chars */
         negate_bool = 1;
       }
-
       /*  Post process the keyboard input buffer data */
       if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
         fflush(stdout);
-
         /*  Clear the input buffer */
         scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
     } while (exitg2 == 0);
-
     /*  Compare the entry to the possible data range */
-    if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
+    if ((param_p >= 0.1) && (param_p <= 10.0)) {
       exitg1 = 1;
     } else {
-      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
-             limits[0], limits[1]);
+      printf(
+          "For this filter, the parameter should be between %.3f and %.3f.\n",
+          0.1, 10.0);
       fflush(stdout);
       printf("Please, enter a correct value.\n");
       fflush(stdout);
     }
   } while (exitg1 == 0);
-
   /*  The parameter stands into the correct range */
+  return param_p;
 }
 
 /*
@@ -413,37 +260,34 @@ static void c_check_num_input(double *param_p, const double limits[2], char
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- * Arguments    : int *param_p
- *                const double limits[2]
+ *
+ * Arguments    : const double limits[2]
  *                char * c_param
- * Return Type  : void
+ * Return Type  : int
  */
-static void check_num_input(int *param_p, const double limits[2], char * c_param)
+static int check_num_input(const double limits[2], char *c_param)
 {
-  char * CLEAR_STDIN;
+  char *CLEAR_STDIN;
   int exitg1;
   int exitg2;
   int nb_params;
   int negate_bool;
-
+  int param_p;
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
   CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
   /*  Initialization */
   /*  Check user's input */
   do {
     exitg1 = 0;
     do {
       exitg2 = 0;
-
       /*  Ask the user to enter a number  */
       printf("%s", "Order of the filter: ");
       fflush(stdout);
-      nb_params = scanf_s(c_param, param_p, 1);
-
+      nb_params = scanf_s(c_param, &param_p, 1);
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
@@ -452,34 +296,32 @@ static void check_num_input(int *param_p, const double limits[2], char * c_param
         /*  Multiple entries => this is an array of chars */
         negate_bool = 1;
       }
-
       /*  Post process the keyboard input buffer data */
       if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
         fflush(stdout);
-
         /*  Clear the input buffer */
         scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
     } while (exitg2 == 0);
-
     /*  Compare the entry to the possible data range */
-    if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
+    if ((param_p >= limits[0]) && (param_p <= limits[1])) {
       exitg1 = 1;
     } else {
-      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
-             limits[0], limits[1]);
+      printf(
+          "For this filter, the parameter should be between %.3f and %.3f.\n",
+          limits[0], limits[1]);
       fflush(stdout);
       printf("Please, enter a correct value.\n");
       fflush(stdout);
     }
   } while (exitg1 == 0);
-
   /*  The parameter stands into the correct range */
+  return param_p;
 }
 
 /*
@@ -491,78 +333,61 @@ static void check_num_input(int *param_p, const double limits[2], char * c_param
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *
  * Arguments    : char param_p[5]
  * Return Type  : void
  */
 static void check_str_input(char param_p[5])
 {
-  int negate_bool;
+  int b_i;
   int exitg1;
-  int i25;
-  char cv12[3];
-  char cv13[5];
-  static const char cv14[3] = { '%', '4', 's' };
-
-  int i26;
   int i;
+  int negate_bool;
+  char cv1[5];
+  char cv2[5];
+  char b_cv[3];
   boolean_T exitg2;
-  int i27;
-  char cv15[5];
-  char FILTER[5];
-  char * CLEAR_STDIN;
-
   /*  Constants */
   /*  Initialization */
   negate_bool = 1;
-
   /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
-
     /*  Ask the user to enter a filter type */
     printf("%s", "Type of filter [low][high][band][stop]: ");
     fflush(stdout);
-    for (i25 = 0; i25 < 3; i25++) {
-      cv12[i25] = cv14[i25];
-    }
-
-    scanf_s(cv12, cv13, 8);
-    for (i26 = 0; i26 < 5; i26++) {
-      param_p[i26] = cv13[i26];
-    }
-
+    b_cv[0] = '%';
+    b_cv[1] = '4';
+    b_cv[2] = 's';
+    scanf_s(&b_cv[0], &param_p[0], 8);
     /*  Compare the entry to the available types */
-    i = 1;
+    i = 0;
     exitg2 = false;
-    while ((!exitg2) && (i < 5)) {
-      for (i27 = 0; i27 < 5; i27++) {
-        cv15[i27] = cv13[i27];
-        FILTER[i27] = cv0[i27 + 5 * (i - 1)];
+    while ((!exitg2) && (i < 4)) {
+      for (b_i = 0; b_i < 5; b_i++) {
+        cv1[b_i] = param_p[b_i];
+        cv2[b_i] = cv[b_i + 5 * i];
       }
-
-      negate_bool = strcmp(cv15, FILTER);
+      negate_bool = strcmp(&cv1[0], &cv2[0]);
       if (negate_bool == 0) {
         exitg2 = true;
       } else {
         i++;
       }
     }
-
     if (negate_bool == 0) {
       exitg1 = 1;
     } else {
       /*  No right type selected */
       printf("%s\n", "Unknown filter type. Please, enter a correct one.");
       fflush(stdout);
-
-      /*  Force the string regular expression in the generated C code for scanf_s */
-      CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
+      /*  Force the string regular expression in the generated C code for
+       * scanf_s */
       /*  Clear the input buffer */
-      scanf_s(CLEAR_STDIN);
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
 }
@@ -576,77 +401,53 @@ static void check_str_input(char param_p[5])
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *
  * Arguments    : char param_p[2]
  * Return Type  : void
  */
 static void check_yes_or_no(char param_p[2])
 {
   int exitg1;
-  int i28;
-  char cv16[2];
-  char cv17[2];
-  static const char cv18[2] = { '%', 's' };
-
-  int i29;
   int negate_bool_idx_0;
-  char cv19[2];
-  char cv20[2];
-  int i30;
-  static const char cv21[2] = { 'n', '\x00' };
-
   int negate_bool_idx_1;
-  char cv22[2];
-  char cv23[2];
-  static const char cv24[2] = { 'y', '\x00' };
-
-  char * CLEAR_STDIN;
-
+  char b_cv[2];
+  char cv1[2];
   /*  Constants */
   /*  Initialization */
   /*  sizeof(char) */
   /*  Loop to get and validate user's input */
   do {
     exitg1 = 0;
-
     /*  Ask the user to enter a selection */
     printf("%s", "Do you want to keep the previous Bodes [y,n]? ");
     fflush(stdout);
-    for (i28 = 0; i28 < 2; i28++) {
-      cv16[i28] = cv18[i28];
-    }
-
-    scanf_s(cv16, cv17, 2);
-
+    b_cv[0] = '%';
+    b_cv[1] = 's';
+    scanf_s(&b_cv[0], &param_p[0], 2);
     /*  Compare the entry to the available types */
-    for (i29 = 0; i29 < 2; i29++) {
-      param_p[i29] = cv17[i29];
-      cv19[i29] = cv17[i29];
-      cv20[i29] = cv21[i29];
-    }
-
-    negate_bool_idx_0 = _strcmpi(cv19, cv20);
-    for (i30 = 0; i30 < 2; i30++) {
-      cv22[i30] = cv17[i30];
-      cv23[i30] = cv24[i30];
-    }
-
-    negate_bool_idx_1 = _strcmpi(cv22, cv23);
+    b_cv[0] = param_p[0];
+    cv1[0] = 'n';
+    b_cv[1] = param_p[1];
+    cv1[1] = '\x00';
+    negate_bool_idx_0 = _strcmpi(&b_cv[0], &cv1[0]);
+    b_cv[0] = param_p[0];
+    cv1[0] = 'y';
+    b_cv[1] = param_p[1];
+    cv1[1] = '\x00';
+    negate_bool_idx_1 = _strcmpi(&b_cv[0], &cv1[0]);
     if ((negate_bool_idx_0 == 0) || (negate_bool_idx_1 == 0)) {
       exitg1 = 1;
     } else {
       printf("%s\n", "Please, enter [y,Y] for YES or [n,N] for NO.\n");
       fflush(stdout);
-
-      /*  Force the string regular expression in the generated C code for scanf_s */
-      CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
+      /*  Force the string regular expression in the generated C code for
+       * scanf_s */
       /*  Clear the input buffer */
-      scanf_s(CLEAR_STDIN);
+      scanf_s("%*[^\n]%*1[\n]");
     }
   } while (exitg1 == 0);
-
   /*  Handle graphical windows in C */
 }
 
@@ -661,38 +462,33 @@ static void check_yes_or_no(char param_p[2])
  *  IN/OUT  : - param_p: parameter to set via the user interface
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- * Arguments    : double *param_p
- *                const double limits[2]
- *                char * c_param
- * Return Type  : void
+ *
+ * Arguments    : char * c_param
+ * Return Type  : double
  */
-static void d_check_num_input(double *param_p, const double limits[2], char
-  * c_param)
+static double d_check_num_input(char *c_param)
 {
-  char * CLEAR_STDIN;
+  char *CLEAR_STDIN;
+  double param_p;
   int exitg1;
   int exitg2;
   int nb_params;
   int negate_bool;
-
   /*  Constant */
   /*  Force the string regular expression in the generated C code for scanf_s */
   CLEAR_STDIN = "%*[^\n]%*1[\n]";
-
   /*  Initialization */
   /*  Check user's input */
   do {
     exitg1 = 0;
     do {
       exitg2 = 0;
-
       /*  Ask the user to enter a number  */
       printf("%s", "Linear gain of the filter: ");
       fflush(stdout);
-      nb_params = scanf_s(c_param, param_p, 1);
-
+      nb_params = scanf_s(c_param, &param_p, 1);
       /*  Check if a number or some chars have been entered */
       if (nb_params == 1) {
         /*  One entry => this is a number */
@@ -701,34 +497,32 @@ static void d_check_num_input(double *param_p, const double limits[2], char
         /*  Multiple entries => this is an array of chars */
         negate_bool = 1;
       }
-
       /*  Post process the keyboard input buffer data */
       if (negate_bool == 1) {
         printf("The value provided is not of the right data type.\n");
         fflush(stdout);
         printf("Please, enter a correct value.\n");
         fflush(stdout);
-
         /*  Clear the input buffer */
         scanf_s(CLEAR_STDIN);
       } else {
         exitg2 = 1;
       }
     } while (exitg2 == 0);
-
     /*  Compare the entry to the possible data range */
-    if ((*param_p >= limits[0]) && (*param_p <= limits[1])) {
+    if ((param_p >= 0.001) && (param_p <= 1000.0)) {
       exitg1 = 1;
     } else {
-      printf("For this filter, the parameter should be between %.3f and %.3f.\n",
-             limits[0], limits[1]);
+      printf(
+          "For this filter, the parameter should be between %.3f and %.3f.\n",
+          0.001, 1000.0);
       fflush(stdout);
       printf("Please, enter a correct value.\n");
       fflush(stdout);
     }
   } while (exitg1 == 0);
-
   /*  The parameter stands into the correct range */
+  return param_p;
 }
 
 /*
@@ -744,11 +538,12 @@ static void d_check_num_input(double *param_p, const double limits[2], char
  *            - f_order: filter's order
  *  IN/OUT  : -
  *  OUT     : - H_mod : module of the transfer function in [dB]
- *            - H_arg : argument of the transfer function in [°]
+ *            - H_arg : argument of the transfer function in [Â°]
  *            - err_f : returns execution error related to input parameters
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *
  * Arguments    : const double f[NB_SAMPLES]
  *                double f_0
  *                double q_0
@@ -757,107 +552,103 @@ static void d_check_num_input(double *param_p, const double limits[2], char
  *                int f_order
  *                double H_mod[NB_SAMPLES]
  *                double H_arg[NB_SAMPLES]
- *                int *err_f
- * Return Type  : void
+ * Return Type  : int
  */
-static void filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, double g,
-  const char f_type[5], int f_order, double H_mod[NB_SAMPLES], double H_arg[NB_SAMPLES],
-  int *err_f)
+static int filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, double g,
+                       const char f_type[5], int f_order, double H_mod[NB_SAMPLES],
+                       double H_arg[NB_SAMPLES])
 {
-  int filter_T_32;
-  int i11;
-  double w_0;
   static creal_T H[NB_SAMPLES];
-  int i;
-  int i12;
+  static creal_T b_H_tmp[NB_SAMPLES];
+  static creal_T dcv[NB_SAMPLES];
+  static double H_tmp[NB_SAMPLES];
   static double w[NB_SAMPLES];
-  int negate_bool;
-  char b_f_type[5];
-  char TYPE[5];
-  int exitg1;
-  boolean_T guard1 = false;
-  int n_cell_order;
-  int i13;
-  static double dv5[NB_SAMPLES];
-  int i14;
-  double y_im;
-  int i15;
-  int i16;
-  double bi;
-  int i17;
-  static creal_T dcv0[NB_SAMPLES];
-  static creal_T dcv1[NB_SAMPLES];
-  int i18;
-  int i19;
-  double bim;
-  double re;
-  double im;
-  double br;
-  double b_im;
-  double d;
-  double b_bi;
-  double H_re;
-  double s;
-  double b_H_re;
-  int i20;
-  double b_br;
-  int i21;
-  double sgnbi;
-  double b_re;
-  static creal_T dcv2[NB_SAMPLES];
-  int i22;
-  static creal_T dcv3[NB_SAMPLES];
-  double brm;
-  double c_im;
-  int i23;
-  int i24;
+  double H_tmp_im;
+  double H_tmp_re;
+  double a_im;
+  double b_a_im;
   double b_bim;
-  double b_y_im;
-  double c_H_re;
-  double d_H_re;
-  double e_H_re;
-  double c_re;
-  double b_s;
-  double d_im;
   double b_d;
-  double f_H_re;
-  double sgnbr;
-  double b_sgnbi;
-
+  double b_im;
+  double b_re;
+  double b_re_tmp;
+  double b_s;
+  double bi;
+  double bim;
+  double br;
+  double brm;
+  double c_d;
+  double c_im;
+  double c_re;
+  double c_re_tmp;
+  double d;
+  double d1;
+  double d2;
+  double d3;
+  double d_im;
+  double d_re_tmp;
+  double e_re_tmp;
+  double f_re_tmp;
+  double g_re_tmp;
+  double h_re_tmp;
+  double i_re_tmp;
+  double im;
+  double j_re_tmp;
+  double k_re_tmp;
+  double l_re_tmp;
+  double m_re_tmp;
+  double re;
+  double re_tmp;
+  double s;
+  double w_0;
+  int b_i;
+  int err_f;
+  int exitg1;
+  int filter_T_32;
+  int i;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
+  int i5;
+  int i6;
+  int i7;
+  int i8;
+  int k;
+  int n_cell_order;
+  int negate_bool;
+  char b_cv[5];
+  char cv1[5];
+  boolean_T guard1;
   /*  Constants */
   /*  Integer representation of filter's type */
-  /*  Initializations */
-  *err_f = 0;
+  /*  Initialization */
+  err_f = 0;
   filter_T_32 = 0;
-
   /*  Pulsation's vectors */
-  for (i11 = 0; i11 < NB_SAMPLES; i11++) {
-    H[i11].re = 1.0;
-    H[i11].im = 0.0;
-    H_mod[i11] = 0.0;
-    H_arg[i11] = 0.0;
-    w[i11] = 6.2831853071795862 * f[i11];
+  for (i = 0; i < NB_SAMPLES; i++) {
+    H[i].re = 1.0;
+    H[i].im = 0.0;
+    H_mod[i] = 0.0;
+    H_arg[i] = 0.0;
+    w[i] = 6.2831853071795862 * f[i];
   }
-
   w_0 = 6.2831853071795862 * f_0;
-
   /*  Set switches to work with integer */
-  for (i = 0; i < 4; i++) {
-    for (i12 = 0; i12 < 5; i12++) {
-      b_f_type[i12] = f_type[i12];
-      TYPE[i12] = cv0[i12 + 5 * i];
+  for (b_i = 0; b_i < 4; b_i++) {
+    for (i1 = 0; i1 < 5; i1++) {
+      b_cv[i1] = f_type[i1];
+      cv1[i1] = cv[i1 + 5 * b_i];
     }
-
-    negate_bool = strcmp(b_f_type, TYPE);
+    negate_bool = strcmp(&b_cv[0], &cv1[0]);
     if (negate_bool == 0) {
-      filter_T_32 = i + 1;
+      filter_T_32 = b_i + 1;
     }
   }
-
   /*  Test the order of the filter against the filter type */
-  if ((filter_T_32 > 2) && (b_mod(f_order) != 0)) {
+  if ((filter_T_32 > 2) && (f_order - ((f_order >> 1) << 1) != 0)) {
     /*  For band-pass and stop-band filters odd orders are not feasible */
-    *err_f = 2;
+    err_f = 2;
   } else {
     /*  Bode diagram calculation */
     do {
@@ -871,197 +662,170 @@ static void filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, doub
         guard1 = true;
       } else {
         /*  All filter's cells have been calculated */
-        for (i13 = 0; i13 < NB_SAMPLES; i13++) {
-          H[i13].re *= g;
-          H[i13].im *= g;
-        }
-
         /*  Apply the filter gain only once */
         /*  Retrieves module and argument of the transfer function H */
-        b_abs(H, dv5);
-        b_log10(dv5);
-        for (i14 = 0; i14 < NB_SAMPLES; i14++) {
-          H_mod[i14] = 20.0 * dv5[i14];
-        }
-
         /*  [dB] */
-        angle_tf(H, dv5);
-        for (i17 = 0; i17 < NB_SAMPLES; i17++) {
-          H_arg[i17] = dv5[i17] * 180.0 / 3.1415926535897931;
+        for (k = 0; k < NB_SAMPLES; k++) {
+          re = g * H[k].re;
+          im = g * H[k].im;
+          H[k].re = re;
+          H[k].im = im;
+          H_mod[k] = 20.0 * log10(rt_hypotd(re, im));
+          H_arg[k] = atan2(im, re) * 180.0 / 3.1415926535897931;
         }
-
-        /*  [°] */
+        /*  [Â°] */
         exitg1 = 1;
       }
-
       if (guard1) {
         f_order -= n_cell_order;
-
         /*  Calculate each filter's cell separately */
         if (n_cell_order == 1) {
           /*  1st order filter */
           /*  Initialization of the transfer function with the common divider */
-          for (i15 = 0; i15 < NB_SAMPLES; i15++) {
-            bi = w[i15] / w_0;
-            if (bi == 0.0) {
-              re = 1.0;
-              im = 0.0;
+          for (i3 = 0; i3 < NB_SAMPLES; i3++) {
+            b_im = w[i3] / w_0;
+            b_H_tmp[i3].re = 0.0;
+            b_H_tmp[i3].im = b_im;
+            if (b_im == 0.0) {
+              b_re = 1.0;
+              c_im = 0.0;
             } else {
-              bim = fabs(bi);
-              if (1.0 > bim) {
-                d = 1.0 + bi * bi;
-                re = 1.0 / d;
-                im = (0.0 - bi) / d;
+              bim = fabs(b_im);
+              if (bim < 1.0) {
+                b_d = b_im * b_im + 1.0;
+                b_re = 1.0 / b_d;
+                c_im = (0.0 - b_im) / b_d;
               } else if (bim == 1.0) {
-                if (bi > 0.0) {
-                  sgnbi = 0.5;
+                b_re = 0.5;
+                if (b_im > 0.0) {
+                  d1 = 0.5;
                 } else {
-                  sgnbi = -0.5;
+                  d1 = -0.5;
                 }
-
-                re = 0.5;
-                im = 0.0 - sgnbi;
+                c_im = 0.0 - d1;
               } else {
-                s = 1.0 / bi;
-                d = bi + s;
-                re = s / d;
-                im = -1.0 / d;
+                s = 1.0 / b_im;
+                b_d = b_im + s;
+                b_re = s / b_d;
+                c_im = -1.0 / b_d;
               }
             }
-
-            b_H_re = H[i15].re;
-            H[i15].re = H[i15].re * re - H[i15].im * im;
-            H[i15].im = b_H_re * im + H[i15].im * re;
+            c_re_tmp = H[i3].re;
+            d_re_tmp = H[i3].im;
+            H[i3].re = c_re_tmp * b_re - d_re_tmp * c_im;
+            H[i3].im = c_re_tmp * c_im + d_re_tmp * b_re;
           }
-
           switch (filter_T_32) {
-           case 1:
+          case 1:
             /*  Low-pass filter */
             break;
-
-           case 2:
+          case 2:
             /*  High-pass filter */
-            for (i19 = 0; i19 < NB_SAMPLES; i19++) {
-              b_im = w[i19] / w_0;
-              H_re = H[i19].re;
-              H[i19].re = 0.0 - b_im * H[i19].im;
-              H[i19].im = b_im * H_re;
+            for (i4 = 0; i4 < NB_SAMPLES; i4++) {
+              re_tmp = b_H_tmp[i4].im;
+              b_re_tmp = H[i4].re;
+              H[i4].re = 0.0 - re_tmp * H[i4].im;
+              H[i4].im = re_tmp * b_re_tmp;
             }
             break;
-
-           default:
+          default:
             /*  Type of filter not supported */
-            *err_f = 1;
+            err_f = 1;
             exitg1 = 1;
             break;
           }
         } else {
           /*  2nd order filter */
           /*  Initialisation of the transfer function with the common divider */
-          y_im = 1.0 / q_0;
-          for (i16 = 0; i16 < NB_SAMPLES; i16++) {
-            dcv0[i16].re = 0.0;
-            dcv0[i16].im = w[i16] / w_0;
+          for (i2 = 0; i2 < NB_SAMPLES; i2++) {
+            d = w[i2] / w_0;
+            H_tmp[i2] = d;
+            dcv[i2].re = 0.0;
+            dcv[i2].im = d;
           }
-
-          b_power(dcv0, dcv1);
-          for (i18 = 0; i18 < NB_SAMPLES; i18++) {
-            br = 1.0 + dcv1[i18].re;
-            b_bi = y_im * (w[i18] / w_0) + dcv1[i18].im;
-            if (b_bi == 0.0) {
-              b_re = 1.0 / br;
-              c_im = 0.0;
+          power(dcv, b_H_tmp);
+          a_im = 1.0 / q_0;
+          for (i5 = 0; i5 < NB_SAMPLES; i5++) {
+            br = b_H_tmp[i5].re + 1.0;
+            bi = a_im * H_tmp[i5] + b_H_tmp[i5].im;
+            if (bi == 0.0) {
+              c_re = 1.0 / br;
+              d_im = 0.0;
             } else if (br == 0.0) {
-              b_re = 0.0;
-              c_im = -(1.0 / b_bi);
+              c_re = 0.0;
+              d_im = -(1.0 / bi);
             } else {
               brm = fabs(br);
-              b_bim = fabs(b_bi);
+              b_bim = fabs(bi);
               if (brm > b_bim) {
-                b_s = b_bi / br;
-                b_d = br + b_s * b_bi;
-                b_re = 1.0 / b_d;
-                c_im = (0.0 - b_s) / b_d;
+                b_s = bi / br;
+                c_d = br + b_s * bi;
+                c_re = 1.0 / c_d;
+                d_im = (0.0 - b_s) / c_d;
               } else if (b_bim == brm) {
                 if (br > 0.0) {
-                  sgnbr = 0.5;
+                  d2 = 0.5;
                 } else {
-                  sgnbr = -0.5;
+                  d2 = -0.5;
                 }
-
-                if (b_bi > 0.0) {
-                  b_sgnbi = 0.5;
+                c_re = d2 / brm;
+                if (bi > 0.0) {
+                  d3 = 0.5;
                 } else {
-                  b_sgnbi = -0.5;
+                  d3 = -0.5;
                 }
-
-                b_re = sgnbr / brm;
-                c_im = (0.0 - b_sgnbi) / brm;
+                d_im = (0.0 - d3) / brm;
               } else {
-                b_s = br / b_bi;
-                b_d = b_bi + b_s * br;
-                b_re = b_s / b_d;
-                c_im = -1.0 / b_d;
+                b_s = br / bi;
+                c_d = bi + b_s * br;
+                c_re = b_s / c_d;
+                d_im = -1.0 / c_d;
               }
             }
-
-            c_H_re = H[i18].re;
-            H[i18].re = H[i18].re * b_re - H[i18].im * c_im;
-            H[i18].im = c_H_re * c_im + H[i18].im * b_re;
+            j_re_tmp = H[i5].re;
+            l_re_tmp = H[i5].im;
+            H[i5].re = j_re_tmp * c_re - l_re_tmp * d_im;
+            H[i5].im = j_re_tmp * d_im + l_re_tmp * c_re;
           }
-
           switch (filter_T_32) {
-           case 1:
+          case 1:
             /*  Low-pass filter */
             break;
-
-           case 2:
+          case 2:
             /*  High-pass filter */
-            for (i20 = 0; i20 < NB_SAMPLES; i20++) {
-              dcv2[i20].re = 0.0;
-              dcv2[i20].im = w[i20] / w_0;
-            }
-
-            b_power(dcv2, dcv1);
-            for (i23 = 0; i23 < NB_SAMPLES; i23++) {
-              d_H_re = H[i23].re;
-              H[i23].re = dcv1[i23].re * H[i23].re - dcv1[i23].im * H[i23].im;
-              H[i23].im = dcv1[i23].re * H[i23].im + dcv1[i23].im * d_H_re;
+            for (i6 = 0; i6 < NB_SAMPLES; i6++) {
+              e_re_tmp = b_H_tmp[i6].re;
+              f_re_tmp = H[i6].im;
+              g_re_tmp = b_H_tmp[i6].im;
+              h_re_tmp = H[i6].re;
+              H[i6].re = e_re_tmp * h_re_tmp - g_re_tmp * f_re_tmp;
+              H[i6].im = e_re_tmp * f_re_tmp + g_re_tmp * h_re_tmp;
             }
             break;
-
-           case 3:
+          case 3:
             /*  Band-pass filter */
-            b_br = 2.0 * q_0 * w_0;
-            y_im = 1.0 / b_br;
-            for (i22 = 0; i22 < NB_SAMPLES; i22++) {
-              b_y_im = w[i22] * y_im;
-              e_H_re = H[i22].re;
-              H[i22].re = 0.0 - b_y_im * H[i22].im;
-              H[i22].im = b_y_im * e_H_re;
+            a_im = 1.0 / (2.0 * q_0 * w_0);
+            for (i8 = 0; i8 < NB_SAMPLES; i8++) {
+              b_a_im = w[i8] * a_im;
+              m_re_tmp = H[i8].re;
+              H[i8].re = 0.0 - b_a_im * H[i8].im;
+              H[i8].im = b_a_im * m_re_tmp;
             }
             break;
-
-           case 4:
+          case 4:
             /*  Band-stop filter */
-            for (i21 = 0; i21 < NB_SAMPLES; i21++) {
-              dcv3[i21].re = 0.0;
-              dcv3[i21].im = w[i21] / w_0;
-            }
-
-            b_power(dcv3, dcv1);
-            for (i24 = 0; i24 < NB_SAMPLES; i24++) {
-              c_re = 1.0 + dcv1[i24].re;
-              d_im = dcv1[i24].im;
-              f_H_re = H[i24].re;
-              H[i24].re = c_re * H[i24].re - d_im * H[i24].im;
-              H[i24].im = c_re * H[i24].im + d_im * f_H_re;
+            for (i7 = 0; i7 < NB_SAMPLES; i7++) {
+              H_tmp_re = b_H_tmp[i7].re + 1.0;
+              H_tmp_im = b_H_tmp[i7].im;
+              i_re_tmp = H[i7].im;
+              k_re_tmp = H[i7].re;
+              H[i7].re = H_tmp_re * k_re_tmp - H_tmp_im * i_re_tmp;
+              H[i7].im = H_tmp_re * i_re_tmp + H_tmp_im * k_re_tmp;
             }
             break;
-
-           default:
+          default:
             /*  Type of filter not supported */
-            *err_f = 1;
+            err_f = 1;
             exitg1 = 1;
             break;
           }
@@ -1069,57 +833,65 @@ static void filter_bode(const double f[NB_SAMPLES], double f_0, double q_0, doub
       }
     } while (exitg1 == 0);
   }
+  return err_f;
 }
 
 /*
- * Arguments    : double d1
- *                double d2
- *                double y[NB_SAMPLES]
+ * Arguments    : const creal_T a[NB_SAMPLES]
+ *                creal_T y[NB_SAMPLES]
  * Return Type  : void
  */
-static void logspace(double d1, double d2, double y[NB_SAMPLES])
+static void power(const creal_T a[NB_SAMPLES], creal_T y[NB_SAMPLES])
 {
-  static double b_y[NB_SAMPLES];
-  double delta1;
+  double ai_tmp;
+  double ar_tmp;
+  double b_im;
+  double b_re;
+  double r;
+  double y_im;
+  double y_re;
   int k;
-  double delta2;
-  int b_k;
-  b_y[NB_SAMPLES-1] = d2;
-  b_y[0] = d1;
-  if (((d1 < 0.0) != (d2 < 0.0)) && ((fabs(d1) > 8.9884656743115785E+307) ||
-       (fabs(d2) > 8.9884656743115785E+307))) {
-    delta1 = d1 / (NB_SAMPLES-1.0);
-    delta2 = d2 / (NB_SAMPLES-1.0);
-    for (b_k = 0; b_k < NB_SAMPLES-2; b_k++) {
-      b_y[b_k + 1] = (d1 + delta2 * (1.0 + (double)b_k)) - delta1 * (1.0 +
-        (double)b_k);
-    }
-  } else {
-    delta1 = (d2 - d1) / (NB_SAMPLES-1.0);
-    for (k = 0; k < NB_SAMPLES-2; k++) {
-      b_y[k + 1] = d1 + (1.0 + (double)k) * delta1;
-    }
-  }
-
-  power(10.0, b_y, y);
-}
-
-/*
- * Arguments    : double a
- *                const double b[NB_SAMPLES]
- *                double y[NB_SAMPLES]
- * Return Type  : void
- */
-static void power(double a, const double b[NB_SAMPLES], double y[NB_SAMPLES])
-{
-  static double z1[NB_SAMPLES];
-  int k;
-  memcpy(&z1[0], &y[0], NB_SAMPLES * sizeof(double));
   for (k = 0; k < NB_SAMPLES; k++) {
-    z1[k] = pow(a, b[k]);
+    ar_tmp = a[k].re;
+    ai_tmp = a[k].im;
+    if ((ai_tmp == 0.0) && (ar_tmp >= 0.0)) {
+      y[k].re = pow(ar_tmp, 2.0);
+      y[k].im = 0.0;
+    } else if (ar_tmp == 0.0) {
+      y[k].re = -pow(ai_tmp, 2.0);
+      y[k].im = 0.0;
+    } else {
+      if (ai_tmp == 0.0) {
+        if (ar_tmp < 0.0) {
+          b_re = log(fabs(ar_tmp));
+          b_im = 3.1415926535897931;
+        } else {
+          b_re = log(fabs(ar_tmp));
+          b_im = 0.0;
+        }
+      } else if ((fabs(ar_tmp) > 8.9884656743115785E+307) ||
+                 (fabs(ai_tmp) > 8.9884656743115785E+307)) {
+        b_re = log(rt_hypotd(ar_tmp / 2.0, ai_tmp / 2.0)) + 0.69314718055994529;
+        b_im = atan2(ai_tmp, ar_tmp);
+      } else {
+        b_re = log(rt_hypotd(ar_tmp, ai_tmp));
+        b_im = atan2(ai_tmp, ar_tmp);
+      }
+      y_re = 2.0 * b_re;
+      y_im = 2.0 * b_im;
+      if (y_re == 0.0) {
+        y[k].re = cos(y_im);
+        y[k].im = sin(y_im);
+      } else if (y_im == 0.0) {
+        y[k].re = exp(y_re);
+        y[k].im = 0.0;
+      } else {
+        r = exp(y_re / 2.0);
+        y[k].re = r * (r * cos(y_im));
+        y[k].im = r * (r * sin(y_im));
+      }
+    }
   }
-
-  memcpy(&y[0], &z1[0], NB_SAMPLES * sizeof(double));
 }
 
 /*
@@ -1129,9 +901,9 @@ static void power(double a, const double b[NB_SAMPLES], double y[NB_SAMPLES])
  */
 static double rt_hypotd(double u0, double u1)
 {
-  double y;
   double a;
   double b;
+  double y;
   a = fabs(u0);
   b = fabs(u1);
   if (a < b) {
@@ -1143,7 +915,6 @@ static double rt_hypotd(double u0, double u1)
   } else {
     y = a * 1.4142135623730951;
   }
-
   return y;
 }
 
@@ -1212,8 +983,9 @@ static void min_and_max(double *data_min, double *data_max,
  *  IN/OUT  : -
  *  OUT     : -
  *
- *  Copyright 2018 The MathWorks, Inc.
+ *  Copyright 2024 The MathWorks, Inc.
  * %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ *
  * Arguments    : void
  * Return Type  : int
  */
@@ -1257,7 +1029,7 @@ int main(void)
   double f_0, q_0, g;
   double mod_min, mod_max, arg_min, arg_max;
   double frequency_range[2];
-  int error_flag, fig_id, i0;
+  int error_flag, fig_id, k;
   int negate_bool, neg_band_bool, neg_stop_bool;
   int mod_y_axs_step, arg_y_axs_step;
   int32_T exitg1;
@@ -1275,7 +1047,14 @@ int main(void)
   g   = 1.0;
 
   /*  Definition of the logarithmic frequency range till 1 Tera Hertz */
-  logspace(0.0, 9.0, f);
+  f[99999] = 9.0;
+  f[0] = 0.0;
+  for (k = 0; k < 99998; k++) {
+    f[k + 1] = ((double)k + 1.0) * 9.0000900009000085E-5;
+  }
+  for (k = 0; k < 100000; k++) {
+    f[k] = pow(10.0, f[k]);
+  }
 
   /*  Program title */
   printf("%s\n",
@@ -1287,32 +1066,27 @@ int main(void)
   printf("%s\n",
          "-------------------------------------------------------------------------------");
   fflush(stdout);
-
   /*  Forever loop */
   fig_id = 0;
   do {
     exitg1 = 0;
-
     /*  Ask for filter's parameters */
     check_str_input(f_t);
     neg_band_bool = strcmp(f_t, BAND_FILTER);
-    neg_stop_bool = strcmp(f_t, BAND_FILTER);	
+    neg_stop_bool = strcmp(f_t, STOP_FILTER);
     if ((neg_band_bool == 0) || (neg_stop_bool == 0)) {
-      check_num_input(&n_f, ORDER_LIMS_2, INTEGER);
+      n_f = check_num_input(ORDER_LIMS_2, INTEGER);
     } else {
-      check_num_input(&n_f, ORDER_LIMS_1, INTEGER);
-        }
-    for (i0 = 0; i0 < 2; i0++) {
-      frequency_range[i0] = 1.0 + 9.99999999E+8 * (double)i0;
+      n_f = check_num_input(ORDER_LIMS_1, INTEGER);
     }
-    b_check_num_input(&f_0, frequency_range, LONG_DOUBLE);
+    f_0 = b_check_num_input(LONG_DOUBLE);
     if (n_f > 1) {
-      c_check_num_input(&q_0, QUAL_LIMS, LONG_DOUBLE);
+      q_0 = c_check_num_input(LONG_DOUBLE);
     }
-    d_check_num_input(&g, GAIN_LIMS, LONG_DOUBLE);
+    g = d_check_num_input(LONG_DOUBLE);
 
     /*  Bodes calculation */
-    filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg, &error_flag);
+    error_flag = filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg);
 
     /*  Display of results (target dependent) */
     if (error_flag == 0) {
@@ -1405,7 +1179,7 @@ int main(void)
       titlin(phase_title,1);
       /* Settings of the phase's bode */
       name  ("Frequency [Hz]","X");
-      name  ("arg(H) [degree]","Y"); // °symbol in unicode:"\u00B0"
+      name  ("arg(H) [degree]","Y"); // Â°symbol in unicode:"\u00B0"
       axsscl("LOG","X");
       labels("LOG","XY");
       axslen(X_AXIS_L,Y_AXIS_L);
@@ -1436,9 +1210,8 @@ int main(void)
     }
 
     /*  Ask the user if he wants to keep the previous graphs */
-    check_yes_or_no(keep_bodes);
-
-    negate_bool = _strcmpi(keep_bodes, N_CHAR);
+    check_yes_or_no(new_bodes);
+    negate_bool = _strcmpi(&new_bodes[0], &N_CHAR[0]);
     if (negate_bool == 0)
     {
       if (fig_id > 1)
@@ -1455,10 +1228,8 @@ int main(void)
     }
     /* Ask the user if he wants to see other filter's Bodes */
     b_check_yes_or_no(new_bodes);
-
-    negate_bool = _strcmpi(new_bodes, N_CHAR);
-    if (negate_bool == 0)
-    {
+    negate_bool = _strcmpi(&new_bodes[0], &N_CHAR[0]);
+    if (negate_bool == 0) {
       /* Close all windows */
       for (fig_id; fig_id>0; fig_id--) {
         clswin(fig_id);
@@ -1472,8 +1243,7 @@ int main(void)
              "-------------------------------------------------------------------------------");
       fflush(stdout);
     }
-  } while (negate_bool != 0);
-
+  } while (exitg1 == 0);
   return error_flag;
 }
 

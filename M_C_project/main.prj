@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2024a">
-  <configuration build-checksum="1808541385" file="D:\GitHub\MATLABIntegrationWithC\M_C_project\main.prj" location="D:\GitHub\MATLABIntegrationWithC\M_C_project" name="main" preferred-package-location="D:\GitHub\MATLABIntegrationWithC\M_C_project" preferred-package-type="package.type.zip.flat" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="962033154" file="D:\GitHub\MATLABIntegrationWithC\M_C_project\main.prj" location="D:\GitHub\MATLABIntegrationWithC\M_C_project" name="main" preferred-package-location="D:\GitHub\MATLABIntegrationWithC\C_project\C_DISLIN\VS2017" preferred-package-type="package.type.zip.flat" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -12,14 +12,14 @@
       <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
       <param.InstructionSetExtensionsAvailableInUI>true</param.InstructionSetExtensionsAvailableInUI>
       <param.InstructionSetExtensionsConfig.FMA>false</param.InstructionSetExtensionsConfig.FMA>
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.ResponsivenessChecks />
+      <param.ExtrinsicCalls />
+      <param.IntegrityChecks />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.OptimizeReductions>false</param.OptimizeReductions>
-      <param.SIMDAcceleration>option.SIMDAcceleration.Portable</param.SIMDAcceleration>
+      <param.SIMDAcceleration />
       <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.NoSync</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.EnableDynamicMemoryAllocation>true</param.EnableDynamicMemoryAllocation>
@@ -41,7 +41,7 @@
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ReservedNameArray />
       <param.CppStyleConst>true</param.CppStyleConst>
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.EnableDebugging />
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
@@ -63,12 +63,12 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.mex.GenCodeOnly>false</param.mex.GenCodeOnly>
+      <param.mex.GenCodeOnly />
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>true</param.EnableRuntimeRecursion>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
-      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.EchoExpressions />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
@@ -80,13 +80,13 @@
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
       <param.DefaultVariableInitialization>option.DefaultVariableInitialization.None</param.DefaultVariableInitialization>
-      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
-      <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
+      <param.ConstantInputs />
+      <param.EnableCRICodeCoverage />
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.CacheDynamicArrayDataPointer>true</param.CacheDynamicArrayDataPointer>
       <param.EnableJIT>false</param.EnableJIT>
       <param.EnableJITSilentBailOut />
-      <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
+      <param.CheckForIssuesJIT />
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>true</param.EnableAutoCommit>
       <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
@@ -288,7 +288,7 @@
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
       <param.TargetLangStandard>C89/C90 (ANSI)</param.TargetLangStandard>
-      <param.CodeReplacementLibrary>DSP Intel AVX2-FMA (Windows)</param.CodeReplacementLibrary>
+      <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
       <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
       <param.SameHardware>true</param.SameHardware>
       <param.Toolchain>Automatically locate an installed toolchain</param.Toolchain>
@@ -297,7 +297,7 @@
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
       <var.ToolchainSupportsBuildConfigurations>true</var.ToolchainSupportsBuildConfigurations>
       <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
-      <param.target.ActiveType>option.target.TargetType.Custom</param.target.ActiveType>
+      <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
       <param.target.ActiveTarget />
       <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
       <param.HardwareType.Production>MATLAB Host Computer</param.HardwareType.Production>
@@ -496,6 +496,7 @@
         <param.CustomInclude />
         <param.CustomSource />
         <param.CustomLibrary />
+        <param.CodeReplacementLibrary />
         <param.DeprecatedCRLFlag />
         <param.SameHardware />
         <param.Toolchain />
@@ -503,6 +504,7 @@
         <param.CustomToolchainOptions />
         <var.ToolchainSettingsVisible />
         <var.ToolchainSupportsBuildConfigurations />
+        <param.target.ActiveType />
         <param.target.ActiveTarget />
         <param.HardwareVendor.Production />
         <param.HardwareType.Production />
@@ -585,7 +587,7 @@
       </unset>
     </profile>
     <param.objective>option.objective.c</param.objective>
-    <param.WorkflowStep>generateCode</param.WorkflowStep>
+    <param.WorkflowStep>workflowSummary</param.WorkflowStep>
     <param.TestSnippets>
       <item>test_main</item>
     </param.TestSnippets>
@@ -616,12 +618,12 @@
     <param.hdlParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\main</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>2269933305</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>962033154</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\main</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>677661340</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>test_main</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_num_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_str_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\filter_bode.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\main.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2734019729&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_num_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_str_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\filter_bode.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\main.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3024968427&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_num_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_str_input.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\check_yes_or_no.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\filter_bode.m&lt;/file&gt;&lt;file&gt;D:\GitHub\MATLABIntegrationWithC\M_C_project\main.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>

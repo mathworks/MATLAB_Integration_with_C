@@ -18,10 +18,10 @@
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main_types.h">
+    <ClInclude Include="rtwtypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rtwtypes.h">
+    <ClInclude Include="tmwtypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
