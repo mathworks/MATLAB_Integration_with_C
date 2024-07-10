@@ -3,14 +3,7 @@
 % Goal  : Generates C code out of the following filter function:
 %         [H_mod,H_arg,error_flag] = filter_bode(f,f_0,q_0,g,f_type,f_order)
 %
-% IN      : - f      : 1x1e005 double; vector of frequency values 
-%           - f_0    :     1x1 double; cutoff frequency
-%           - g      :     1x1 double; gain
-%           - q_0    :     1x1 double; quality factor (for 2nd order sections)
-%           - f_type :     1x1  int32; type: 'low', 'high', 'band' and 'stop'
-%           - f_order:     1x1  int32; order
-%
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear variables; clc;
 

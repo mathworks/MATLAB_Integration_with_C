@@ -14,7 +14,7 @@ function [H_mod,H_arg,err_f] = filter_bode_DLL(f,f_0,q_0,g,f_type,f_order)
 %           - H_arg : argument of the transfer function in [°]
 %           - err_f : returns execution error related to input parameters
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %#codegen
   coder.cinclude('string.h');
@@ -25,10 +25,10 @@ function [H_mod,H_arg,err_f] = filter_bode_DLL(f,f_0,q_0,g,f_type,f_order)
   ERROR_TYPE  = int32(1);
   ERROR_ORDER = int32(2);
 
-  % Initializations
+  % Initialization
   err_f       = int32(0);
   filter_T_32 = int32(0);
-  negate_bool = int32(0); %#ok<NASGU>
+  negate_bool = int32(0);
   n           = int32(0);
   nb_samples  = int32(length(f));
   H     = complex(ones(1,nb_samples),0);
