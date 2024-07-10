@@ -2,7 +2,7 @@
 % Parse_files
 % Automatically modify the generated C and header files.
 %
-% Copyright 2018 The MathWorks, Inc.
+% Copyright 2024 The MathWorks, Inc.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Parsing of the main.h file
@@ -13,8 +13,7 @@ disp('Starting the parsing of the header file...');
 FILE_READ  = '.\main_original.h';
 FILE_WRITE = '.\main.h';
 % Key words to recognize in the generated files
-KEY_TAGS   = {'__cplusplus' 'main(void)'...
-               'main_initialize' 'main_terminate' 'File trailer'};
+KEY_TAGS   = {'main(void)' 'main_initialize' 'main_terminate' 'File trailer'};
 % Text to add at the end of the file
 LINE_FEED  = newline;
 DIRECTIVES = {'/* Constants definition */'
@@ -47,21 +46,16 @@ while(1)
     % Retrieve needed data based on tags identification
     switch (tag_idx)
       case {1}
-        % Increase the line index to avoid copying unwanted text lines
-        for i=1:5
-          line_data = fgets(file_read_ID);
-        end
-      case {2}
         fprintf(file_write_ID,'%s',line_data(1:end-1));
         % Write pre-compilation directives needed for the C code
         for i=1:length(DIRECTIVES)
           fprintf(file_write_ID,'%s',[LINE_FEED DIRECTIVES{i,1}]);
         end
         fprintf(file_write_ID,'%s',LINE_FEED);
-      case {3,4}
+      case {2,3}
         line_data = fgets(file_read_ID);
         fprintf(file_write_ID,'%s','');
-      case {5}
+      case {4}
         % Copy the trailer comment
         fprintf(file_write_ID,'%s',line_data(1:end-1));
         line_data = fgets(file_read_ID);
@@ -84,18 +78,19 @@ fclose(file_write_ID);
 disp('Parsing of the header file done.');
 
 %% Parsing of the main.c file
-clear variables; close all; clc;
+clear variables; close all;
 disp('Starting the parsing of the C file...');
 % Constants declarations
 % Text files containing HMM definitions
 FILE_READ  = '.\main_original.c';
 FILE_WRITE = '.\main.c';
 % Key words to recognize in the generated files
-KEY_TAGS   = {'angle' '100000U' '100000' '99999.0' '99998.0' '99999' '99998'};
+KEY_TAGS   = {'100000' '99999' '99998'};
 % Text to add at the beginning of the file
 LINE_FEED  = newline;
-INCLUDES   = {'#include <float.h>'
-              '#include "dislin.h" /* Added of the graphical library */'};
+INCLUDES   = {'#include "dislin.h" /* Added of the graphical library */'
+              '#include <string.h>'
+              '#include <float.h>'};
 
 % Text to add at the end of the file
 file_ID = fopen('.\min_and_max.txt','r');
@@ -132,14 +127,9 @@ while(1)
   % Look for any tag in the current line
   tags_present = cellfun(@(s) contains(line_data,s),KEY_TAGS);
   if any(tags_present)
-    % Correct the name of the angle function that already exists in math.h
-    line_data = regexprep(line_data,KEY_TAGS(1),'angle_tf');
     % Add of the pre-defined directives for constant values
-    line_data = regexprep(line_data,KEY_TAGS(2),'NB_SAMPLES');
-    line_data = regexprep(line_data,KEY_TAGS(3),'NB_SAMPLES');
-    line_data = regexprep(line_data,KEY_TAGS(4),'(NB_SAMPLES-1.0)');
-    line_data = regexprep(line_data,KEY_TAGS(5),'(NB_SAMPLES-2.0)');
-    line_data = regexprep(line_data,KEY_TAGS(6),'NB_SAMPLES-1');
+    line_data = regexprep(line_data,KEY_TAGS(1),'NB_SAMPLES');
+    line_data = regexprep(line_data,KEY_TAGS(2),'NB_SAMPLES-1');
     line_data = regexprep(line_data,KEY_TAGS(end),'NB_SAMPLES-2');
   elseif regexp(line_data,'<math.h>')
     % Write includes needed for the main C file

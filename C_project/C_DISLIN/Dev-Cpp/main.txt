@@ -38,7 +38,7 @@ int main(void)
   double f_0, q_0, g;
   double mod_min, mod_max, arg_min, arg_max;
   double frequency_range[2];
-  int error_flag, fig_id, i0;
+  int error_flag, fig_id, k;
   int negate_bool, neg_band_bool, neg_stop_bool;
   int mod_y_axs_step, arg_y_axs_step;
   int32_T exitg1;
@@ -47,7 +47,7 @@ int main(void)
   char * LONG_DOUBLE;
   INTEGER = "%d";
   LONG_DOUBLE = "%lf";
-  
+
   /*  Initialization */
   error_flag = 0;
   n_f = 0;
@@ -56,7 +56,14 @@ int main(void)
   g   = 1.0;
 
   /*  Definition of the logarithmic frequency range till 1 Tera Hertz */
-  logspace(0.0, 9.0, f);
+  f[99999] = 9.0;
+  f[0] = 0.0;
+  for (k = 0; k < 99998; k++) {
+    f[k + 1] = ((double)k + 1.0) * 9.0000900009000085E-5;
+  }
+  for (k = 0; k < 100000; k++) {
+    f[k] = pow(10.0, f[k]);
+  }
 
   /*  Program title */
   printf("%s\n",
@@ -68,32 +75,27 @@ int main(void)
   printf("%s\n",
          "-------------------------------------------------------------------------------");
   fflush(stdout);
-
   /*  Forever loop */
   fig_id = 0;
   do {
     exitg1 = 0;
-
     /*  Ask for filter's parameters */
     check_str_input(f_t);
     neg_band_bool = strcmp(f_t, BAND_FILTER);
-    neg_stop_bool = strcmp(f_t, BAND_FILTER);	
+    neg_stop_bool = strcmp(f_t, STOP_FILTER);
     if ((neg_band_bool == 0) || (neg_stop_bool == 0)) {
-      check_num_input(&n_f, ORDER_LIMS_2, INTEGER);
+      n_f = check_num_input(ORDER_LIMS_2, INTEGER);
     } else {
-      check_num_input(&n_f, ORDER_LIMS_1, INTEGER);
-        }
-    for (i0 = 0; i0 < 2; i0++) {
-      frequency_range[i0] = 1.0 + 9.99999999E+8 * (double)i0;
+      n_f = check_num_input(ORDER_LIMS_1, INTEGER);
     }
-    b_check_num_input(&f_0, frequency_range, LONG_DOUBLE);
+    f_0 = b_check_num_input(LONG_DOUBLE);
     if (n_f > 1) {
-      c_check_num_input(&q_0, QUAL_LIMS, LONG_DOUBLE);
+      q_0 = c_check_num_input(LONG_DOUBLE);
     }
-    d_check_num_input(&g, GAIN_LIMS, LONG_DOUBLE);
+    g = d_check_num_input(LONG_DOUBLE);
 
     /*  Bodes calculation */
-    filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg, &error_flag);
+    error_flag = filter_bode(f, f_0, q_0, g, f_t, n_f, H_mod, H_arg);
 
     /*  Display of results (target dependent) */
     if (error_flag == 0) {
@@ -217,9 +219,8 @@ int main(void)
     }
 
     /*  Ask the user if he wants to keep the previous graphs */
-    check_yes_or_no(keep_bodes);
-
-    negate_bool = _strcmpi(keep_bodes, N_CHAR);
+    check_yes_or_no(new_bodes);
+    negate_bool =_strcmpi(&new_bodes[0], &N_CHAR[0]);
     if (negate_bool == 0)
     {
       if (fig_id > 1)
@@ -236,10 +237,8 @@ int main(void)
     }
     /* Ask the user if he wants to see other filter's Bodes */
     b_check_yes_or_no(new_bodes);
-
-    negate_bool = _strcmpi(new_bodes, N_CHAR);
-    if (negate_bool == 0)
-    {
+    negate_bool = _strcmpi(&new_bodes[0], &N_CHAR[0]);
+    if (negate_bool == 0) {
       /* Close all windows */
       for (fig_id; fig_id>0; fig_id--) {
         clswin(fig_id);
@@ -253,8 +252,7 @@ int main(void)
              "-------------------------------------------------------------------------------");
       fflush(stdout);
     }
-  } while (negate_bool != 0);
-
+  } while (exitg1 == 0);
   return error_flag;
 }
 
