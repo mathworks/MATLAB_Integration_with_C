@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
-  <configuration build-checksum="1401405883" file="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="C:\Users\sdupertu\Data\Projects\Demos\branches\Sebastien_Dupertuis\File_Exchange\Filter_Design_C_Codegen\R2018a\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
+  <configuration build-checksum="519202967" file="D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment\FilterDesignCompiler.prj" location="D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment" name="FilterDesignCompiler" preferred-package-location="D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
     <param.appname>FilterDesign</param.appname>
     <param.icon>${PROJECT_ROOT}\FilterDesignCompiler_resources\icon.ico</param.icon>
     <param.icons>
@@ -9,7 +9,7 @@
       <file>${PROJECT_ROOT}\FilterDesignCompiler_resources\icon_16.png</file>
     </param.icons>
     <param.version>1.1</param.version>
-    <param.authnamewatermark>Copyright 2018 The MathWorks, Inc.</param.authnamewatermark>
+    <param.authnamewatermark>Copyright 2024 The MathWorks, Inc.</param.authnamewatermark>
     <param.email />
     <param.company>MathWorks</param.company>
     <param.summary>Design analog filters interactively</param.summary>
@@ -41,7 +41,12 @@
     <param.native.matlab>false</param.native.matlab>
     <param.checkbox>false</param.checkbox>
     <param.example />
-    <param.help.text />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments</param.help.text>
     <unset>
       <param.email />
       <param.description />
@@ -68,46 +73,35 @@
       <param.native.matlab />
       <param.checkbox />
       <param.example />
-      <param.help.text />
     </unset>
     <fileset.main>
-      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Filter_Design.mlapp</file>
+      <file>D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Filter_Design.mlapp</file>
     </fileset.main>
     <fileset.resources />
     <fileset.package />
     <fileset.depfun>
-      <file>C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\filter_bode.m</file>
+      <file>D:\GitHub\MATLABIntegrationWithC\M_MEX_project\filter_bode.m</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\for_testing" name="splash.png" optional="false">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\splash.png</file>
-      <file location="${PROJECT_ROOT}\for_testing" name="readme.txt" optional="true">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\readme.txt</file>
-      <file location="${PROJECT_ROOT}\for_testing" name="FilterDesign.exe" optional="false">C:\Users\sdupertu\Data\Projects\GitHub\MATLAB_Integration_with_C\M_MEX_project\Deployment\for_testing\FilterDesign.exe</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="FilterDesign.exe" optional="false">D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment\for_testing\FilterDesign.exe</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="readme.txt" optional="true">D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\for_testing" name="splash.png" optional="false">D:\GitHub\MATLABIntegrationWithC\M_MEX_project\Deployment\for_testing\splash.png</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\MATLAB\R2018a</root>
+      <root>C:\Program Files\MATLAB\R2024a</root>
       <toolboxes>
-        <toolbox name="fixedpoint" />
         <toolbox name="matlabcoder" />
-        <toolbox name="matlabhdlcoder" />
         <toolbox name="embeddedcoder" />
         <toolbox name="gpucoder" />
-        <toolbox name="polyspacebugfinder" />
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="neuralnetwork" />
       </toolboxes>
-      <toolbox>
-        <fixedpoint>
-          <enabled>true</enabled>
-        </fixedpoint>
-      </toolbox>
       <toolbox>
         <matlabcoder>
           <enabled>true</enabled>
         </matlabcoder>
-      </toolbox>
-      <toolbox>
-        <matlabhdlcoder>
-          <enabled>true</enabled>
-        </matlabhdlcoder>
       </toolbox>
       <toolbox>
         <embeddedcoder>
@@ -120,9 +114,19 @@
         </gpucoder>
       </toolbox>
       <toolbox>
-        <polyspacebugfinder>
+        <fixedpoint>
           <enabled>true</enabled>
-        </polyspacebugfinder>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
       </toolbox>
     </matlab>
     <platform>
